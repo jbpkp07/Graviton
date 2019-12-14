@@ -1,22 +1,17 @@
 {
     "compilerOptions": {
         "target": "ES2017",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "skipLibCheck": true,
-        "allowJs": true,
+        "allowJs": false,
+        "checkJs": false,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
+        "module": "commonjs",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
+        "isolatedModules": false,
         "jsx": "react",
+        "outDir": "./build",
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,

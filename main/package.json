@@ -1,0 +1,21 @@
+{
+    "name": "graviton",
+    "author": "Jeremy Barnes, Daniel Spira",
+    "description": "Spafax HUB media asset management software",
+    "version": "1.0.0",
+    "private": true,
+    "main": "./src/main.js",
+    "scripts": {
+        "start": "electron ./build/main.js",
+        "build": "cp ./src/index.html ./build/ && tsc -w"
+    },
+    "dependencies": {
+        "electron": "^7.1.5"
+    },
+    "devDependencies": {
+        "@types/electron": "^1.6.10",
+        "@types/node": "^12.12.17",
+        "typescript": "^3.7.3"
+    },
+    "license": "ISC"
+}

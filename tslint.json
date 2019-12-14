@@ -58,19 +58,18 @@
         "prefer-for-of": true,
         "prefer-readonly": true,
         "promise-function-async": true,
-        "typedef": {
-            "options": [
-                "call-signature",
-                "arrow-call-signature",
-                "parameter",
-                "arrow-parameter",
-                "property-declaration",
-                "variable-declaration",
-                "member-variable-declaration",
-                "object-destructuring",
-                "array-destructuring"
-            ]
-        },
+        "typedef": [
+            true,
+            "call-signature",
+            "arrow-call-signature",
+            "parameter",
+            "arrow-parameter",
+            "property-declaration",
+            "variable-declaration",
+            "member-variable-declaration",
+            "object-destructuring",
+            "array-destructuring"
+        ],
         "typedef-whitespace": {
             "options": [
                 {
@@ -139,7 +138,7 @@
         "radix": false,
         "restrict-plus-operands": true,
         "static-this": true,
-        "strict-boolean-expressions": false,
+        "strict-boolean-expressions": true,
         "strict-string-expressions": true,
         "strict-comparisons": true,
         "strict-type-predicates": true,
@@ -165,7 +164,7 @@
         "no-mergeable-namespace": true,
         "no-parameter-reassignment": true,
         "no-require-imports": false,
-        "no-trailing-whitespace": false,
+        "no-trailing-whitespace": true,
         "object-literal-sort-keys": [
             true,
             "ignore-case",

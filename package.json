@@ -1,20 +1,19 @@
 {
-  "name": "graviton",
-  "author": "Jeremy Barnes, Daniel Spira",
-  "description": "Spafax HUB media asset management software",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {
-    "tslint": "^5.20.1",
-    "tslint-react": "^4.1.0",
-    "typescript": "^3.7.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jbpkp07/Graviton.git"
-  },
-  "license": "ISC",
-  "homepage": "https://github.com/jbpkp07/Graviton"
+    "name": "graviton",
+    "author": "Jeremy Barnes, Daniel Spira",
+    "description": "Spafax HUB media asset management software",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {},
+    "dependencies": {},
+    "devDependencies": {
+        "tslint": "^5.20.1",
+        "tslint-react": "^4.1.0"
+    },
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jbpkp07/Graviton.git"
+    },
+    "homepage": "https://github.com/jbpkp07/Graviton"
 }
