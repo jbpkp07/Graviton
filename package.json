@@ -4,7 +4,14 @@
     "description": "Spafax HUB media asset management software",
     "version": "1.0.0",
     "private": true,
-    "scripts": {},
+    "scripts": {
+        "start": "npm run start-react && npm run start-electron",
+        "start-react": "cd ./renderer && npm start",
+        "start-electron": "cd ./main && npm start",
+        "install-all": "npm install && npm run install-react && npm run install-electron",
+        "install-react": "cd ./renderer && npm install",
+        "install-electron": "cd ./main && npm install"
+    },
     "dependencies": {},
     "devDependencies": {
         "tslint": "^5.20.1",

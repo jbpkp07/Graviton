@@ -4,18 +4,23 @@
     "description": "Spafax HUB media asset management software",
     "version": "1.0.0",
     "private": true,
-    "main": "./src/main.js",
+    "main": "./build/main.js",
     "scripts": {
-        "start": "electron ./build/main.js",
-        "build": "cp ./src/index.html ./build/ && tsc -w"
+        "start": "start bash -c 'npm run start-dev'",
+        "start-dev": "concurrently \"tsc -w\"  \"cross-env NODE_ENV=dev nodemon --exec \"\"wait-on http://localhost:3000 && electron ./build/main.js\"\""
     },
     "dependencies": {
-        "electron": "^7.1.5"
+        "electron": "^7.1.5",
+        "electron-is-dev": "^1.1.0"
     },
     "devDependencies": {
         "@types/electron": "^1.6.10",
         "@types/node": "^12.12.17",
-        "typescript": "^3.7.3"
+        "concurrently": "^5.0.1",
+        "cross-env": "^6.0.3",
+        "nodemon": "^2.0.2",
+        "typescript": "^3.7.3",
+        "wait-on": "^3.3.0"
     },
     "license": "ISC"
 }
