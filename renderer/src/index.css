@@ -1,13 +1,52 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+    --light-white: rgba(248,248,248,1.0);
+    --medium-white: rgba(232,232,232,1.0);
+    --dark-white: rgba(192,192,192,1.0);
+  
+    --lightest-gray: rgba(96,96,96,1.0);
+    --lighter-gray: rgba(72,72,72,1.0);
+    --light-gray: rgba(48,48,48,1.0);
+    --medium-gray: rgba(32,32,32,1.0);
+    --dark-gray: rgba(18,18,18,1.0);
+
+    --light-purple: rgba(151,64,250,1.0);
+    --medium-purple: rgba(93,31,153,1.0);
+    --dark-purple: rgba(50,27,99,1.0);
+
+    --light-blue: rgba(0,174,239,1.0);
+    --light-red: rgba(251,103,105,1.0);
+    --light-green: rgba(42,252,156,1.0);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+    user-select: none;
+}
+
+html {
+    height: 100%;
+    cursor: default;
+}
+
+body {
+    background: var(--dark-gray);
+    border: 1px solid red;
+    color: var(--light-white);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+a {
+    text-decoration: none;
+}
+
+.drag {
+    -webkit-app-region: drag;
+}
+
+.nodrag {
+    -webkit-app-region: none;
 }

@@ -1,14 +1,16 @@
 import React from "react";
 
 import "./App.css";
-
-// const logo: string = require("./logo.svg");
+import { TitleBar } from "./components/TitleBar/TitleBar";
 
 export const App: React.FC = (): JSX.Element => {
 
+    console.log("here: Jeremy");
+
     return (
 
-      <div className="App">
+        <div className="App">
+            <TitleBar />
             <header className="App-header">
                 <img src={require("./logo.svg")} className="App-logo" alt="logo" />
                 <p>

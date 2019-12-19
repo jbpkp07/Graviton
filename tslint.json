@@ -148,7 +148,7 @@
         "use-default-type-parameter": true,
         "use-isnan": true,
         "cyclomatic-complexity": true,
-        "eofline": false,
+        "eofline": true,
         "indent": [true, "spaces", 4],
         "invalid-void": true,
         "linebreak-style": [false, "LF"],

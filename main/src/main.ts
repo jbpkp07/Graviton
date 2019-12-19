@@ -1,15 +1,10 @@
-// Modules to control application life and create native browser window
-// const {app, BrowserWindow} = require('electron')
-// const path = require('path')
-
-import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import { app, BrowserWindow } from "electron";
 import electronIsDev from "electron-is-dev";
 import path from "path";
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow: BrowserWindow | null = null;
+import { browserWindowOptions } from "./config";
 
+let mainWindow: BrowserWindow | null = null;
 
 function createWindow(): void {
     // Create the browser window.
@@ -19,19 +14,7 @@ function createWindow(): void {
         throw new Error("Electron main window already created.");
     }
 
-    const options: BrowserWindowConstructorOptions = {
-
-        width: 1680,
-        height: 1050,
-
-        webPreferences: {
-            devTools: true,
-            nodeIntegration: false,
-            preload: path.join(__dirname, "./preload.js")
-        }
-    };
-
-    mainWindow = new BrowserWindow(options);
+    mainWindow = new BrowserWindow(browserWindowOptions);
 
     // and load the index.html of the app.
     // mainWindow.loadFile("./index.html");
@@ -51,9 +34,7 @@ function createWindow(): void {
     }
     else {
 
-        const prodPath: string = `file://${path.join(__dirname, "./index.html")}`;
-
-        mainWindow.loadURL(prodPath);
+        mainWindow.loadFile(path.join(__dirname, "./index.html"));
     }
 
     // Emitted when the window is closed.

@@ -4,7 +4,7 @@
     "scripts": {
         "start": "start bash -c 'npm run start-dev'",
         "start-dev": "concurrently \"tsc -w\"  \"cross-env NODE_ENV=dev nodemon --exec \"\"wait-on http://localhost:3000 && electron ./build/main.js\"\"\"",
-        "build": "rm -rf build && mkdir build && tsc && cp src/app.ico build"
+        "build": "rm -rf build && mkdir build && tsc && cp src/images/app.ico build"
     },
     "dependencies": {
         "electron": "^7.1.6",
