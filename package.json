@@ -4,23 +4,45 @@
     "description": "Spafax HUB media asset management software",
     "version": "1.0.0",
     "private": true,
+    "main": "./build/main.js",
+    "homepage": "https://github.com/jbpkp07/Graviton",
     "scripts": {
+        "install-all": "npm install && npm run install-react && npm run install-electron",
+        "install-react": "cd ./renderer && npm install",
+        "install-electron": "cd ./main && npm install",
         "start": "npm run start-react && npm run start-electron",
         "start-react": "cd ./renderer && npm start",
         "start-electron": "cd ./main && npm start",
-        "install-all": "npm install && npm run install-react && npm run install-electron",
-        "install-react": "cd ./renderer && npm install",
-        "install-electron": "cd ./main && npm install"
+        "build": "rm -rf build dist && mkdir build dist && npm run build-react && npm run build-electron && electron-builder --publish=always",
+        "build-react": "cd ./renderer && npm run build && cp -r ./build/* ../build",
+        "build-electron": "cd ./main && npm run build && cp -r ./build/* ../build"
     },
-    "dependencies": {},
+    "dependencies": {
+        "electron-is-dev": "^1.1.0"
+    },
     "devDependencies": {
+        "electron": "^7.1.6",
+        "electron-builder": "^21.2.0",
         "tslint": "^5.20.1",
         "tslint-react": "^4.1.0"
+    },
+    "build": {
+        "productName": "Graviton",
+        "files": [
+            "./build/**/*",
+            "./node_modules/**/*"
+        ],
+        "directories": {
+            "buildResources": ""
+        },
+        "win": {
+            "target": "portable",
+            "icon": "./build/app.ico"
+        }
     },
     "license": "ISC",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jbpkp07/Graviton.git"
-    },
-    "homepage": "https://github.com/jbpkp07/Graviton"
+    }
 }

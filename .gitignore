@@ -1,8 +1,13 @@
 # dependencies
 /node_modules
+/main/node_modules
+/renderer/node_modules
 
 # production
 /build
+/main/build
+/renderer/build
+/dist
 
 # misc
 desktop.ini

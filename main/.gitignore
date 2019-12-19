@@ -1,9 +1,0 @@
-# dependencies
-/node_modules
-
-# production
-/build
-
-# misc
-desktop.ini
-.DS_Store
