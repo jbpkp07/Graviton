@@ -20,6 +20,7 @@
 
 * {
     user-select: none;
+    /* -webkit-app-region: none; */
 }
 
 html {
@@ -34,8 +35,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12pt;
     overflow-x: hidden;
-    /* overflow-y: hidden; */
-    overflow-y: scroll;
+    overflow-y: hidden;
+    /* overflow-y: scroll; */
     -webkit-overflow-scrolling: touch;
 }
 
@@ -45,8 +46,4 @@ a {
 
 .drag {
     -webkit-app-region: drag;
-}
-
-.nodrag {
-    -webkit-app-region: none;
 }

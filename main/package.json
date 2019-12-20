@@ -2,8 +2,7 @@
     "name": "graviton",
     "private": true,
     "scripts": {
-        "start": "start bash -c 'npm run start-dev'",
-        "start-dev": "concurrently \"tsc -w\"  \"cross-env NODE_ENV=dev nodemon --exec \"\"wait-on http://localhost:3000 && electron ./build/main.js\"\"\"",
+        "start": "start bash -c 'tsc -w' && start bash -c 'cross-env NODE_ENV=dev nodemon --exec \"wait-on http://localhost:3000 && electron ./build/main.js\"'",
         "build": "rm -rf build && mkdir build && tsc && cp src/images/app.ico build"
     },
     "dependencies": {
@@ -13,7 +12,6 @@
     "devDependencies": {
         "@types/electron": "^1.6.10",
         "@types/node": "^12.12.17",
-        "concurrently": "^5.0.1",
         "cross-env": "^6.0.3",
         "nodemon": "^2.0.2",
         "typescript": "^3.7.3",

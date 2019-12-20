@@ -1,0 +1,67 @@
+#titleBar {
+    background: var(--medium-purple);
+    height: 30px;
+    width: 100%;
+    cursor: pointer;
+    -webkit-app-region: drag;
+  
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+#spafaxLogo {
+    /* float: left; */
+    display: block;
+    /* margin: 3px 0px 3px 10px; */
+    height: 30px;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#title {
+    margin: 0 auto;
+    width: fit-content;
+   
+    position: relative;
+    top: 8px;
+   
+    /* font-weight: 600; */
+}
+
+#titleText {
+    font-size: 12pt;
+    font-family: 'Roboto-Regular', sans-serif;
+}
+
+#version {
+    color: var(--dark-white);
+    font-size: 8pt;
+}
+
+#windowBtnsBox {
+ 
+
+    /* float: right;
+    margin-left: auto; */
+    height: 30px;
+    width: fit-content;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.titleBarBtn  {
+    display: inline-block;
+    background: var(--medium-purple);
+    font-size: 30px;
+    padding: 0px 10px 0px 10px;
+}
+
+.titleBarBtn:hover {
+
+    background: var(--dark-purple);
+}

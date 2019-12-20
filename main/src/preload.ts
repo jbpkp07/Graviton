@@ -1,53 +1,74 @@
-import { MenuItemConstructorOptions, remote } from "electron";
+import { remote } from "electron";
+import electronIsDev from "electron-is-dev";
+
+import { ContextMenu } from "./ContextMenu";
+
+interface IElectronAPI {
+
+    random: number;
+    openFileDialog: Function;
+}
+
+interface IWindow extends Window {
+
+    electronAPI: IElectronAPI;
+}
+
+declare const window: IWindow;
+
+if (electronIsDev) {
+
+    const contextMenu: ContextMenu = new ContextMenu();
+
+    window.addEventListener("contextmenu", contextMenu.showMenu.bind(contextMenu));
+}
+
+
+
+
+
+
+
+
+window.electronAPI = {
+
+    random: 43210,
+    openFileDialog: (): void => {
+
+        remote.dialog.showOpenDialog(remote.getCurrentWindow(), {});
+    }
+};
 
 // window.addEventListener("DOMContentLoaded", (): void => {
 
-//     const replaceText: Function = (selector: string, text: string): void => {
-
-//         const element: HTMLElement | null = document.getElementById(selector);
-
-//         if (element !== null) {
-
-//             element.innerText = text;
-//         }
-//     };
-
-//     for (const app of ["chrome", "node", "electron"]) {
-
-//         // @ts-ignore
-//         replaceText(`${app}-version`, process.versions[app]);
-//     }
 // });
 
-let xPos: number = 0;
-let yPos: number = 0;
 
-const menuItemOptions: MenuItemConstructorOptions = {
 
-    click: (): void => {
 
-        remote.getCurrentWindow().webContents.inspectElement(xPos, yPos);
-    },
-    label: "Inspect Element"
-};
 
-const menuItem: Electron.MenuItem = new remote.MenuItem(menuItemOptions);
 
-const menu: Electron.Menu = new remote.Menu();
+// let xPos: number = 0;
+// let yPos: number = 0;
 
-menu.append(menuItem);
+// const contextMenu: Electron.Menu = new remote.Menu();
 
-window.addEventListener("contextmenu", (event: MouseEvent) => {
+// const inspectMenuItem: MenuItemConstructorOptions = {
 
-    event.preventDefault();
+//     click: (): void => { remote.getCurrentWindow().webContents.inspectElement(xPos, yPos); },
+//     label: "Inspect"
+// };
 
-    xPos = event.x;
-    yPos = event.y;
+// contextMenu.append(new remote.MenuItem(inspectMenuItem));
 
-    const popupOptions: Electron.PopupOptions = {
+// window.addEventListener("contextmenu", (event: MouseEvent) => {
 
-        window: remote.getCurrentWindow()
-    };
+//     event.preventDefault();
 
-    menu.popup(popupOptions);
-});
+//     xPos = event.x;
+//     yPos = event.y;
+
+//     const window: Electron.BrowserWindow = remote.getCurrentWindow();
+
+//     contextMenu.popup({ window });
+// });

@@ -164,7 +164,7 @@
         "no-mergeable-namespace": true,
         "no-parameter-reassignment": true,
         "no-require-imports": false,
-        "no-trailing-whitespace": true,
+        "no-trailing-whitespace": false,
         "object-literal-sort-keys": [
             true,
             "ignore-case",

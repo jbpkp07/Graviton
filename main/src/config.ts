@@ -1,34 +1,58 @@
 import { BrowserWindowConstructorOptions } from "electron";
+import electronIsDev from "electron-is-dev";
 import path from "path";
 
-// interface IFilePaths {
 
-//     preload: string;
-// }
+function getFullPath(relativePath: string): string {
 
-// const filePaths: IFilePaths = {
+    return path.join(__dirname, relativePath);
+}
 
-//     preload: path.join(__dirname, "./preload.js")
-// };
+export interface IAppWindowConfig {
 
+    appWindowOptions: BrowserWindowConstructorOptions;
+    rendererHTMLPathProd: string;
+    rendererURLDev: string;
+    blurOpacity: number;
+    focusOpacity: number;
+    fadeToDurationMS: number;
+    showDurationMS: number;
+}
 
+export const mainWindowConfig: IAppWindowConfig = {
 
+    appWindowOptions: {
 
-export const browserWindowOptions: BrowserWindowConstructorOptions = {
+        width: 1680,
+        height: 1050,
 
-    width: 1680,
-    height: 1050,
-    center: true,
-    minWidth: 800,
-    minHeight: 600,
-    show: true,
-    frame: false,
-    opacity: 1,
+        center: true,
 
-    webPreferences: {
-        devTools: true,
-        nodeIntegration: false,
-        preload: path.join(__dirname, "./preload.js"),
-        zoomFactor: 1
-    }
+        minWidth: 1440,
+        minHeight: 900,
+
+        alwaysOnTop: !electronIsDev || true,
+        show: false,
+        paintWhenInitiallyHidden: true,
+        frame: false,
+        backgroundColor: "#181818",
+        opacity: 0,
+        darkTheme: true,
+
+        webPreferences: {
+
+            backgroundThrottling: false,
+            devTools: true,
+            nodeIntegration: false,
+            preload: getFullPath("./preload.js"),
+            zoomFactor: 1
+        }
+    },
+    rendererHTMLPathProd: getFullPath("./index.html"),
+    rendererURLDev: "http://localhost:3000",
+    blurOpacity: 0.7,
+    focusOpacity: 1,
+    fadeToDurationMS: 200,
+    showDurationMS: 750
 };
+
