@@ -9,6 +9,7 @@ declare const window: ElectronAPI.IWindow;
 const webFrame: Electron.WebFrame = window.electronAPI.webFrame;
 
 webFrame.setZoomFactor(1);
+
 console.log(webFrame.getZoomFactor());
 
 // setTimeout(() => {
@@ -37,6 +38,7 @@ console.log(webFrame.getZoomFactor());
 //     console.log(remote.dialog.showOpenDialogSync(options));
 
 // }, 5000);
+
 
 
 export const App: React.FC = (): JSX.Element => {

@@ -1,5 +1,6 @@
 import Electron, { remote, webFrame } from "electron";
 
+
 export declare namespace ElectronAPI {
 
     interface IElectronAPI {

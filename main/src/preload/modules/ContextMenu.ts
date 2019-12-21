@@ -1,5 +1,6 @@
 import Electron, { BrowserWindow, MenuItemConstructorOptions, remote } from "electron";
 
+
 export class ContextMenu {
 
     private xPos: number = 0;

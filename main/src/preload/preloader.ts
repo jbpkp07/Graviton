@@ -3,6 +3,7 @@ import electronIsDev from "electron-is-dev";
 import { ContextMenu } from "./modules/ContextMenu";
 import { ElectronAPI, electronAPI } from "./modules/ElectronAPI";
 
+
 declare const window: ElectronAPI.IWindow;
 
 if (electronIsDev) {
