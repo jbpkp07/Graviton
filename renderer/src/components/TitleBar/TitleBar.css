@@ -1,47 +1,60 @@
+:root {
+    --titleBarFontSize: 18px;
+    --spafaxLogoWidth: 80px;
+    --titleBarBtnWidth: 48px;
+    --titleBarHeight: 30px;
+}
+
 .drag {
     -webkit-app-region: drag;
 }
 
 #titleBar {
     background: var(--medium-purple);
-    height: 30px;
-    width: 100%;
+    height: var(--titleBarHeight);
+    text-align: center;
 }
 
 #spafaxLogo {
     background: var(--dark-purple);
     float: left;
-    height: 30px;
-    text-align: center;
-    width: 80px;
+    height: var(--titleBarHeight);
+    width: var(--spafaxLogoWidth);
 }
 
 #title {
     display: inline-block;
-    height: 30px;
-    text-align: center;
+    height: var(--titleBarHeight);
+    position: relative;
+    left: calc((var(--titleBarBtnWidth) * 3 - var(--spafaxLogoWidth)) / 2);
 }
 
 .titleBarText {
-    font-size: 15pt;
+    font-size: var(--titleBarFontSize);
     letter-spacing: -.5px;
     position: relative;
-    top: 4px;
+    top: calc((var(--titleBarHeight) - var(--titleBarFontSize)) / 2);
 }
 
-#windowBtnsBox {
+#titleBarBtnsBox {
     cursor: pointer;
     float: right;
-    height: 30px;
+    height: var(--titleBarHeight);
 }
 
 .titleBarBtn  {
-    display: inline-block;
     background: var(--medium-purple);
-    font-size: 30px;
-    padding: 0px 10px 0px 10px;
+    display: inline-block;
+    height: calc(var(--titleBarHeight) - 10px);
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: var(--titleBarBtnWidth);
 }
 
 .titleBarBtn:hover {
     background: var(--dark-purple);
+}
+
+#closeBtn:hover {
+    background: var(--light-red);
 }

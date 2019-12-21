@@ -1,16 +1,19 @@
 import React from "react";
 
-import { ElectronAPI } from "../../main/src/preload/modules/ElectronAPI";
 import "./App.css";
+import { AppWindow } from "../../main/src/window/AppWindow";
+import { ElectronAPI } from "../../main/src/preload/modules/ElectronAPI";
 import { TitleBar } from "./components/TitleBar/TitleBar";
 
 declare const window: ElectronAPI.IWindow;
 
+const remote: Electron.Remote = window.electronAPI.remote;
+const currentWindow: AppWindow = remote.getCurrentWindow() as AppWindow;
 const webFrame: Electron.WebFrame = window.electronAPI.webFrame;
 
 webFrame.setZoomFactor(1);
 
-console.log(webFrame.getZoomFactor());
+console.log(`zoomFactor: ${webFrame.getZoomFactor()}`);
 
 // setTimeout(() => {
 
@@ -43,21 +46,13 @@ console.log(webFrame.getZoomFactor());
 
 export const App: React.FC = (): JSX.Element => {
 
-    console.log("here: Jeremy");
-
     return (
 
         <div className="App">
-            <TitleBar />
-            <header className="App-header">
-                <img src={require("./logo.svg")} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" >
-                    Learn React
-                </a>
-            </header>
+            <TitleBar {...{ currentWindow }} />
+            <div className="App-header">
+                <img src={require("./logo.svg")} className="App-logo" alt="logo" draggable="false" />
+            </div>
         </div>
     );
 };

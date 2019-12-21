@@ -225,9 +225,8 @@
                     { "name": "project-files", "match": "^\\.", "order": 2 },
                     { "name": "libraries", "match": ".*", "order": 1 }
                 ],
-                "import-sources-order": "case-insensitive",
                 "named-imports-order": "case-insensitive",
-                "module-source-path": "full"
+                "module-source-path": "basename"
             }
         ],
         "prefer-function-over-method": false,

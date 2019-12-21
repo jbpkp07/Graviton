@@ -7,14 +7,14 @@
     --lighter-gray: rgba(72,72,72,1.0);
     --light-gray: rgba(48,48,48,1.0);
     --medium-gray: rgba(32,32,32,1.0);
-    --dark-gray: rgba(18,18,18,1.0);
+    --dark-gray: rgba(24,24,24,1.0);
 
     --light-purple: rgba(151,64,250,1.0);
     --medium-purple: rgba(93,31,153,1.0);
     --dark-purple: rgba(50,27,99,1.0);
 
     --light-blue: rgba(0,174,239,1.0);
-    --light-red: rgba(251,103,105,1.0);
+    --light-red: rgba(255,80,80,1.0);
     --light-green: rgba(42,252,156,1.0);
 }
 
@@ -39,16 +39,18 @@
 }
 
 html {
-    height: 100%;
+    /* border: 1px solid var(--medium-purple); */
+    border-bottom: 1px solid var(--dark-purple);
+    border-left: 1px solid var(--dark-purple);
+    border-right: 1px solid var(--dark-purple); 
     cursor: default;
+    height: calc(100% - 2px);
 }
 
 body {
     background: var(--dark-gray);
-    /* border: 1px solid red; */
     color: var(--light-white);
-    /* font-family: Arial, Helvetica, sans-serif; */
-    font-family: "Roboto-Light";
+    font-family: "Roboto-Light", Arial, sans-serif;
     font-size: 12pt;
     overflow-x: hidden;
     overflow-y: hidden;

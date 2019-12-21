@@ -14,5 +14,3 @@ if (electronIsDev) {
 }
 
 window.electronAPI = electronAPI;
-
-// window.addEventListener("DOMContentLoaded", (): void => { });
