@@ -1,7 +1,7 @@
 import { BrowserWindow } from "electron";
 import electronIsDev from "electron-is-dev";
 
-import { IAppWindowConfig } from "./config";
+import { IAppWindowConfig } from "./appWindowConfig";
 
 
 export class AppWindow extends BrowserWindow {

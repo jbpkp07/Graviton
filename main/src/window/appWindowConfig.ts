@@ -23,8 +23,8 @@ export const mainWindowConfig: IAppWindowConfig = {
 
     appWindowOptions: {
 
-        width: 1680,
-        height: 1050,
+        width: 1920,
+        height: 1200,
 
         center: true,
 
@@ -42,17 +42,17 @@ export const mainWindowConfig: IAppWindowConfig = {
         webPreferences: {
 
             backgroundThrottling: false,
+            contextIsolation: false,
             devTools: true,
             nodeIntegration: false,
-            preload: getFullPath("./preload.js"),
+            preload: getFullPath("../preload/preloader.js"),
             zoomFactor: 1
         }
     },
-    rendererHTMLPathProd: getFullPath("./index.html"),
+    rendererHTMLPathProd: getFullPath("../index.html"),
     rendererURLDev: "http://localhost:3000",
     blurOpacity: 0.7,
     focusOpacity: 1,
     fadeToDurationMS: 200,
     showDurationMS: 750
 };
-

@@ -18,9 +18,24 @@
     --light-green: rgba(42,252,156,1.0);
 }
 
+@font-face {
+    font-family: "Roboto-Light";
+    src: url("./fonts/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url("./fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url("./fonts/Roboto-Medium.ttf") format("truetype");
+}
+
 * {
     user-select: none;
-    /* -webkit-app-region: none; */
+    -webkit-app-region: none;
 }
 
 html {
@@ -32,7 +47,8 @@ body {
     background: var(--dark-gray);
     border: 1px solid red;
     color: var(--light-white);
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: "Roboto-Light";
     font-size: 12pt;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -42,8 +58,4 @@ body {
 
 a {
     text-decoration: none;
-}
-
-.drag {
-    -webkit-app-region: drag;
 }

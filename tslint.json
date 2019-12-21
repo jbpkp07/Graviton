@@ -48,7 +48,7 @@
         "no-inferrable-types": [false, "ignore-params"],
         "no-internal-module": true,
         "no-magic-numbers": false,
-        "no-namespace": true,
+        "no-namespace": [true, "allow-declarations"],
         "no-non-null-assertion": true,
         "no-reference": true,
         "no-restricted-globals": true,

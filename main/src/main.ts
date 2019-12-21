@@ -1,7 +1,7 @@
 import { app } from "electron";
 
-import { AppWindow } from "./AppWindow";
-import { mainWindowConfig } from "./config";
+import { AppWindow } from "./window/AppWindow";
+import { mainWindowConfig } from "./window/appWindowConfig";
 
 
 let mainWindow: AppWindow | null = null;
