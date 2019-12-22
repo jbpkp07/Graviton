@@ -13,8 +13,10 @@ export interface IAppWindowConfig {
     appWindowOptions: BrowserWindowConstructorOptions;
     rendererHTMLPathProd: string;
     rendererURLDev: string;
+    fadeFPS: number;
     blurOpacity: number;
     focusOpacity: number;
+    closeDurationMS: number;
     fadeToDurationMS: number;
     showDurationMS: number;
 }
@@ -24,14 +26,14 @@ export const mainWindowConfig: IAppWindowConfig = {
     appWindowOptions: {
 
         width: 1920,
-        height: 1200,
+        height: 1080,
 
         center: true,
 
         minWidth: 1440,
         minHeight: 900,
 
-        alwaysOnTop: !electronIsDev || true,
+        alwaysOnTop: !electronIsDev || false,
         show: false,
         paintWhenInitiallyHidden: true,
         frame: false,
@@ -51,8 +53,10 @@ export const mainWindowConfig: IAppWindowConfig = {
     },
     rendererHTMLPathProd: getFullPath("../index.html"),
     rendererURLDev: "http://localhost:3000",
+    fadeFPS: 60,
     blurOpacity: 0.7,
     focusOpacity: 1,
+    closeDurationMS: 500,
     fadeToDurationMS: 200,
-    showDurationMS: 750
+    showDurationMS: 500
 };

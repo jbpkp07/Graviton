@@ -10,24 +10,27 @@ const currentWindow: ElectronAPI.IAppWindow = window.electronAPI.getCurrentWindo
 
 console.log(`zoomFactor: ${window.electronAPI.resetZoomFactor(1)}`);
 
-setTimeout(() => {
+console.log(`nodeAPI test: ${window.nodeAPI.test()}`);
 
-    const options: Electron.OpenDialogOptions = {
 
-        title: "select hub file asset",
-        buttonLabel: "Select File",
-        // filters: [
-        //   { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
-        //   { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
-        //   { name: 'Custom File Type', extensions: ['as'] },
-        //   { name: 'All Files', extensions: ['*'] }
-        // ],
-        properties: ["openFile"]
-    };
+// setTimeout(() => {
 
-    console.log(window.electronAPI.showOpenDialogSync(options));
+//     const options: Electron.OpenDialogOptions = {
 
-}, 5000);
+//         title: "select hub file asset",
+//         buttonLabel: "Select File",
+//         // filters: [
+//         //   { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+//         //   { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
+//         //   { name: 'Custom File Type', extensions: ['as'] },
+//         //   { name: 'All Files', extensions: ['*'] }
+//         // ],
+//         properties: ["openFile"]
+//     };
+
+//     console.log(window.electronAPI.showOpenDialogSync(options));
+
+// }, 5000);
 
 
 export const App: React.FC = (): JSX.Element => {

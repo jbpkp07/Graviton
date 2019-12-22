@@ -17,6 +17,6 @@ export const electronAPI: ElectronAPI.IElectronAPI = {
     },
     showOpenDialogSync(options: Electron.OpenDialogOptions): string[] | undefined {
 
-        return remote.dialog.showOpenDialogSync(this.getCurrentWindow(), options);
+        return remote.dialog.showOpenDialogSync(options);
     }
 };

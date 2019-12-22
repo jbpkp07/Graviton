@@ -18,6 +18,7 @@ export declare namespace ElectronAPI {
     interface INodeAPI {
         
         // To be filled in later as needed. Functions that give granular access to the NodeJS libraries.
+        test(): boolean;
     }
     
     interface IWindow extends Window {

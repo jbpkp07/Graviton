@@ -7,45 +7,47 @@ import { ElectronAPI } from "../../../shared/ElectronAPI";
 
 export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
+    private readonly config: IAppWindowConfig;
+
     private intervalID: NodeJS.Timeout | null = null;
 
     public constructor(config: IAppWindowConfig) {
 
         super(config.appWindowOptions);
 
-        this.loadRenderer(config);
+        this.config = config;
 
-        this.assignListeners(config);
+        this.loadRenderer();
+
+        this.assignListeners();
     }
-    public blah(): void {
-        
-    }
+
     public closeGracefully(): void {
 
         if (this.intervalID !== null) { clearInterval(this.intervalID); }
 
-        this.fadeTo(0, 500).then(() => {
+        this.fadeTo(0, this.config.closeDurationMS).then(() => {
 
             this.close();
         });
     }
 
-    private loadRenderer(config: IAppWindowConfig): void {
+    private loadRenderer(): void {
 
         if (electronIsDev) {
 
-            this.loadURL(config.rendererURLDev).then((): void => {
+            this.loadURL(this.config.rendererURLDev).then((): void => {
 
                 // this.webContents.openDevTools(); 
             });
         }
         else {
 
-            this.loadFile(config.rendererHTMLPathProd);
+            this.loadFile(this.config.rendererHTMLPathProd);
         }
     }
 
-    private assignListeners(config: IAppWindowConfig): void {
+    private assignListeners(): void {
 
         this.once("ready-to-show", () => {
 
@@ -53,7 +55,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
             setTimeout(() => {
                 
-                this.fadeTo(config.blurOpacity, config.showDurationMS).then(() => {
+                this.fadeTo(this.config.blurOpacity, this.config.showDurationMS).then(() => {
 
                     this.setAlwaysOnTop(false);
     
@@ -61,14 +63,14 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
     
                         if (this.intervalID !== null) { clearInterval(this.intervalID); }
     
-                        this.fadeTo(config.focusOpacity, config.fadeToDurationMS);
+                        this.fadeTo(this.config.focusOpacity, this.config.fadeToDurationMS);
                     });
     
                     this.on("blur", () => {
     
                         if (this.intervalID !== null) { clearInterval(this.intervalID); }
     
-                        this.fadeTo(config.blurOpacity, config.fadeToDurationMS);
+                        this.fadeTo(this.config.blurOpacity, this.config.fadeToDurationMS);
                     });
                 });
 
@@ -82,9 +84,11 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
         const isIncreasing: boolean = (opacity < toOpacity) ? true : false;
 
-        const ms: number = (fadeMS >= 10) ? fadeMS : 10;
+        const renderMS: number = Math.floor(1000 / this.config.fadeFPS);
 
-        const step: number = parseFloat(((toOpacity - opacity) / (ms / 10)).toFixed(3));
+        const ms: number = (fadeMS >= renderMS) ? fadeMS : renderMS;
+
+        const step: number = parseFloat(((toOpacity - opacity) / (ms / renderMS)).toFixed(3));
 
         return new Promise((resolve: Function): void => {
 
@@ -107,7 +111,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
                     this.setOpacity(opacity);
                 }
 
-            }, 10);
+            }, renderMS);
         });
     }
 }

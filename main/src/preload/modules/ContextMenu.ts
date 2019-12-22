@@ -1,4 +1,6 @@
-import Electron, { BrowserWindow, MenuItemConstructorOptions, remote } from "electron";
+import Electron, { MenuItemConstructorOptions, remote } from "electron";
+
+import { ElectronAPI } from "../../../../shared/ElectronAPI";
 
 
 export class ContextMenu {
@@ -26,7 +28,7 @@ export class ContextMenu {
         this.xPos = event.x;
         this.yPos = event.y;
 
-        const window: BrowserWindow = remote.getCurrentWindow();
+        const window: ElectronAPI.IAppWindow = remote.getCurrentWindow() as ElectronAPI.IAppWindow;
 
         this.contextMenu.popup({ window });
     }
