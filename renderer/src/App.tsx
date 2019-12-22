@@ -1,47 +1,33 @@
 import React from "react";
 
 import "./App.css";
-import { AppWindow } from "../../main/src/window/AppWindow";
-import { ElectronAPI } from "../../main/src/preload/modules/ElectronAPI";
+import { ElectronAPI } from "../../shared/ElectronAPI";
 import { TitleBar } from "./components/TitleBar/TitleBar";
 
 declare const window: ElectronAPI.IWindow;
 
-const remote: Electron.Remote = window.electronAPI.remote;
-const currentWindow: AppWindow = remote.getCurrentWindow() as AppWindow;
-const webFrame: Electron.WebFrame = window.electronAPI.webFrame;
+const currentWindow: ElectronAPI.IAppWindow = window.electronAPI.getCurrentWindow();
 
-webFrame.setZoomFactor(1);
+console.log(`zoomFactor: ${window.electronAPI.resetZoomFactor(1)}`);
 
-console.log(`zoomFactor: ${webFrame.getZoomFactor()}`);
+setTimeout(() => {
 
-// setTimeout(() => {
+    const options: Electron.OpenDialogOptions = {
 
-//     const options: Electron.OpenDialogOptions = {
+        title: "select hub file asset",
+        buttonLabel: "Select File",
+        // filters: [
+        //   { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+        //   { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
+        //   { name: 'Custom File Type', extensions: ['as'] },
+        //   { name: 'All Files', extensions: ['*'] }
+        // ],
+        properties: ["openFile"]
+    };
 
-//         title: "select hub file asset",
-//         buttonLabel: "Select File",
-//         // filters: [
-//         //   { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
-//         //   { name: 'Movies', extensions: ['mkv', 'avi', 'mp4'] },
-//         //   { name: 'Custom File Type', extensions: ['as'] },
-//         //   { name: 'All Files', extensions: ['*'] }
-//         // ],
-//         properties: ["openFile"]
-//     };
+    console.log(window.electronAPI.showOpenDialogSync(options));
 
-//     // remote.dialog.showOpenDialog(remote.getCurrentWindow(), options)
-
-//     //     .then((filePath: Electron.OpenDialogReturnValue) => {
-
-//     //         console.log(filePath.canceled);
-//     //         console.log(filePath.filePaths);
-//     //     });
-
-//     console.log(remote.dialog.showOpenDialogSync(options));
-
-// }, 5000);
-
+}, 5000);
 
 
 export const App: React.FC = (): JSX.Element => {

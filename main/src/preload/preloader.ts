@@ -1,7 +1,8 @@
 import electronIsDev from "electron-is-dev";
 
 import { ContextMenu } from "./modules/ContextMenu";
-import { ElectronAPI, electronAPI } from "./modules/ElectronAPI";
+import { electronAPI } from "./modules/electronAPI";
+import { ElectronAPI } from "../../../shared/ElectronAPI";
 
 
 declare const window: ElectronAPI.IWindow;

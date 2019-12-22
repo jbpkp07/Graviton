@@ -2,9 +2,10 @@ import { BrowserWindow } from "electron";
 import electronIsDev from "electron-is-dev";
 
 import { IAppWindowConfig } from "./appWindowConfig";
+import { ElectronAPI } from "../../../shared/ElectronAPI";
 
 
-export class AppWindow extends BrowserWindow {
+export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
     private intervalID: NodeJS.Timeout | null = null;
 
@@ -16,7 +17,9 @@ export class AppWindow extends BrowserWindow {
 
         this.assignListeners(config);
     }
-
+    public blah(): void {
+        
+    }
     public closeGracefully(): void {
 
         if (this.intervalID !== null) { clearInterval(this.intervalID); }

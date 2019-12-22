@@ -1,16 +1,16 @@
 import React from "react";
 
-import { AppWindow } from "../../../../main/src/window/AppWindow";
+import { ElectronAPI } from "../../../../shared/ElectronAPI";
 import "./TitleBar.css";
 
 interface ITitleBarProps {
 
-    currentWindow: AppWindow;
+    currentWindow: ElectronAPI.IAppWindow;
 }
 
 export function TitleBar(props: ITitleBarProps): JSX.Element {
 
-    const currentWindow: AppWindow = props.currentWindow;
+    const currentWindow: ElectronAPI.IAppWindow = props.currentWindow;
 
     function minimizeWindow(): void {
 
