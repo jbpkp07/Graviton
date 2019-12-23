@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./App.css";
-import { ElectronAPI } from "../../shared/ElectronAPI";
-import { TitleBar } from "./components/TitleBar/TitleBar";
+import { ElectronAPI } from "../../../shared/ElectronAPI";
+import { TitleBar } from "../components/TitleBar/TitleBar";
 
 declare const window: ElectronAPI.IWindow;
 
@@ -33,15 +33,15 @@ console.log(`nodeAPI test: ${window.nodeAPI.test()}`);
 // }, 5000);
 
 
-export const App: React.FC = (): JSX.Element => {
+export function App(): JSX.Element {
 
     return (
 
         <div className="App">
             <TitleBar {...{ currentWindow }} />
             <div className="App-header">
-                <img src={require("./logo.svg")} className="App-logo" alt="logo" draggable="false" />
+                <img src={require("./images/logo.svg")} className="App-logo" alt="logo" draggable="false" />
             </div>
         </div>
     );
-};
+}

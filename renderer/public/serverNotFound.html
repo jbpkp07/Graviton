@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; img-src * data:; style-src * 'unsafe-inline';">
+
+    <title>Graviton</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+    <style>
+
+        html, body {
+            color: var(--light-purple);
+        }
+
+        #messageBoxWrapper {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+
+        #messageBox {
+            height: 480px;
+            margin: auto auto;
+            text-align: center;
+            width: 720px;
+        }
+
+        #title {
+            font-family: "Roboto-Light", Arial, sans-serif;
+            font-size: 42pt;
+        }
+
+        #logo {
+            animation: App-logo-spin infinite 20s linear;
+            display: block;
+            margin: 0 auto;
+            width: 460px;
+        }
+
+        #message {
+            color: var(--light-red);
+        }
+
+        #closeBtn {
+            position: relative;
+            margin: 30px auto 0px auto;
+            z-index: 1;
+        }
+
+        @keyframes App-logo-spin {
+
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+    </style>
+    
+</head>
+
+<body>
+    <div id="messageBoxWrapper">
+        <div id="messageBox">
+            <div id="title">graviton</div>
+            <img id="logo" src="./images/logo.svg" alt="Graviton Logo" draggable="false">
+            <div id="message">ERROR &nbsp;server not found</div>
+            <div id="closeBtn" class="btn" onclick="window.electronAPI.getCurrentWindow().closeGracefully();">click to close</div>
+        </div>
+    </div>
+</body>
+
+</html>

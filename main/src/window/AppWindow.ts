@@ -17,9 +17,9 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
         this.config = config;
 
-        this.loadRenderer();
-
         this.assignListeners();
+
+        this.loadRenderer();
     }
 
     public closeGracefully(): void {
@@ -32,55 +32,67 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
         });
     }
 
-    private loadRenderer(): void {
-
-        if (electronIsDev) {
-
-            this.loadURL(this.config.rendererURLDev).then((): void => {
-
-                // this.webContents.openDevTools(); 
-            });
-        }
-        else {
-
-            this.loadFile(this.config.rendererHTMLPathProd);
-        }
-    }
-
     private assignListeners(): void {
 
         this.once("ready-to-show", () => {
 
-            this.showInactive();
+            electronIsDev ? this.showInactive() : this.show();
 
             setTimeout(() => {
-                
-                this.fadeTo(this.config.blurOpacity, this.config.showDurationMS).then(() => {
+
+                this.fadeTo(this.config.focusOpacity, this.config.showDurationMS).then(() => {
 
                     this.setAlwaysOnTop(false);
-    
+
                     this.on("focus", () => {
-    
+
                         if (this.intervalID !== null) { clearInterval(this.intervalID); }
-    
+
                         this.fadeTo(this.config.focusOpacity, this.config.fadeToDurationMS);
                     });
-    
+
                     this.on("blur", () => {
-    
+
                         if (this.intervalID !== null) { clearInterval(this.intervalID); }
-    
+
                         this.fadeTo(this.config.blurOpacity, this.config.fadeToDurationMS);
                     });
                 });
 
-            }, 250);
+            }, 250);  // Slight delay helps with smoother opacity fading
         });
+    }
+
+    private loadRenderer(): void {
+
+        if (electronIsDev) {
+
+            this.loadURL(this.config.rendererURLDev)
+
+                .catch(() => {
+
+                    this.loadFile(this.config.rendererHTMLServerNotFoundDev);
+                });
+        }
+        else {
+
+            this.loadFile(this.config.rendererHTMLProd)
+
+                .catch(() => {
+
+                    this.loadFile(this.config.rendererHTMLServerNotFoundProd);
+                });
+        }
     }
 
     private async fadeTo(toOpacity: number, fadeMS: number): Promise<void> {
 
         let opacity: number = this.getOpacity();
+
+        if (opacity === toOpacity) {
+
+            return Promise.resolve(); // No fading necessary
+        }
 
         const isIncreasing: boolean = (opacity < toOpacity) ? true : false;
 

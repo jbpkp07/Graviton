@@ -37,9 +37,9 @@ export function TitleBar(props: ITitleBarProps): JSX.Element {
                 <span className="titleBarText drag">graviton</span>
             </div>
             <div id="titleBarBtnsBox">
-                <img src={require("./minimize.svg")} alt="min" title="Minimize"           className="titleBarBtn" onClick={minimizeWindow} draggable="false" />
-                <img src={require("./maximize.svg")} alt="max" title="Maximize / Restore" className="titleBarBtn" onClick={maximizeWindow} draggable="false" />
-                <img src={require("./close.svg")}    alt="close" title="Close"            className="titleBarBtn" onClick={closeWindow}    draggable="false" />
+                <img src={require("./images/minimize.svg")} alt="min" title="Minimize"           className="titleBarBtn" onClick={minimizeWindow} draggable="false" />
+                <img src={require("./images/maximize.svg")} alt="max" title="Maximize / Restore" className="titleBarBtn" onClick={maximizeWindow} draggable="false" />
+                <img src={require("./images/close.svg")}    alt="close" title="Close"            className="titleBarBtn" onClick={closeWindow}    draggable="false" />
             </div>
         </div>
     );

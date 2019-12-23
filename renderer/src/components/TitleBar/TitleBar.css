@@ -11,6 +11,7 @@
 
 #titleBar {
     background: var(--medium-purple);
+    font-family: "Roboto-Light", Arial, sans-serif;
     height: var(--titleBarHeight);
     text-align: center;
 }
