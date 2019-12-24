@@ -16,6 +16,11 @@
     --light-blue: rgba(0,174,239,1.0);
     --light-red: rgba(255,80,80,1.0);
     --light-green: rgba(42,252,156,1.0);
+
+    --titleBarFontSize: 18px;
+    --titleBarLogoWidth: 80px;
+    --titleBarBtnWidth: 48px;
+    --titleBarHeight: 31px;
 }
 
 @font-face {
@@ -29,6 +34,7 @@
 }
 
 * {
+    box-sizing: border-box;
     user-select: none;
     -webkit-app-region: none;
 }
@@ -45,6 +51,11 @@ html, body {
     /* overflow-y: scroll; */
     width: 100%;
     -webkit-overflow-scrolling: touch;
+}
+
+#root {
+    height: inherit;
+    width: inherit;
 }
 
 a {

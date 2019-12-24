@@ -1,0 +1,31 @@
+#startScreenWrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+#startScreen {
+    height: 480px;
+    margin: auto auto;
+    text-align: center;
+    width: 720px;
+}
+
+#startScreenTitle {
+    color: var(--light-purple);
+    font-family: "Roboto-Light", Arial, sans-serif;
+    font-size: 42pt;
+}
+
+#startScreenLogo {
+    animation: App-logo-spin infinite 20s linear;
+    display: block;
+    margin: 0 auto;
+    width: 460px;
+}
+
+@keyframes App-logo-spin {
+
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

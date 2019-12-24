@@ -3,6 +3,7 @@ import React from "react";
 import { ElectronAPI } from "../../../../shared/ElectronAPI";
 import "./TitleBar.css";
 
+
 interface ITitleBarProps {
 
     currentWindow: ElectronAPI.IAppWindow;
@@ -29,17 +30,17 @@ export function TitleBar(props: ITitleBarProps): JSX.Element {
 
     return (
 
-        <div id="titleBar" className="drag">
-            <div id="spafaxLogo" className="drag">
-                <span className="titleBarText drag">spafax</span>
+        <div id="titleBar" className="titleBarDrag">
+            <div id="titleBarLogo" className="titleBarDrag">
+                <span className="titleBarText titleBarDrag">spafax</span>
             </div>
-            <div id="title" className="drag">
-                <span className="titleBarText drag">graviton</span>
+            <div id="titleBarTitle" className="titleBarDrag">
+                <span className="titleBarText titleBarDrag">graviton</span>
             </div>
             <div id="titleBarBtnsBox">
-                <img src={require("./images/minimize.svg")} alt="min" title="Minimize"           className="titleBarBtn" onClick={minimizeWindow} draggable="false" />
-                <img src={require("./images/maximize.svg")} alt="max" title="Maximize / Restore" className="titleBarBtn" onClick={maximizeWindow} draggable="false" />
-                <img src={require("./images/close.svg")}    alt="close" title="Close"            className="titleBarBtn" onClick={closeWindow}    draggable="false" />
+                <img src={require("./images/minimize.svg")} alt="Min"   title="Minimize"           className="titleBarBtn" onClick={minimizeWindow} draggable="false" />
+                <img src={require("./images/maximize.svg")} alt="Max"   title="Maximize / Restore" className="titleBarBtn" onClick={maximizeWindow} draggable="false" />
+                <img src={require("./images/close.svg")}    alt="Close" title="Close"              className="titleBarBtn" onClick={closeWindow}    draggable="false" />
             </div>
         </div>
     );
