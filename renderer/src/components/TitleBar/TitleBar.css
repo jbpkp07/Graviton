@@ -4,7 +4,7 @@
 
 #titleBar {
     background: var(--medium-purple);
-    border-bottom: 1px solid var(--dark-purple);
+    /* border-bottom: 1px solid var(--dark-purple); */
     font-family: "Roboto-Light", Arial, sans-serif;
     height: var(--titleBarHeight);
     text-align: center;
@@ -12,9 +12,16 @@
 
 #titleBarLogo {
     background: var(--dark-purple);
+    background: linear-gradient(to right, var(--dark-purple) 50%, var(--medium-purple));
     float: left;
-    height: calc(var(--titleBarHeight) - 1px);
+    height: var(--titleBarHeight);
+    text-align: left;
     width: var(--titleBarLogoWidth);
+}
+
+#titleBarLogoText {
+    left: 20px;
+    position: relative;
 }
 
 #titleBarTitle {
@@ -40,7 +47,7 @@
 .titleBarBtn  {    
     background: var(--medium-purple);
     display: inline-block;
-    height: calc(var(--titleBarHeight) - 1px);
+    height: var(--titleBarHeight);
     padding-bottom: 5px;
     padding-top: 5px;
     width: var(--titleBarBtnWidth);

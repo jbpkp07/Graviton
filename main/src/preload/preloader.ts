@@ -3,6 +3,7 @@ import { electronAPI } from "./modules/electronAPI";
 import { ElectronAPI } from "../../../shared/ElectronAPI";
 import { nodeAPI } from "./modules/nodeAPI";
 
+
 const contextMenu: ContextMenu = new ContextMenu();
 
 declare const window: ElectronAPI.IWindow;

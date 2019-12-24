@@ -32,7 +32,7 @@ export function TitleBar(props: ITitleBarProps): JSX.Element {
 
         <div id="titleBar" className="titleBarDrag">
             <div id="titleBarLogo" className="titleBarDrag">
-                <span className="titleBarText titleBarDrag">spafax</span>
+                <span id="titleBarLogoText" className="titleBarText titleBarDrag">spafax</span>
             </div>
             <div id="titleBarTitle" className="titleBarDrag">
                 <span className="titleBarText titleBarDrag">graviton</span>

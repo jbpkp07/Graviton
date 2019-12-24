@@ -14,13 +14,19 @@
     --dark-purple: rgba(50,27,99,1.0);
 
     --light-blue: rgba(0,174,239,1.0);
+    --light-blue-transparent: rgba(0,174,239,0.5);
+
     --light-red: rgba(255,80,80,1.0);
     --light-green: rgba(42,252,156,1.0);
 
+    --defaultFontSize: 13.333px;
+
     --titleBarFontSize: 18px;
-    --titleBarLogoWidth: 80px;
+    --titleBarLogoWidth: 180px;
     --titleBarBtnWidth: 48px;
-    --titleBarHeight: 31px;
+    --titleBarHeight: 30px;
+
+    --navBarHeight: 30px;
 }
 
 @font-face {
@@ -44,7 +50,7 @@ html, body {
     color: var(--light-white);
     cursor: default;
     font-family: "Roboto-Regular", Arial, sans-serif;
-    font-size: 11pt;
+    font-size: var(--defaultFontSize);
     height: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -63,17 +69,22 @@ a {
 }
 
 .btn {
-    border: 2px solid var(--medium-purple);
+    /* background: var(--medium-gray); */
+    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
+    border: 1px solid var(--lightest-gray);
     border-radius: 5px;
+    color: var(--light-blue);
     cursor: pointer;
     padding: 8px;
+    position: relative;
     width: fit-content;
+    z-index: 1;
 }
 
 .btn:hover {
-    border: 2px solid var(--light-purple);
+    background: var(--light-gray);
 }
 
 .btn:active {
-    color: var(--medium-purple);
+    color: var(--light-blue-transparent);
 }

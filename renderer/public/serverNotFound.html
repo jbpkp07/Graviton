@@ -13,10 +13,6 @@
 
     <style>
 
-        html, body {
-            color: var(--light-purple);
-        }
-
         #startScreenWrapper {
             display: flex;
             height: 100%;
@@ -31,6 +27,7 @@
         }
 
         #startScreenTitle {
+            color: var(--light-purple);
             font-family: "Roboto-Light", Arial, sans-serif;
             font-size: 42pt;
         }
@@ -48,9 +45,7 @@
         }
 
         #closeBtn {
-            position: relative;
             margin: 30px auto 0px auto;
-            z-index: 1;
         }
 
         @keyframes App-logo-spin {
@@ -69,7 +64,7 @@
             <div id="startScreenTitle">graviton</div>
             <img id="startScreenLogo" src="./images/logo.svg" alt="Graviton Logo" draggable="false"/>
             <div id="serverNotFoundMessage">ERROR &nbsp;server not found</div>
-            <div id="closeBtn" class="btn" onclick="window.electronAPI.getCurrentWindow().closeGracefully();">click to close</div>
+            <div id="closeBtn" class="btn" onclick="window.electronAPI.getCurrentWindow().closeGracefully();">Close Graviton</div>
         </div>
     </div>
 </body>

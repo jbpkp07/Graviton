@@ -12,18 +12,25 @@ export interface INavBarProps {
 
 export function NavBar(props: INavBarProps): JSX.Element {
 
-    // function selectScreen(screen: EScreen): void {
-
-    //     props.selectScreen(screen);
-    // }
-
     function renderLink(screen: EScreen): JSX.Element {
 
-        const className: string = `navBarLink ${props.currentScreen === screen ? "navBarActiveLink" : ""}`;
+        if (props.currentScreen === screen) {
+
+            return (
+
+                <div className="navBarLink navBarActiveLink" key={screen}>
+                    {screen}
+                </div>
+            );
+        }
+
+        function selectScreen(): void { props.selectScreen(screen); }
 
         return (
 
-            <div className={className} key={screen} onClick={(): void => props.selectScreen(screen)}>{screen}</div>
+            <div className="navBarLink navBarInActiveLink btn" key={screen} onClick={selectScreen}>
+                {screen}
+            </div>
         );
     }
 

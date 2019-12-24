@@ -60,7 +60,7 @@ export const mainWindowConfig: IAppWindowConfig = {
     fadeFPS: 60,
     blurOpacity: 0.7,
     focusOpacity: 1,
-    closeDurationMS: 500,
-    fadeToDurationMS: 200,
-    showDurationMS: 500
+    closeDurationMS: 750,
+    fadeToDurationMS: 250,
+    showDurationMS: 750
 };
