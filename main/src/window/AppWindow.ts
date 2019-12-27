@@ -59,7 +59,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
                     });
                 });
 
-            }, 250);  // Slight delay helps with smoother opacity fading
+            }, 1000);  // Slight delay helps with smoother opacity fading and start page animations
         });
     }
 

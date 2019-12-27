@@ -4,7 +4,8 @@
 }
 
 #appScreenWrapper {
-    height: calc(100% - var(--titleBarHeight));
+    /* border: 1px solid red; */
+    height: calc(100% - var(--titleBarHeight) - var(--navBarHeight));
     padding: 20px;
     width: inherit;
 }
