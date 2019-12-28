@@ -1,6 +1,6 @@
 import React from "react";
 
-import { EScreen } from "../../App/App";
+import { EScreen } from "../../screens/EScreen";
 import "./NavBar.css";
 
 
