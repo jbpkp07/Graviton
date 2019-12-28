@@ -1,33 +1,21 @@
 import React from "react";
-import { default as Dropdown, Option as DropDownOption } from "react-dropdown";
-// tslint:disable-next-line: no-submodule-imports
-import "react-dropdown/style.css";
 
 import "./Admin.css";
 import { Button, IButtonProps } from "../../components/Button/Button";
-// import { default as Select, OptionsType, OptionTypeBase, ValueType } from "react-select";
-
+import { DropDown, IDropDownProps, IOptionType } from "../../components/DropDown/DropDown";
 
 
 interface IAdminScreenState {
 
     myNumber: number;
-    selectedOption: DropDownOption | undefined;
+    selectedOption: IOptionType | null;
 }
 
 let adminScreenState: IAdminScreenState = {
 
     myNumber: 0,
-    selectedOption: undefined
+    selectedOption: null
 };
-
-
-const options: DropDownOption[] = [
-
-    { label: "4 by 3", value: "4x3" },
-    { label: "16 by 9", value: "16x9" },
-    { label: "16 by 10", value: "16x10" }
-];
 
 
 export class AdminScreen extends React.Component {
@@ -42,17 +30,23 @@ export class AdminScreen extends React.Component {
             onClick: this.increment
         };
 
+        const dropDownProps: IDropDownProps = {
+
+            options: [
+                { label: "4 by 3   asdfsdfsadfsadfsadfasdfasdfasdfsadfasdfasdfasdfasdfasdf", value: "4x3 asdfsadfsadfsadfsadfsadfsdsaf" },
+                { label: "16 by 9", value: "16x9" },
+                { label: "16 by 10", value: "16x10" }
+            ],
+            selectedOption: this.state.selectedOption,
+            onChange: this.handleChange
+        };
+
+
         return (
             <div>
+                <DropDown {...dropDownProps} />
                 <Button {...buttonProps} />
                 <div id="myNumber">{this.state.myNumber}</div>
-                <Dropdown
-                    className="dropDown" 
-                    options={options} 
-                    onChange={this.handleChange}
-                    value={this.state.selectedOption}
-                    placeholder="Admin Button" 
-                />
             </div>
         );
     }
@@ -69,10 +63,10 @@ export class AdminScreen extends React.Component {
         this.setState({ myNumber });
     }
 
-    private readonly handleChange = (selectedOption: DropDownOption): void => {
+    private readonly handleChange = (selectedOption: IOptionType): void => {
 
         this.setState({ selectedOption });
 
-        console.log(`Option selected: ${selectedOption.value}`);
+        console.log(selectedOption.value);
     }
 }
