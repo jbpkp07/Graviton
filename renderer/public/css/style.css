@@ -41,8 +41,8 @@
 
 * {
     box-sizing: border-box;
-    box-shadow: none;
-    outline: none;
+    /* box-shadow: none; */
+    /* outline: none; */
     text-decoration: none;
     user-select: none;
     -webkit-app-region: none;
@@ -67,30 +67,10 @@ html, body {
     width: inherit;
 }
 
-.btn {
-    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
-    border: 1px solid var(--lightest-gray);
-    border-radius: 5px;
-    color: var(--light-blue);
-    cursor: pointer;
-    padding: 8px;
-    position: relative;
-    width: fit-content;
-    z-index: 1;
-}
-
-.btn:hover {
-    background: var(--light-gray);
-}
-
-.btn:active {
-    color: var(--light-blue-transparent);
-}
-
-#dropDown {
+/* .dropDown {
     background: var(--medium-gray);
     color: var(--light-blue);
     width: 200px;
     outline: none;
     box-shadow: none;
-}
+} */

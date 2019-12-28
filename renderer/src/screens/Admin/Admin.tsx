@@ -1,8 +1,12 @@
 import React from "react";
 import { default as Dropdown, Option as DropDownOption } from "react-dropdown";
-// import { default as Select, OptionsType, OptionTypeBase, ValueType } from "react-select";
+// tslint:disable-next-line: no-submodule-imports
+import "react-dropdown/style.css";
 
 import "./Admin.css";
+import { Button, IButtonProps } from "../../components/Button/Button";
+// import { default as Select, OptionsType, OptionTypeBase, ValueType } from "react-select";
+
 
 
 interface IAdminScreenState {
@@ -20,39 +24,34 @@ let adminScreenState: IAdminScreenState = {
 
 const options: DropDownOption[] = [
 
-    { label: "4 x 3", value: "4x3" },
-    { label: "16 x 9", value: "16x9" },
-    { label: "16 x 10", value: "16x10" }
+    { label: "4 by 3", value: "4x3" },
+    { label: "16 by 9", value: "16x9" },
+    { label: "16 by 10", value: "16x10" }
 ];
 
 
 export class AdminScreen extends React.Component {
 
-    public readonly state: IAdminScreenState;
-
-    public constructor(props: any) {
-
-        super(props);
-
-        this.state = adminScreenState;
-    }
-
-    // public readonly componentDidMount = (): void => {
-
-    //     this.setState(persistentState);
-    // }
+    public readonly state: IAdminScreenState = adminScreenState;
 
     public readonly render = (): JSX.Element => {
 
+        const buttonProps: IButtonProps = {
+
+            label: "Admin Button",
+            onClick: this.increment
+        };
+
         return (
             <div>
-                <div className="btn" onClick={this.increment}>Admin Button</div>
+                <Button {...buttonProps} />
                 <div id="myNumber">{this.state.myNumber}</div>
-                <Dropdown 
+                <Dropdown
+                    className="dropDown" 
                     options={options} 
                     onChange={this.handleChange}
                     value={this.state.selectedOption}
-                    placeholder="Select an option" 
+                    placeholder="Admin Button" 
                 />
             </div>
         );
@@ -74,6 +73,6 @@ export class AdminScreen extends React.Component {
 
         this.setState({ selectedOption });
 
-        console.log(`Option selected: ${selectedOption.toString()}`);
+        console.log(`Option selected: ${selectedOption.value}`);
     }
 }

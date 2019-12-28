@@ -61,6 +61,7 @@ export class App extends React.Component {
 
     private readonly selectScreen = (currentScreen: EScreen): void => {
 
+        console.log(`selectedScreen: ${currentScreen}`);
         this.setState({ currentScreen });
     }
 }

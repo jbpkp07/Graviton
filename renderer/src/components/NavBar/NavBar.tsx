@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Button, IButtonProps } from "../Button/Button";
 import { EScreen } from "../../screens/EScreen";
 import "./NavBar.css";
 
@@ -24,13 +25,17 @@ export function NavBar(props: INavBarProps): JSX.Element {
             );
         }
 
-        function selectScreen(): void { props.selectScreen(screen); }
+        const buttonProps: IButtonProps = {
+
+            className: "navBarLink navBarInActiveLink",
+            key: screen,
+            label: screen,
+            onClick: (): void => props.selectScreen(screen)
+        };
 
         return (
 
-            <div className="navBarLink navBarInActiveLink btn" key={screen} onClick={selectScreen}>
-                {screen}
-            </div>
+            <Button {...buttonProps} />
         );
     }
 

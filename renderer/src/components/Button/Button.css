@@ -1,0 +1,19 @@
+.btn {
+    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
+    border: 1px solid var(--lightest-gray);
+    border-radius: 5px;
+    color: var(--light-blue);
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+    width: fit-content;
+    z-index: 1;
+}
+
+.btn:hover {
+    background: var(--light-gray);
+}
+
+.btn:active {
+    color: var(--light-blue-transparent);
+}
