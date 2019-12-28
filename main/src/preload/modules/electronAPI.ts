@@ -9,11 +9,11 @@ export const electronAPI: ElectronAPI.IElectronAPI = {
 
         return remote.getCurrentWindow() as ElectronAPI.IAppWindow;
     },
-    resetZoomFactor(factor: number): number {
+    resetZoomFactor(factor: number): void {
 
         webFrame.setZoomFactor(factor);
-
-        return webFrame.getZoomFactor();
+        
+        console.log(`zoomFactor: ${webFrame.getZoomFactor()}`);
     },
     showOpenDialogSync(options: Electron.OpenDialogOptions): string[] | undefined {
 

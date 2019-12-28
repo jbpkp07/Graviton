@@ -11,7 +11,7 @@ export declare namespace ElectronAPI {
     interface IElectronAPI {
     
         getCurrentWindow(): IAppWindow;
-        resetZoomFactor(factor: number): number;
+        resetZoomFactor(factor: number): void;
         showOpenDialogSync(options: Electron.OpenDialogOptions): string[] | undefined;
     }
 
