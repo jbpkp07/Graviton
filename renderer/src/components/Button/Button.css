@@ -4,10 +4,10 @@
     border-radius: 5px;
     color: var(--light-blue);
     cursor: pointer;
+    display: inline-block;
+    margin: 0;
     padding: 7px 8px 8px 8px;
-    /* position: relative; */
     width: fit-content;
-    /* z-index: 1; */
 }
 
 .btn:hover {

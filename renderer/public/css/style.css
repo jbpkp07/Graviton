@@ -9,12 +9,16 @@
     --medium-gray: rgba(36,36,36,1.0);
     --dark-gray: rgba(24,24,24,1.0);
 
+    --black: rgba(0,0,0,1.0);
+
     --light-purple: rgba(151,64,250,1.0);
     --medium-purple: rgba(93,31,153,1.0);
     --dark-purple: rgba(50,27,99,1.0);
 
-    --light-blue: rgba(0,174,239,1.0);
-    --light-blue-transparent: rgba(0,174,239,0.5);
+    --light-blue: rgba(0,204,255,1.0);
+    --light-blue-transparent: rgba(0,204,255,0.5);
+
+    --light-teal: rgba(53,212,199,1.0);
 
     --light-red: rgba(255,80,80,1.0);
     --light-green: rgba(42,252,156,1.0);
@@ -49,10 +53,11 @@
 }
 
 html, body {
+    /* background: var(--dark-white); */
     background: var(--dark-gray);
     color: var(--light-white);
     cursor: default;
-    font-family: "Roboto-Regular", Arial, sans-serif;
+    font-family: "Roboto-Regular" !important;
     font-size: var(--defaultFontSize);
     height: 100%;
     overflow-x: hidden;
@@ -62,15 +67,11 @@ html, body {
     -webkit-overflow-scrolling: touch;
 }
 
+input {
+    font-family: "Roboto-Regular" !important;
+}
+
 #root {
     height: inherit;
     width: inherit;
 }
-
-/* .dropDown {
-    background: var(--medium-gray);
-    color: var(--light-blue);
-    width: 200px;
-    outline: none;
-    box-shadow: none;
-} */

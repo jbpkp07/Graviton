@@ -16,7 +16,7 @@
 
 #startScreenTitle {
     color: var(--light-purple);
-    font-family: "Roboto-Light", Arial, sans-serif;
+    font-family: "Roboto-Light";
     font-size: 42pt;
 }
 

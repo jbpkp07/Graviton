@@ -26,17 +26,19 @@ export class AdminScreen extends React.Component {
 
         const buttonProps: IButtonProps = {
 
-            label: "Admin Button",
+            label: "Select 16 by 9",
             onClick: this.increment
         };
 
         const dropDownProps: IDropDownProps = {
 
+            id: "dropDownMenu1",
             options: [
-                { label: "4 by 3   asdfsdfsadfsadfsadfasdfasdfasdfsadfasdfasdfasdfasdfasdf", value: "4x3 asdfsadfsadfsadfsadfsadfsdsaf" },
+                { label: "Select   asdfsdfsadfsadfsadfasdfasdfasdfsadfasdfasdfasdfasdfasdf 123", value: "4x3 asdfsadfsadfsadfsadfsadfsdsaf 123" },
                 { label: "16 by 9", value: "16x9" },
                 { label: "16 by 10", value: "16x10" }
             ],
+            placeholder: "Select Options From This Menu",
             selectedOption: this.state.selectedOption,
             onChange: this.handleChange
         };
@@ -44,9 +46,9 @@ export class AdminScreen extends React.Component {
 
         return (
             <div>
-                <DropDown {...dropDownProps} />
                 <Button {...buttonProps} />
-                <div id="myNumber">{this.state.myNumber}</div>
+                <DropDown {...dropDownProps} />
+                {/* <div id="myNumber">{this.state.myNumber}</div> */}
             </div>
         );
     }
@@ -63,10 +65,10 @@ export class AdminScreen extends React.Component {
         this.setState({ myNumber });
     }
 
-    private readonly handleChange = (selectedOption: IOptionType): void => {
+    private readonly handleChange = (selectedOption: IOptionType | null): void => {
 
         this.setState({ selectedOption });
 
-        console.log(selectedOption.value);
+        console.log(selectedOption);
     }
 }
