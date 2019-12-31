@@ -169,7 +169,8 @@
             true,
             "ignore-case",
             "locale-compare",
-            "match-declaration-order"
+            "match-declaration-order",
+            "shorthand-first"
         ],
         "prefer-const": true,
         "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],

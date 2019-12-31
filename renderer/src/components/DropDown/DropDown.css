@@ -2,12 +2,8 @@ div.dropDown {
     display: inline-block;
     height: 30px;
     margin: 0;
+    position: absolute;
     white-space: nowrap;
-
-
-    left: 20px;
-    top: 3px;
-    width: 250px;
 }
 
 /* dropDown__control ------------------------------------------------------------------------------ */
@@ -40,12 +36,21 @@ div.dropDown__value-container {
     padding: 0px 8px 0px 8px;
 }
 
+div.css-b8ldur-Input {
+    height: 14px;
+}
+
 div.dropDown__input {
     color: var(--light-blue);
+    display: block !important;
     height: 14px;
-    left: -2px;
-    position: relative;
-    top: -3px;
+}
+
+div.dropDown__input > input {
+    height: 14px;
+    left: 8px;
+    position: absolute;
+    top: 6px;
 }
 
 div.dropDown__placeholder {
@@ -85,6 +90,10 @@ div.dropDown__indicator {
     width: 30px;
 }
 
+div.dropDown__indicator.dropDown__clear-indicator {
+    color: var(--light-blue-transparent);
+}
+
 div.dropDown__indicator:hover {
     color: var(--light-blue);
 }
@@ -96,29 +105,23 @@ div.dropDown__indicator:active {
 /* dropDown__menu --------------------------------------------------------------------------------- */
 div.dropDown__menu {
     background: var(--light-gray);
-
-
-    border-radius: 0;
+    border-bottom: 1px solid var(--lightest-gray);
+    border-left: 1px solid var(--lightest-gray);
+    border-right: 1px solid var(--lightest-gray);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin: 0;
-    padding-top: 1px;
-    padding-bottom: 1px;
-
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     box-shadow: 0 2px 2px var(--black);
-    /* border-bottom: 1px solid var(--lightest-gray);
-    border-left: 1px solid var(--lightest-gray);
-    border-right: 1px solid var(--lightest-gray); */
+    margin: 0;
+    padding-bottom: 1px;
+    padding-top: 1px;
 }
 
 div.dropDown__option {
     background: transparent;
     color: var(--light-blue);
     cursor: pointer;
-
-
-
-    /* height: 29px; */
     padding-left: 9px;
     padding-right: 9px;
     overflow-x: hidden;

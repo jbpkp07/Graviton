@@ -1,5 +1,5 @@
-import React from "react";
-import { default as Select, ValueType } from "react-select";
+import React, { CSSProperties } from "react";
+import { default as Select, Styles, ValueType } from "react-select";
 
 import "./DropDown.css";
 
@@ -14,68 +14,43 @@ export interface IDropDownProps {
     id: string;
     options: IOptionType[];
     placeholder: string;
+    positionLeft: string;
+    positionTop: string;
     selectedOption: IOptionType | null;
-    onChange(selectedOption: ValueType<IOptionType>): void;
+    width: string;
+    onChange(dropDownId: string, selectedOption: ValueType<IOptionType>): void;
 }
 
 export function DropDown(props: IDropDownProps): JSX.Element {
 
-    // const customStyles: Partial<Styles> = {
+    const customStyles: Partial<Styles> = {
 
-    // container: (_styles: CSSProperties): CSSProperties => ({
-    //     // ...styles,
-    //     // outline: "none",
-    //     // boxShadow: "none",
-    //     // border: "none"
-    //     // // tslint:disable-next-line: object-literal-sort-keys
-    //     // // backgroundColor: "var(--light-gray)",
-    //     // // width: "300px"
-    //     // // backgroundColor: "var(--light-gray)"
-    // }),
-    // control: (styles: CSSProperties): CSSProperties => ({
-    //     ...styles,
-    //     // background: "var(--light-gray)",
-    //     // outline: "none",
-    //     // boxShadow: "none",
-    //     // border: "none"
+        container: (styles: CSSProperties): CSSProperties => ({
+            ...styles,
+            // tslint:disable-next-line: object-literal-sort-keys
+            left: props.positionLeft,
+            top: props.positionTop,
+            width: props.width
+        })
+    };
 
-    // }),
-    // singleValue: (_styles: CSSProperties): CSSProperties => ({
+    function onChange(selectedOption: ValueType<IOptionType>): void {
 
-    //     // ...styles,
-    //     // color: "var(--light-blue)",
-    //     // outline: "none",
-    //     // boxShadow: "none",
-    //     // border: "none"
-    // })
-    // input: (_provided, _state) => {
-
-
-    //     const fontFamily = "Roboto-Regular";
-
-    //     return { fontFamily };
-    // }
-    // };
-
-
-    // setTimeout(() => {
-
-    //     const blah: any = document.getElementsByClassName("dropDown__option");
-    //     console.log(blah);
-    // }, 5000);
-
+        props.onChange(props.id, selectedOption);
+    }
 
     return (
 
         <Select
             id={props.id}
             value={props.selectedOption}
-            onChange={props.onChange.bind(props)}
+            onChange={onChange}
             options={props.options}
             placeholder={props.placeholder}
             className="dropDown"
             classNamePrefix="dropDown"
             isClearable={true}
+            styles={customStyles}
         />
     );
 }

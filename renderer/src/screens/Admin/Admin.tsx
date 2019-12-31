@@ -5,16 +5,26 @@ import { Button, IButtonProps } from "../../components/Button/Button";
 import { DropDown, IDropDownProps, IOptionType } from "../../components/DropDown/DropDown";
 
 
+interface IDropDownStates {
+    [key: string]: IOptionType | null;
+    aspectRatioDropDown: IOptionType | null;
+    versionDropDown: IOptionType | null;
+}
+
 interface IAdminScreenState {
 
     myNumber: number;
-    selectedOption: IOptionType | null;
+    selectedOptions: IDropDownStates;
 }
 
 let adminScreenState: IAdminScreenState = {
 
     myNumber: 0,
-    selectedOption: null
+    selectedOptions: { 
+
+        aspectRatioDropDown: null,
+        versionDropDown: null
+    }
 };
 
 
@@ -26,29 +36,49 @@ export class AdminScreen extends React.Component {
 
         const buttonProps: IButtonProps = {
 
-            label: "Select 16 by 9",
+            label: "Select Button",
             onClick: this.increment
         };
 
-        const dropDownProps: IDropDownProps = {
+        const aspectRatioDropDownProps: IDropDownProps = {
 
-            id: "dropDownMenu1",
+            id: "aspectRatioDropDown",
             options: [
-                { label: "Select   asdfsdfsadfsadfsadfasdfasdfasdfsadfasdfasdfasdfasdfasdf 123", value: "4x3 asdfsadfsadfsadfsadfsadfsdsaf 123" },
-                { label: "16 by 9", value: "16x9" },
-                { label: "16 by 10", value: "16x10" }
+                { label: "4 x 3", value: "4x3" },
+                { label: "16 x 9", value: "16x9" },
+                { label: "16 x 10", value: "16x10" }
             ],
-            placeholder: "Select Options From This Menu",
-            selectedOption: this.state.selectedOption,
-            onChange: this.handleChange
+            placeholder: "Aspect Ratio",
+            positionLeft: "150px",
+            positionTop: "none",
+            selectedOption: this.state.selectedOptions["aspectRatioDropDown"],
+            width: "125px",
+            onChange: this.handleDropDownChange
         };
 
+        const versionDropDownProps: IDropDownProps = {
+
+            id: "versionDropDown",
+            options: [
+                { label: "Theatrical", value: "T" },
+                { label: "Edited", value: "E" },
+                { label: "Special Edit", value: "SE" }
+            ],
+            placeholder: "Version",
+            positionLeft: "150px",
+            positionTop: "130px",
+            selectedOption: this.state.selectedOptions["versionDropDown"],
+            width: "145px",
+            onChange: this.handleDropDownChange
+        };
 
         return (
-            <div>
+
+            <div id="adminScreen">
                 <Button {...buttonProps} />
-                <DropDown {...dropDownProps} />
-                {/* <div id="myNumber">{this.state.myNumber}</div> */}
+                <DropDown {...aspectRatioDropDownProps} />
+                <DropDown {...versionDropDownProps} />
+                <div id="myNumber">{this.state.myNumber}</div>
             </div>
         );
     }
@@ -65,10 +95,12 @@ export class AdminScreen extends React.Component {
         this.setState({ myNumber });
     }
 
-    private readonly handleChange = (selectedOption: IOptionType | null): void => {
+    private readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
 
-        this.setState({ selectedOption });
+        const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
-        console.log(selectedOption);
+        selectedOptions[dropDownId] = selectedOption;
+
+        this.setState({ selectedOptions }, () => console.log(this.state.selectedOptions));
     }
 }
