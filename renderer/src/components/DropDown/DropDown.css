@@ -9,8 +9,8 @@ div.dropDown {
 /* dropDown__control ------------------------------------------------------------------------------ */
 div.dropDown__control {
     background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
-    border-radius: 5px;
     border: 1px solid var(--lightest-gray);
+    border-radius: 5px;
     box-shadow: none;
     cursor: pointer;
     height: 30px;
@@ -33,41 +33,55 @@ div.dropDown__control--menu-is-open {
 div.dropDown__value-container {
     color: var(--light-blue);
     height: 30px;
-    padding: 0px 8px 0px 8px;
+    line-height: 14px !important;
+    padding: 8px 8px 8px 8px;
 }
 
-div.css-b8ldur-Input {
+div.dropDown__value-container > div {
     height: 14px;
+    line-height: 14px !important;
+    margin: 0;
+    max-width: calc(100% - 8px);
+    min-width: calc(100% - 8px);
+    padding: 0;
+    position: absolute;
+    top: 13px;
+    transform: matrix(1, 0, 0, 1, 0, -7);
 }
 
 div.dropDown__input {
     color: var(--light-blue);
     display: block !important;
     height: 14px;
+    line-height: 14px !important;
+    position: absolute !important;
+    width: 100%;
 }
 
-div.dropDown__input > input {
-    height: 14px;
-    left: 8px;
-    position: absolute;
-    top: 6px;
+div.dropDown__input > input, div.dropDown__input > div {
+    box-sizing: border-box !important;
+    display: block !important;
+    height: 14px !important;
+    line-height: 14px !important;
+    position: absolute !important;
+    width: 100% !important;
 }
 
 div.dropDown__placeholder {
     color: var(--light-blue-transparent);
     height: 14px;
+    line-height: 14px !important;
+    margin: 0;
     max-width: calc(100% - 8px);
     overflow: hidden;
-    top: 14px;
-    margin: 0;
     text-overflow: ellipsis;
 }
 
 div.dropDown__single-value {
     color: var(--light-blue);
     height: 14px;
+    line-height: 14px !important;
     margin: 0;
-    top: 14px;
 }
 
 /* dropDown__indicators --------------------------------------------------------------------------- */
@@ -122,8 +136,8 @@ div.dropDown__option {
     background: transparent;
     color: var(--light-blue);
     cursor: pointer;
-    padding-left: 9px;
-    padding-right: 9px;
+    padding-left: 8px;
+    padding-right: 8px;
     overflow-x: hidden;
     text-overflow: ellipsis;
 }
@@ -133,8 +147,8 @@ div.dropDown__option:hover {
 }
 
 div.dropDown__option:active {
-    color: var(--light-blue-transparent);
     background: var(--lighter-gray);
+    color: var(--light-blue-transparent);
 }
 
 div.dropDown__option.dropDown__option--is-selected {

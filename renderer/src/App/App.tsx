@@ -2,6 +2,7 @@ import React from "react";
 
 import { AdminScreen } from "../screens/Admin/Admin";
 import "./App.css";
+import { Button, IButtonProps } from "../components/Button/Button";
 import { EScreen } from "../screens/EScreen";
 import { currentWindow } from "../index";
 import { INavBarProps, NavBar } from "../components/NavBar/NavBar";
@@ -52,7 +53,15 @@ export class App extends React.Component {
                 return (<AdminScreen />);
 
             case EScreen.Renamer:
-                return (<div className="btn">Renamer Button</div>);
+
+                const buttonProps: IButtonProps = {
+
+                    id: "fileRenamerButton", 
+                    label: "Renamer Button", 
+                    onClick: (): void => {}
+                };
+
+                return (<Button {...buttonProps} />);
 
             default:
                 return (<StartScreen />);

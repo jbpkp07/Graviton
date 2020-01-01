@@ -1,20 +1,21 @@
-.btn {
+.button {
     background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
     color: var(--light-blue);
     cursor: pointer;
     display: inline-block;
+    line-height: 14px;
     margin: 0;
-    padding: 7px 8px 8px 8px;
+    padding: 6px 8px 8px 8px;
     position: absolute;
     width: fit-content;
 }
 
-.btn:hover {
+.button:hover {
     background: var(--light-gray);
 }
 
-.btn:active {
+.button:active {
     color: var(--light-blue-transparent);
 }

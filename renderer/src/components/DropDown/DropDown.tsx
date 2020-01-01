@@ -18,7 +18,7 @@ export interface IDropDownProps {
     positionTop: string;
     selectedOption: IOptionType | null;
     width: string;
-    onChange(dropDownId: string, selectedOption: ValueType<IOptionType>): void;
+    onChange(id: string, selectedOption: ValueType<IOptionType>): void;
 }
 
 export function DropDown(props: IDropDownProps): JSX.Element {

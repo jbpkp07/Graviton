@@ -36,7 +36,10 @@ export class AdminScreen extends React.Component {
 
         const buttonProps: IButtonProps = {
 
+            id: "incrementButton",
             label: "Select Button",
+            positionLeft: "150px",
+            positionTop: "180px",
             onClick: this.increment
         };
 
@@ -52,7 +55,7 @@ export class AdminScreen extends React.Component {
             positionLeft: "150px",
             positionTop: "none",
             selectedOption: this.state.selectedOptions["aspectRatioDropDown"],
-            width: "125px",
+            width: "145px",
             onChange: this.handleDropDownChange
         };
 
@@ -88,11 +91,11 @@ export class AdminScreen extends React.Component {
         adminScreenState = this.state;
     }
 
-    private readonly increment = (): void => {
+    private readonly increment = (buttonId: string): void => {
 
         const myNumber: number = this.state.myNumber + 1;
 
-        this.setState({ myNumber });
+        this.setState({ myNumber }, () => console.log(buttonId));
     }
 
     private readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
