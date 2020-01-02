@@ -1,15 +1,23 @@
-.button {
+.button, .buttonInactive {
     background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
-    color: var(--light-blue);
-    cursor: pointer;
     display: inline-block;
     line-height: 14px;
     margin: 0;
     padding: 6px 8px 8px 8px;
     position: absolute;
     width: fit-content;
+}
+
+.button {
+    color: var(--light-blue);
+    cursor: pointer;
+}
+
+.buttonInactive {
+    color: var(--light-blue-transparent);
+    cursor: default;
 }
 
 .button:hover {

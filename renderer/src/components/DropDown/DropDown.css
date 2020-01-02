@@ -64,7 +64,6 @@ div.dropDown__input > input, div.dropDown__input > div {
     height: 14px !important;
     line-height: 14px !important;
     position: absolute !important;
-    width: 100% !important;
 }
 
 div.dropDown__placeholder {

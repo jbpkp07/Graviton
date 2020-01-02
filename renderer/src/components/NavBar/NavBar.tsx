@@ -29,6 +29,7 @@ export function NavBar(props: INavBarProps): JSX.Element {
 
             className: "navBarLink navBarInActiveLink",
             id: "navButton",
+            isActive: true,
             key: screen,
             label: screen,
             onClick: (): void => props.selectScreen(screen)

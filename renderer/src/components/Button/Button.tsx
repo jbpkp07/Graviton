@@ -7,6 +7,7 @@ export interface IButtonProps {
 
     className?: string;
     id: string;
+    isActive: boolean;
     key?: string;
     label: string;
     positionLeft?: string;
@@ -15,6 +16,10 @@ export interface IButtonProps {
 }
 
 export function Button(props: IButtonProps): JSX.Element {
+
+    const buttonClass: string = (props.isActive) ? "button" : "buttonInactive";
+
+    const className: string = (props.className !== undefined) ? `${props.className} ${buttonClass}` : `${buttonClass}`;
 
     function onClick(): void {
 
@@ -25,10 +30,10 @@ export function Button(props: IButtonProps): JSX.Element {
 
         <div
             id={props.id} 
-            className={props.className !== undefined ? `${props.className} button` : "button"} 
+            className={className} 
             key={props.id}
             style={{ left: props.positionLeft, top: props.positionTop }}
-            onClick={onClick}
+            onClick={(props.isActive) ? onClick : undefined}
         >
             {props.label}
         </div>

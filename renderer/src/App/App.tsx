@@ -56,7 +56,8 @@ export class App extends React.Component {
 
                 const buttonProps: IButtonProps = {
 
-                    id: "fileRenamerButton", 
+                    id: "fileRenamerButton",
+                    isActive: true,
                     label: "Renamer Button", 
                     onClick: (): void => {}
                 };

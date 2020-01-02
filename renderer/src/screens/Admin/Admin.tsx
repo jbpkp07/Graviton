@@ -13,18 +13,18 @@ interface IDropDownStates {
 
 interface IAdminScreenState {
 
-    myNumber: number;
     selectedOptions: IDropDownStates;
+    submitButtonIsActive: boolean;
 }
 
 let adminScreenState: IAdminScreenState = {
 
-    myNumber: 0,
-    selectedOptions: { 
+    selectedOptions: {
 
         aspectRatioDropDown: null,
         versionDropDown: null
-    }
+    },
+    submitButtonIsActive: false
 };
 
 
@@ -36,11 +36,12 @@ export class AdminScreen extends React.Component {
 
         const buttonProps: IButtonProps = {
 
-            id: "incrementButton",
-            label: "Select Button",
+            id: "submitButton",
+            isActive: this.state.submitButtonIsActive,
+            label: "Submit",
             positionLeft: "150px",
             positionTop: "180px",
-            onClick: this.increment
+            onClick: this.submit
         };
 
         const aspectRatioDropDownProps: IDropDownProps = {
@@ -81,7 +82,6 @@ export class AdminScreen extends React.Component {
                 <Button {...buttonProps} />
                 <DropDown {...aspectRatioDropDownProps} />
                 <DropDown {...versionDropDownProps} />
-                <div id="myNumber">{this.state.myNumber}</div>
             </div>
         );
     }
@@ -91,11 +91,18 @@ export class AdminScreen extends React.Component {
         adminScreenState = this.state;
     }
 
-    private readonly increment = (buttonId: string): void => {
+    private readonly submit = (_buttonId: string): void => {
 
-        const myNumber: number = this.state.myNumber + 1;
+        const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
-        this.setState({ myNumber }, () => console.log(buttonId));
+        Object.keys(selectedOptions).forEach((key: string) => {
+
+            selectedOptions[key] = null;
+        });
+
+        const submitButtonIsActive: boolean = false;
+
+        this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 
     private readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
@@ -104,6 +111,8 @@ export class AdminScreen extends React.Component {
 
         selectedOptions[dropDownId] = selectedOption;
 
-        this.setState({ selectedOptions }, () => console.log(this.state.selectedOptions));
+        const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: IOptionType | null) => option === null);
+
+        this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 }
