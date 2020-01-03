@@ -2,11 +2,13 @@
 /node_modules
 /main/node_modules
 /renderer/node_modules
+/server/node_modules
 
 # production
 /build
 /main/build
 /renderer/build
+/server/build
 /dist
 
 # misc
