@@ -10,7 +10,7 @@ export function printHeader(): void {
     terminal.clear();
     terminal("\n");
     terminal.magenta(" ┌─────────────────────────────────────────────────────────────────────────────┐\n");
-    terminal.magenta(" │").bgMagenta.brightWhite(" spafax ").bgBrightMagenta.brightWhite("                       graviton server                         - □ x ").magenta("│\n");
+    terminal.magenta(" │").bgMagenta.brightWhite(" spafax  ").bgBrightMagenta.brightWhite("                      Graviton server                         - □ x ").magenta("│\n");
     terminal.magenta(" ├─────────────────────────────────────────────────────────────────────────────┤\n");
     terminal.magenta(" │").brightCyan(" Usage       : ").white("node ./build/server.js").gray(" or ").white("npm start").gray(" will start this webserver.").magenta("│\n");
     terminal.magenta(" │                                                                             │\n");
