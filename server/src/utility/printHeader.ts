@@ -2,7 +2,7 @@
 import { terminal } from "terminal-kit";
 
 const xCoord: number = 1;
-const yCoord: number = 15;
+const yCoord: number = 13;
 
 export function printHeader(): void {
 
@@ -10,9 +10,7 @@ export function printHeader(): void {
     terminal.clear();
     terminal("\n");
     terminal.magenta(" ┌─────────────────────────────────────────────────────────────────────────────┐\n");
-    terminal.magenta(" │").brightWhite.bgMagenta("                               Graviton server                               ").magenta("│\n");
-    terminal.magenta(" │").brightMagenta("                                   Spafax                                    ").magenta("│\n");
-    terminal.magenta(" │").gray("                          written by: Jeremy Barnes                          ").magenta("│\n");
+    terminal.magenta(" │").bgMagenta.brightWhite(" spafax ").bgBrightMagenta.brightWhite("                       graviton server                         - □ x ").magenta("│\n");
     terminal.magenta(" ├─────────────────────────────────────────────────────────────────────────────┤\n");
     terminal.magenta(" │").brightCyan(" Usage       : ").white("node ./build/server.js").gray(" or ").white("npm start").gray(" will start this webserver.").magenta("│\n");
     terminal.magenta(" │                                                                             │\n");

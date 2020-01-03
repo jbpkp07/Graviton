@@ -47,8 +47,8 @@
     background: var(--medium-purple);
     display: inline-block;
     height: var(--titleBarHeight);
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 7px;
+    padding-top: 7px;
     width: var(--titleBarBtnWidth);
 }
 
