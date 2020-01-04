@@ -54,8 +54,8 @@ export const mainWindowConfig: IAppWindowConfig = {
         }
     },
     rendererHTMLProd: getFullPath("../index.html"),
-    rendererHTMLServerNotFoundDev: getFullPath("../../../renderer/public/serverNotFound.html"),
-    rendererHTMLServerNotFoundProd: getFullPath("../serverNotFound.html"),
+    rendererHTMLServerNotFoundDev: getFullPath("../../../renderer/public/static/serverNotFound.html"),
+    rendererHTMLServerNotFoundProd: getFullPath("../public/serverNotFound.html"),
     rendererURLDev: "http://localhost:3000",
     fadeFPS: 60,
     blurOpacity: 0.7,

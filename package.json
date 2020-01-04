@@ -18,9 +18,10 @@
         "start-electron": "cd ./main && npm start",
         "start-server": "cd ./server && npm start",
 
-        "build": "rm -rf build dist && mkdir build dist && npm run build-react && npm run build-electron && electron-builder --publish=always",
-        "build-react": "cd ./renderer && npm run build && cp -r ./build/* ../build",
-        "build-electron": "cd ./main && npm run build && cp -r ./build/* ../build"
+        "build": "rm -rf build dist && mkdir \"build/public\" \"dist/client\" \"dist/server/public\" && npm run build-react && npm run build-electron && npm run build-server && electron-builder --publish=always",
+        "build-react": "cd ./renderer && npm run build && cp -r ./public/static/* ../build/public && cp -r ./build/* ../dist/server/public",
+        "build-electron": "cd ./main && npm run build && cp -r ./build/* ../build",
+        "build-server": "cd ./server && npm run build && cp -r ./build/* ../dist/server && rm -rf ../dist/server/public/static/serverNotFound.html ../dist/server/public/static/media/logo.svg"
 
     },
     "dependencies": {
@@ -39,7 +40,7 @@
             "./node_modules/**/*"
         ],
         "directories": {
-            "buildResources": ""
+            "output": "./dist/client"
         },
         "win": {
             "target": "portable",

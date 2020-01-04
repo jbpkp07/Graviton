@@ -2,7 +2,7 @@
     "name": "graviton",
     "private": true,
     "homepage": "./",
-    "proxy": "http://localhost:3001/",
+    "proxy": "http://localhost:3001",
     "scripts": {
         "start": "start bash -c 'cross-env BROWSER=none react-scripts start'",
         "build": "rm -rf build && mkdir build && react-scripts build"
