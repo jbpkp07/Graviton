@@ -4,48 +4,34 @@
     "description": "Spafax HUB media asset management software",
     "version": "1.0.0",
     "private": true,
-    "main": "./build/main.js",
+    "main": "./server/build/server.js",
     "homepage": "https://github.com/jbpkp07/Graviton",
     "scripts": {
-
-        "install-all": "npm install && npm run install-react && npm run install-electron && npm run install-server",
-        "install-react": "cd ./renderer && npm install",
-        "install-electron": "cd ./main && npm install",
+        "install": "if-env NODE_ENV=production && npm run install-prod || npm run install-dev",
+        "install-prod": "npm run install-server && npm run install-react",
+        "install-dev": "npm run install-server && npm run install-react && npm run install-electron",
         "install-server": "cd ./server && npm install",
-
-        "start": "npm run start-react && npm run start-electron && npm run start-server",
-        "start-react": "cd ./renderer && npm start",
-        "start-electron": "cd ./main && npm start",
-        "start-server": "cd ./server && npm start",
-
-        "build": "rm -rf build dist && mkdir \"build/public\" \"dist/client\" \"dist/server/public\" && npm run build-react && npm run build-electron && npm run build-server && electron-builder --publish=always",
-        "build-react": "cd ./renderer && npm run build && cp -r ./public/static/* ../build/public && cp -r ./build/* ../dist/server/public",
-        "build-electron": "cd ./main && npm run build && cp -r ./build/* ../build",
-        "build-server": "cd ./server && npm run build && cp -r ./build/* ../dist/server && rm -rf ../dist/server/public/static/serverNotFound.html ../dist/server/public/static/media/logo.svg"
-
+        "install-react": "cd ./renderer && npm install",
+        "install-electron": "cd ./electron && npm install",
+        "build": "npm run build-server && npm run build-react",
+        "build-server": "cd ./server && npm run build",
+        "build-react": "cd ./renderer && npm run build",
+        "build-electron": "cd ./electron && npm run build",
+        "heroku-postbuild": "npm run build",
+        "start": "if-env NODE_ENV=production && npm run start-prod || npm run start-dev",
+        "start-prod": "node ./server/build/server.js",
+        "start-dev": "npm run start-server-dev && npm run start-react-dev && npm run start-electron-dev",
+        "start-server-dev": "cd ./server && npm run start-dev",
+        "start-react-dev": "cd ./renderer && npm run start-dev",
+        "start-electron-dev": "cd ./electron && npm run start-dev"
     },
-    "dependencies": {
-        "electron-is-dev": "^1.1.0"
-    },
+    "dependencies": {},
     "devDependencies": {
-        "electron": "^7.1.7",
-        "electron-builder": "^21.2.0",
+        "@types/electron": "^1.6.10",
+        "if-env": "^1.0.4",
         "tslint": "^5.20.1",
-        "tslint-react": "^4.1.0"
-    },
-    "build": {
-        "productName": "Graviton",
-        "files": [
-            "./build/**/*",
-            "./node_modules/**/*"
-        ],
-        "directories": {
-            "output": "./dist/client"
-        },
-        "win": {
-            "target": "portable",
-            "icon": "./build/app.ico"
-        }
+        "tslint-react": "^4.1.0",
+        "typescript": "^3.7.3"
     },
     "license": "ISC",
     "repository": {

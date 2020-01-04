@@ -1,8 +1,8 @@
 import { default as express } from "express";
 import session from "express-session";
-// import { terminal } from "terminal-kit";
+import { terminal } from "terminal-kit";
 
-// import { config } from "./config/config";
+import { config } from "./config/config";
 // import { Controller } from "./controller/Controller";
 import { printHeader } from "./utility/printHeader";
 
@@ -20,14 +20,24 @@ const sessionOptions: session.SessionOptions = {
 
 app.use(session(sessionOptions));
 
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
 
-    // app.use(express.static(config.publicAssetsPath));
-}
+app.use(express.static(config.staticAssetsPath));
+// }
 
 // const controller: Controller = new Controller();
 
+const router: express.Router = express.Router();
+
+function sendClientApp(_request: express.Request, response: express.Response): void {
+
+    response.sendFile(config.htmlAssetPath);
+}
+
+router.use(sendClientApp);
+
 // app.use(controller.router);
+app.use(router);
 
 printHeader();
 
@@ -35,10 +45,10 @@ printHeader();
 
 //     .then(() => {
 
-//         app.listen(config.port, () => {
+app.listen(config.port, () => {
 
-//             terminal.white("  Webserver listening on port ► ").brightGreen(`${config.port}\n\n`);
-//         });
+    terminal.white("  Webserver listening on port ► ").brightGreen(`${config.port}\n\n`);
+});
 //     })
 //     .catch((err: string) => {
 

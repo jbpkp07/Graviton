@@ -1,15 +1,16 @@
 # dependencies
 /node_modules
-/main/node_modules
+/electron/node_modules
 /renderer/node_modules
 /server/node_modules
 
 # production
-/build
-/main/build
+/electron/build
 /renderer/build
 /server/build
-/dist
+
+# dist
+/electron/dist
 
 # misc
 desktop.ini
