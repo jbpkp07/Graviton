@@ -11,10 +11,10 @@ function getFullPath(relativePath: string): string {
 export interface IAppWindowConfig {
 
     appWindowOptions: BrowserWindowConstructorOptions;
-    rendererHTMLProd: string;
     rendererHTMLServerNotFoundDev: string;
     rendererHTMLServerNotFoundProd: string;
     rendererURLDev: string;
+    rendererURLProd: string;
     fadeFPS: number;
     blurOpacity: number;
     focusOpacity: number;
@@ -53,10 +53,10 @@ export const mainWindowConfig: IAppWindowConfig = {
             zoomFactor: 1
         }
     },
-    rendererHTMLProd: getFullPath("../index.html"),
     rendererHTMLServerNotFoundDev: getFullPath("../../../renderer/public/static/serverNotFound.html"),
     rendererHTMLServerNotFoundProd: getFullPath("../public/serverNotFound.html"),
-    rendererURLDev: "http://localhost:3000",
+    rendererURLDev:  "http://localhost:3000",
+    rendererURLProd: "http://localhost:3001",
     fadeFPS: 60,
     blurOpacity: 0.7,
     focusOpacity: 1,

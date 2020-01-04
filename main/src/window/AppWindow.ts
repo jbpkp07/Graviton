@@ -76,7 +76,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
         }
         else {
 
-            this.loadFile(this.config.rendererHTMLProd)
+            this.loadURL(this.config.rendererURLProd)
 
                 .catch(() => {
 
