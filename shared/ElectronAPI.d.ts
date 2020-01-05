@@ -1,5 +1,3 @@
-import Electron from "electron";
-
 
 export declare namespace ElectronAPI {
 

@@ -6,8 +6,9 @@
     "private": true,
     "main": "./build/main.js",
     "scripts": {
-        "start-dev": "start bash -c 'tsc -w' && start bash -c 'cross-env NODE_ENV=dev nodemon --exec \"wait-on http://localhost:3000 && electron ./build/main.js\"'",
-        "build": "rm -rf build dist && mkdir \"build/public\" dist && tsc && cp src/images/app.ico build && cp -r ../renderer/public/static/* ./build/public && electron-builder --publish=always"
+        "start-dev": "rm -rf build && mkdir build && start bash -c 'tsc -w' && start bash -c 'cross-env NODE_ENV=dev nodemon --exec \"wait-on http://localhost:3000 && electron ./build/main.js\"'",
+        "build": "rm -rf build dist && mkdir \"build/public\" dist && tsc && cp src/images/app.ico build && cp -r ../renderer/public/static/* ./build/public",
+        "build-dist": "electron-builder --publish=always && cd ./dist && rm -rf ./win-unpacked ./builder-effective-config.yaml"
     },
     "dependencies": {
         "electron-is-dev": "^1.1.0"
