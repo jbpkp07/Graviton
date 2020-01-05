@@ -56,7 +56,7 @@ export const mainWindowConfig: IAppWindowConfig = {
     rendererHTMLServerNotFoundDev: getFullPath("../../../renderer/public/static/serverNotFound.html"),
     rendererHTMLServerNotFoundProd: getFullPath("../public/serverNotFound.html"),
     rendererURLDev:  "http://localhost:3000",
-    rendererURLProd: "http://localhost:3001",
+    rendererURLProd: "https://hub-graviton.herokuapp.com",
     fadeFPS: 60,
     blurOpacity: 0.7,
     focusOpacity: 1,
