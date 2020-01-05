@@ -11,15 +11,15 @@
         "build-dist": "electron-builder --publish=always && cd ./dist && rm -rf ./win-unpacked ./builder-effective-config.yaml"
     },
     "dependencies": {
-        "electron-is-dev": "^1.1.0"
+        "@types/node": "^12.12.17",
+        "electron-is-dev": "^1.1.0",
+        "typescript": "^3.7.4"
     },
     "devDependencies": {
-        "@types/node": "^12.12.17",
         "cross-env": "^6.0.3",
         "electron": "^7.1.7",
         "electron-builder": "^21.2.0",
         "nodemon": "^2.0.2",
-        "typescript": "^3.7.3",
         "wait-on": "^3.3.0"
     },
     "build": {

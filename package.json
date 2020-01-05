@@ -25,12 +25,13 @@
         "start-dev-react": "cd ./renderer && npm run start-dev",
         "start-dev-electron": "cd ./electron && npm run start-dev"
     },
-    "dependencies": {},
+    "dependencies": {
+        "if-env": "^1.0.4"
+    },
     "devDependencies": {
-        "if-env": "^1.0.4",
         "tslint": "^5.20.1",
         "tslint-react": "^4.1.0",
-        "typescript": "^3.7.3"
+        "typescript": "^3.7.4"
     },
     "license": "ISC",
     "repository": {
