@@ -26,6 +26,7 @@
         "start-dev-electron": "cd ./electron && npm run start-dev"
     },
     "dependencies": {
+        "@types/axios": "^0.14.0",
         "if-env": "^1.0.4"
     },
     "devDependencies": {

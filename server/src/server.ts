@@ -4,7 +4,7 @@ import { terminal } from "terminal-kit";
 
 import { config } from "./config/config";
 // import { Controller } from "./controller/Controller";
-import { printHeader } from "./utility/printHeader";
+import { printHeader } from "./utils/printHeader";
 
 const app: express.Application = express();
 
@@ -27,6 +27,8 @@ app.use(express.static(config.staticAssetsPath));
 
 // const controller: Controller = new Controller();
 
+printHeader();
+
 const router: express.Router = express.Router();
 
 function sendClientApp(_request: express.Request, response: express.Response): void {
@@ -37,9 +39,6 @@ function sendClientApp(_request: express.Request, response: express.Response): v
 router.use(sendClientApp);
 
 // app.use(controller.router);
-app.use(router);
-
-printHeader();
 
 // controller.connectDatabase()
 

@@ -3,7 +3,7 @@
     "private": true,
     "main": "./build/server.js",
     "scripts": {
-        "start-dev": "rm -rf build && mkdir build && start bash -c 'tsc -w' && start bash -c 'nodemon ./build/server.js'",
+        "start-dev": "rm -rf build && mkdir build && tsc && start bash -c 'tsc -w' && start bash -c 'nodemon ./build/server.js'",
         "build": "rm -rf build && mkdir build && tsc"
     },
     "dependencies": {
