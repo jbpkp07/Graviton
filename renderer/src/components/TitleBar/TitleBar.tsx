@@ -1,4 +1,4 @@
-/// <reference types="../../../../shared/electron" />
+/// <reference types="../../../../shared/Electron" />
 import React from "react";
 
 import { ElectronAPI } from "../../../../shared/ElectronAPI";
