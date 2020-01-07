@@ -3,6 +3,7 @@ import session from "express-session";
 import { terminal } from "terminal-kit";
 
 import { config } from "./config/config";
+import { Controller } from "./controller/Controller";
 // import { Controller } from "./controller/Controller";
 import { printHeader } from "./utils/printHeader";
 
@@ -25,20 +26,21 @@ app.use(session(sessionOptions));
 app.use(express.static(config.staticAssetsPath));
 // }
 
-// const controller: Controller = new Controller();
+const controller: Controller = new Controller();
+
 
 printHeader();
 
-const router: express.Router = express.Router();
+// const router: express.Router = express.Router();
 
-function sendClientApp(_request: express.Request, response: express.Response): void {
+// function sendClientApp(_request: express.Request, response: express.Response): void {
 
-    response.sendFile(config.htmlAssetPath);
-}
+//     response.sendFile(config.htmlAssetPath);
+// }
 
-router.use(sendClientApp);
+// router.use(sendClientApp);
 
-// app.use(controller.router);
+app.use(controller.router);
 
 // controller.connectDatabase()
 

@@ -3,6 +3,7 @@ export declare namespace ElectronAPI {
 
     interface IAppWindow extends Electron.BrowserWindow {
         closeGracefully(): void;
+        loadServerNotFound(): void;
     }
     
     interface IElectronAPI {

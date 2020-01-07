@@ -2,13 +2,16 @@ import { AxiosResponse } from "axios";
 
 export declare namespace API {
 
+    type getLookups = (...args: any) => void | Promise<ILookups>;
+
     interface IApi {
-        getLookups(...args: any): void | Promise<AxiosResponse<ILookups>>;
+        getLookups: getLookups
     }
 
     interface ILookup {
-        name: string;
-        code: string;
+        label: string;
+        value: string;
+        ordinal: number;
     }
 
     interface ILookups {
