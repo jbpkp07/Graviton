@@ -3,10 +3,13 @@ import React from "react";
 import "./Admin.css";
 import { api } from "../../api/api";
 import { API } from "../../../../shared/API";
-import { Button, IButtonProps } from "../../components/Button/Button";
-import { DropDown, IDropDownProps, IOptionType } from "../../components/DropDown/DropDown";
+import { Button } from "../../components/Button/Button";
+import { getComponentProps, IAdminComponentProps } from "./componentProps";
+import { DropDown, IOptionType } from "../../components/DropDown/DropDown";
+
 
 interface IDropDownStates {
+    
     [key: string]: IOptionType | null;
     aspectRatioDropDown: IOptionType | null;
     versionDropDown: IOptionType | null;
@@ -37,50 +40,14 @@ export class AdminScreen extends React.Component {
 
     public readonly render = (): JSX.Element => {
 
-        const buttonProps: IButtonProps = {
-
-            id: "submitButton",
-            isActive: this.state.submitButtonIsActive,
-            label: "Submit",
-            positionLeft: "150px",
-            positionTop: "180px",
-            onClick: this.submit
-        };
-
-        const aspectRatioDropDownProps: IDropDownProps = {
-
-            id: "aspectRatioDropDown",
-            options: null,
-            placeholder: "Aspect Ratio",
-            positionLeft: "150px",
-            positionTop: "none",
-            selectedOption: this.state.selectedOptions.aspectRatioDropDown,
-            width: "145px",
-            onChange: this.handleDropDownChange
-        };
-
-        aspectRatioDropDownProps.options = (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null;
-
-        const versionDropDownProps: IDropDownProps = {
-
-            id: "versionDropDown",
-            options: null,
-            placeholder: "Version",
-            positionLeft: "150px",
-            positionTop: "130px",
-            selectedOption: this.state.selectedOptions.versionDropDown,
-            width: "145px",
-            onChange: this.handleDropDownChange
-        };
-
-        versionDropDownProps.options = (this.state.lookups !== null) ? this.state.lookups.versions : null;
+        const componentProps: IAdminComponentProps = getComponentProps.call(this);
 
         return (
 
             <div id="adminScreen">
-                <Button {...buttonProps} />
-                <DropDown {...aspectRatioDropDownProps} />
-                <DropDown {...versionDropDownProps} />
+                <Button   {...componentProps.submitButtonProps} />
+                <DropDown {...componentProps.aspectRatioDropDownProps} />
+                <DropDown {...componentProps.versionDropDownProps} />
             </div>
         );
     }
@@ -102,7 +69,7 @@ export class AdminScreen extends React.Component {
         adminScreenState = this.state;
     }
 
-    private readonly submit = (_buttonId: string): void => {
+    public readonly submit = (_buttonId: string): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
@@ -116,7 +83,7 @@ export class AdminScreen extends React.Component {
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 
-    private readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
+    public readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 

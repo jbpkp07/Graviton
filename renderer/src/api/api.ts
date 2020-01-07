@@ -6,11 +6,6 @@ import { currentWindow } from "../index";
 
 export const api: API.IApi = {
 
-    // async getLookups(): Promise<AxiosResponse<API.ILookups>> {
-
-    //     return Axios.get("/api/lookups");
-    // }
-
     async getLookups(): Promise<API.ILookups> {
 
         return new Promise((resolve: Function): void => {

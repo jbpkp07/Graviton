@@ -155,7 +155,7 @@
         "max-classes-per-file": [true, 1, "exclude-class-expressions"],
         "max-file-line-count": { "options": 1000 },
         "max-line-length": {
-            "options": { "limit": 160 }
+            "options": { "limit": 180 }
         },
         "no-default-export": true,
         "no-default-import": true,
