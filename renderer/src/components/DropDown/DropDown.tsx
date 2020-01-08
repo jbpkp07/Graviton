@@ -1,25 +1,20 @@
 import React, { CSSProperties } from "react";
 import { default as Select, Styles, ValueType } from "react-select";
 
+import { API } from "../../../../shared/API";
 import "./DropDown.css";
 
-
-export interface IOptionType {
-    label: string;
-    value: string;
-    ordinal: number;
-}
 
 export interface IDropDownProps {
 
     id: string;
-    options: IOptionType[] | null;
+    options: API.TLookup[] | null;
     placeholder: string;
     positionLeft: string;
     positionTop: string;
-    selectedOption: IOptionType | null;
+    selectedOption: API.TLookup | null;
     width: string;
-    onChange(id: string, selectedOption: ValueType<IOptionType>): void;
+    onChange(id: string, selectedOption: ValueType<API.TLookup>): void;
 }
 
 export function DropDown(props: IDropDownProps): JSX.Element {
@@ -35,14 +30,14 @@ export function DropDown(props: IDropDownProps): JSX.Element {
         })
     };
 
-    function onChange(selectedOption: ValueType<IOptionType>): void {
+    function onChange(selectedOption: ValueType<API.TLookup>): void {
 
         props.onChange(props.id, selectedOption);
     }
 
     if (props.options !== null) {
 
-        function sortByOrdinal(a: IOptionType, b: IOptionType): number {
+        function sortByOrdinal(a: API.TLookup, b: API.TLookup): number {
 
             return a.ordinal < b.ordinal ? 1 : -1;
         }

@@ -5,19 +5,19 @@ import { api } from "../../api/api";
 import { API } from "../../../../shared/API";
 import { Button } from "../../components/Button/Button";
 import { getComponentProps, IAdminComponentProps } from "./componentProps";
-import { DropDown, IOptionType } from "../../components/DropDown/DropDown";
+import { DropDown } from "../../components/DropDown/DropDown";
 
 
 interface IDropDownStates {
     
-    [key: string]: IOptionType | null;
-    aspectRatioDropDown: IOptionType | null;
-    versionDropDown: IOptionType | null;
+    [key: string]: API.TLookup | null;
+    aspectRatioDropDown: API.TLookup | null;
+    versionDropDown: API.TLookup | null;
 }
 
 interface IAdminScreenState {
 
-    lookups: API.ILookups | null;
+    lookups: API.TLookups | null;
     selectedOptions: IDropDownStates;
     submitButtonIsActive: boolean;
 }
@@ -54,11 +54,11 @@ export class AdminScreen extends React.Component {
 
     public readonly componentDidMount = (): void => {
 
-        (api.getLookups() as Promise<API.ILookups>)
+        (api.getLookups() as Promise<API.TLookups>)
 
-            .then((response: API.ILookups) => {
+            .then((response: API.TLookups) => {
 
-                const lookups: API.ILookups = response;
+                const lookups: API.TLookups = response;
 
                 this.setState({ lookups });
             });
@@ -83,13 +83,13 @@ export class AdminScreen extends React.Component {
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 
-    public readonly handleDropDownChange = (dropDownId: string, selectedOption: IOptionType | null): void => {
+    public readonly handleDropDownChange = (dropDownId: string, selectedOption: API.TLookup | null): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
         selectedOptions[dropDownId] = selectedOption;
 
-        const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: IOptionType | null) => option === null);
+        const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: API.TLookup | null) => option === null);
 
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }

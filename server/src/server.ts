@@ -1,57 +1,47 @@
 import { default as express } from "express";
-import session from "express-session";
+import session, { SessionOptions } from "express-session";
 import { terminal } from "terminal-kit";
 
 import { config } from "./config/config";
 import { Controller } from "./controller/Controller";
-// import { Controller } from "./controller/Controller";
 import { printHeader } from "./utils/printHeader";
+
 
 const app: express.Application = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-const sessionOptions: session.SessionOptions = {
+const sessionOptions: SessionOptions = {
 
     secret: "35036ca3-7153-4b9a-a854-c21ceba18c5c", // random UUID for secret
     resave: false,
     saveUninitialized: true
 };
 
+const controller: Controller = new Controller();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(session(sessionOptions));
+app.use(controller.router);
 
 // if (process.env.NODE_ENV === "production") {
 
 app.use(express.static(config.staticAssetsPath));
 // }
 
-const controller: Controller = new Controller();
+controller.connectDatabase()
 
+    .then((successMsg: string) => {
 
-printHeader();
+        printHeader();
 
-// const router: express.Router = express.Router();
+        terminal.white(`  ${successMsg} ► `).brightGreen("Successful\n\n");
 
-// function sendClientApp(_request: express.Request, response: express.Response): void {
+        app.listen(config.port, () => {
 
-//     response.sendFile(config.htmlAssetPath);
-// }
+            terminal.white("  Webserver listening on port ► ").brightGreen(`${config.port}\n\n`);
+        });
+    })
+    .catch((err: string) => {
 
-// router.use(sendClientApp);
-
-app.use(controller.router);
-
-// controller.connectDatabase()
-
-//     .then(() => {
-
-app.listen(config.port, () => {
-
-    terminal.white("  Webserver listening on port ► ").brightGreen(`${config.port}\n\n`);
-});
-//     })
-//     .catch((err: string) => {
-
-//         terminal.red(err);
-//     });
+        terminal.red(err);
+    });

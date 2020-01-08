@@ -2,11 +2,14 @@ import { default as express, Request, Response } from "express";
 
 import { api } from "../api/api";
 import { config } from "../config/config";
+import { GravitonDatabase } from "../db/GravitonDatabase";
 
 
 export class Controller {
 
-    public router: express.Router = express.Router();
+    public readonly router: express.Router = express.Router();
+
+    public readonly gravitonDatabase: GravitonDatabase = new GravitonDatabase();
 
     public constructor() {
 
@@ -15,6 +18,11 @@ export class Controller {
 
         this.router.route("/api/lookups")
             .get(api.getLookups.bind(this));
+    }
+
+    public async connectDatabase(): Promise<string> {
+
+        return this.gravitonDatabase.connectDatabase();
     }
 
     private sendClientApp(_request: Request, response: Response): void {

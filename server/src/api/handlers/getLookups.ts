@@ -1,22 +1,28 @@
 import { Request, Response } from "express";
 
-import { API } from "../../../../shared/API";
 import { Controller } from "../../controller/Controller";
+import { convertToILookups, ILookups, ILookupsDoc } from "../../db/models/Lookups";
+
 
 export function getLookups(this: Controller, _request: Request, response: Response): void {
 
-    const lookups: API.ILookups = {
+    this.gravitonDatabase.lookupsModel.findOne().exec()
 
-        aspectRatios: [
-            { label: "4 x 3", value: "4x3", ordinal: 1 },
-            { label: "16 x 9", value: "16x9", ordinal: 3 },
-            { label: "16 x 10", value: "16x10", ordinal: 2 }
-        ],
-        versions: [
-            { label: "Theatrical", value: "T", ordinal: 2 },
-            { label: "Edited", value: "E", ordinal: 1 }
-        ]
-    };
+        .then((lookupsDoc: ILookupsDoc | null) => {
 
-    response.json(lookups);
+            if (lookupsDoc !== null) {
+
+                console.log(lookupsDoc);
+                console.log("\n\n");
+                const lookups: ILookups = convertToILookups(lookupsDoc);
+
+                console.log(lookups);
+
+                response.json(lookups);
+            }
+        })
+        .catch((err: string) => {
+
+            console.log(err);
+        });
 }

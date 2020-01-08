@@ -1,21 +1,16 @@
 import { AxiosResponse } from "axios";
 
+import { ILookup, ILookups } from "../server/src/db/models/Lookups";
+
+
 export declare namespace API {
 
-    type getLookups = (...args: any) => void | Promise<ILookups>;
+    type TLookup = ILookup;
+    type TLookups = ILookups;
+    type TGetLookups = (...args: any) => void | Promise<TLookups>;
 
     interface IApi {
-        getLookups: getLookups
-    }
-
-    interface ILookup {
-        label: string;
-        value: string;
-        ordinal: number;
-    }
-
-    interface ILookups {
-        aspectRatios: ILookup[];
-        versions: ILookup[];
+        
+        getLookups: TGetLookups
     }
 }
