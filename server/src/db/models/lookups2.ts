@@ -1,23 +1,17 @@
 import mongoose, { Document, Model, Schema, SchemaDefinition, SchemaTypeOpts } from "mongoose";
 
 
-interface ILookupBase {
+interface ILookupSchema {
 
+    _id?: any;
     label: string | SchemaTypeOpts<any>;
     ordinal: number | SchemaTypeOpts<any>;
     value: string | SchemaTypeOpts<any>;
 }
 
-interface ILookupOpts extends ILookupBase {
+export interface ILookup extends ILookupSchema {
 
-    _id: boolean;
-    label: SchemaTypeOpts<any>;
-    ordinal: SchemaTypeOpts<any>;
-    value: SchemaTypeOpts<any>;
-}
-
-export interface ILookup extends ILookupBase {
-
+    _id?: any;
     label: string;
     ordinal: number;
     value: string;
@@ -33,22 +27,19 @@ export interface ILookupsDoc extends ILookups, Document { }
 
 export function convertToILookups(lookupsDoc: ILookupsDoc): ILookups {
 
-    const lookups: any = lookupsDoc.toObject();
+    const lookups: any = lookupsDoc.toObject({ versionKey: false });
 
     delete lookups._id;
-
-    delete lookups.__v;
 
     return lookups;
 }
 
-const lookupOpts: ILookupOpts = {
+const lookupSchema: ILookupSchema = {
 
     _id: false,
     label: {
         minlength: 1,
         required: true,
-        trim: true,
         type: String,
         unique: true
     },
@@ -61,16 +52,15 @@ const lookupOpts: ILookupOpts = {
     value: {
         minlength: 1,
         required: true,
-        trim: true,
         type: String,
         unique: true
     }
 };
 
-const lookupsSchemaDefinition: SchemaDefinition = {
+const lookupsSchema: SchemaDefinition = {
 
-    aspectRatios: [lookupOpts],
-    versions: [lookupOpts]
+    aspectRatios: [lookupSchema],
+    versions: [lookupSchema]
 };
 
-export const LookupsModel: Model<ILookupsDoc> = mongoose.model("Lookups", new Schema(lookupsSchemaDefinition));
+export const lookupsModel: Model<ILookupsDoc> = mongoose.model("lookups", new Schema(lookupsSchema));

@@ -12,17 +12,17 @@ export function getLookups(this: Controller, _request: Request, response: Respon
 
             if (lookupsDoc !== null) {
 
-                console.log(lookupsDoc);
-                console.log("\n\n");
                 const lookups: ILookups = convertToILookups(lookupsDoc);
 
-                console.log(lookups);
-
                 response.json(lookups);
+            }
+            else {
+
+                this.sendError(response, 500, "ERROR: Lookups object not found in database");
             }
         })
         .catch((err: string) => {
 
-            console.log(err);
+            this.sendError(response, 500, "ERROR: Lookups object not found in database", err);
         });
 }

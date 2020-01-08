@@ -22,11 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session(sessionOptions));
 app.use(controller.router);
-
-// if (process.env.NODE_ENV === "production") {
-
 app.use(express.static(config.staticAssetsPath));
-// }
 
 controller.connectDatabase()
 

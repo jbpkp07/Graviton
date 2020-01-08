@@ -1,12 +1,12 @@
 import mongoose, { ConnectionOptions, Model } from "mongoose";
 
 import { config } from "../config/config";
-import { ILookups, ILookupsDoc, LookupsModel } from "./models/Lookups";
+import { ILookups, ILookupsDoc, lookupsModel } from "./models/Lookups";
 
 
 export class GravitonDatabase {
 
-    public readonly lookupsModel: Model<ILookupsDoc> = LookupsModel;
+    public readonly lookupsModel: Model<ILookupsDoc> = lookupsModel;
 
     public async connectDatabase(): Promise<string> {
 

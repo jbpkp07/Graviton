@@ -1,4 +1,5 @@
 import { default as express, Request, Response } from "express";
+import { terminal } from "terminal-kit";
 
 import { api } from "../api/api";
 import { config } from "../config/config";
@@ -23,6 +24,20 @@ export class Controller {
     public async connectDatabase(): Promise<string> {
 
         return this.gravitonDatabase.connectDatabase();
+    }
+    
+    public sendError(response: Response, statusCode: number, clientErr: string, caughtErr?: string): void {
+
+        terminal.red(`  ${clientErr}\n\n`);
+
+        if (caughtErr !== undefined) {
+
+            terminal.gray(`  ${caughtErr}\n\n`);
+        }
+
+        response.statusMessage = clientErr;
+
+        response.sendStatus(statusCode);
     }
 
     private sendClientApp(_request: Request, response: Response): void {

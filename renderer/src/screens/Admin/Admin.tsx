@@ -10,14 +10,14 @@ import { DropDown } from "../../components/DropDown/DropDown";
 
 interface IDropDownStates {
     
-    [key: string]: API.TLookup | null;
-    aspectRatioDropDown: API.TLookup | null;
-    versionDropDown: API.TLookup | null;
+    [key: string]: API.ILookup | null;
+    aspectRatioDropDown: API.ILookup | null;
+    versionDropDown: API.ILookup | null;
 }
 
 interface IAdminScreenState {
 
-    lookups: API.TLookups | null;
+    lookups: API.ILookups | null;
     selectedOptions: IDropDownStates;
     submitButtonIsActive: boolean;
 }
@@ -54,11 +54,9 @@ export class AdminScreen extends React.Component {
 
     public readonly componentDidMount = (): void => {
 
-        (api.getLookups() as Promise<API.TLookups>)
+        (api.getLookups() as Promise<API.ILookups>)
 
-            .then((response: API.TLookups) => {
-
-                const lookups: API.TLookups = response;
+            .then((lookups: API.ILookups) => {
 
                 this.setState({ lookups });
             });
@@ -83,13 +81,13 @@ export class AdminScreen extends React.Component {
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 
-    public readonly handleDropDownChange = (dropDownId: string, selectedOption: API.TLookup | null): void => {
+    public readonly handleDropDownChange = (dropDownId: string, selectedOption: API.ILookup | null): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
         selectedOptions[dropDownId] = selectedOption;
 
-        const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: API.TLookup | null) => option === null);
+        const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: API.ILookup | null) => option === null);
 
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }

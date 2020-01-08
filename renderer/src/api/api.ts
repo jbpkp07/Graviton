@@ -6,17 +6,19 @@ import { currentWindow } from "../index";
 
 export const api: API.IApi = {
 
-    async getLookups(): Promise<API.TLookups> {
+    async getLookups(): Promise<API.ILookups> {
 
         return new Promise((resolve: Function): void => {
 
             Axios.get("/api/lookups")
 
-                .then((response: AxiosResponse<API.TLookups>) => {
+                .then((response: AxiosResponse<API.ILookups>) => {
                     console.log(response.data);
                     resolve(response.data);
                 })
-                .catch(() => {
+                .catch((response: string) => {
+
+                    alert(response);
 
                     currentWindow.loadServerNotFound();
                 });
