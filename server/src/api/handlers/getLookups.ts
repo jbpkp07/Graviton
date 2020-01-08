@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { Controller } from "../../controller/Controller";
-import { convertToILookups, ILookups, ILookupsDoc } from "../../db/models/Lookups";
+import { convertToILookups, ILookups, ILookupsDoc } from "../../db/models/lookups";
 
 
 export function getLookups(this: Controller, _request: Request, response: Response): void {

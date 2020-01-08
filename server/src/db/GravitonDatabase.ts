@@ -1,7 +1,7 @@
 import mongoose, { ConnectionOptions, Model } from "mongoose";
 
 import { config } from "../config/config";
-import { ILookups, ILookupsDoc, lookupsModel } from "./models/Lookups";
+import { ILookups, ILookupsDoc, lookupsModel } from "./models/lookups";
 
 
 export class GravitonDatabase {

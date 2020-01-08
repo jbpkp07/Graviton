@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { ILookup as ILookupModel, ILookups as ILookupsModel } from "../server/src/db/models/Lookups";
+import { ILookup as ILookupModel, ILookups as ILookupsModel } from "../server/src/db/models/lookups";
 
 
 export declare namespace API {
