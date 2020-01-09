@@ -39,7 +39,7 @@
             width: 460px;
         }
 
-        #serverNotFoundMessage {
+        #serverErrorMessage {
             color: var(--light-red);
             margin-top: 10px;
         }
@@ -83,7 +83,7 @@
         <div id="startScreen">
             <div id="startScreenTitle">graviton</div>
             <img id="startScreenLogo" src="./media/logo.svg" alt="Graviton Logo" draggable="false"/>
-            <div id="serverNotFoundMessage">ERROR &nbsp;server not found</div>
+            <div id="serverErrorMessage">Error communicating with server</div>
             <div id="closeBtn" class="btn" onclick="window.electronAPI.getCurrentWindow().closeGracefully();">Close Graviton</div>
         </div>
     </div>

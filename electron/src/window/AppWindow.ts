@@ -32,15 +32,15 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
         });
     }
 
-    public loadServerNotFound(): void {
+    public loadServerError(): void {
 
         if (electronIsDev) {
 
-            this.loadFile(this.config.rendererHTMLServerNotFoundDev);
+            this.loadFile(this.config.rendererHTMLServerErrorDev);
         }
         else {
 
-            this.loadFile(this.config.rendererHTMLServerNotFoundProd);
+            this.loadFile(this.config.rendererHTMLServerErrorProd);
         }
     }
 
@@ -83,7 +83,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
                 .catch(() => {
 
-                    this.loadServerNotFound();
+                    this.loadServerError();
                 });
         }
         else {
@@ -92,7 +92,7 @@ export class AppWindow extends BrowserWindow implements ElectronAPI.IAppWindow {
 
                 .catch(() => {
 
-                    this.loadServerNotFound();
+                    this.loadServerError();
                 });
         }
     }

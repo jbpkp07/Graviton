@@ -4,8 +4,8 @@
     "homepage": "./",
     "proxy": "http://localhost:3001",
     "scripts": {
-        "start-dev": "rm -rf build && mkdir build && start bash -c 'cross-env BROWSER=none react-scripts start'",
-        "build": "rm -rf build && mkdir build && react-scripts build && rm -rf ./build/static/serverNotFound.html ./build/static/media/logo.svg"
+        "start-dev": "start bash -c 'cross-env BROWSER=none react-scripts start'",
+        "build": "rm -rf build && mkdir build && react-scripts build && rm -rf ./build/static/serverError.html ./build/static/media/logo.svg"
     },
     "dependencies": {
         "@types/axios": "^0.14.0",

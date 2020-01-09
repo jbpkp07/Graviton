@@ -4,6 +4,8 @@ import { Controller } from "../../controller/Controller";
 import { convertToILookups, ILookups, ILookupsDoc } from "../../db/models/lookups";
 
 
+const clientErr: string = "ERROR [api.getLookups()]:  \"Server could not retreive lookups object from graviton database\"";
+
 export function getLookups(this: Controller, _request: Request, response: Response): void {
 
     this.gravitonDatabase.lookupsModel.findOne().exec()
@@ -18,11 +20,11 @@ export function getLookups(this: Controller, _request: Request, response: Respon
             }
             else {
 
-                this.sendError(response, 500, "ERROR: Lookups object not found in database");
+                this.sendError(response, 500, clientErr);
             }
         })
         .catch((err: string) => {
 
-            this.sendError(response, 500, "ERROR: Lookups object not found in database", err);
+            this.sendError(response, 500, clientErr, err);
         });
 }

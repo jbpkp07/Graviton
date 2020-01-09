@@ -11,8 +11,8 @@ function getFullPath(relativePath: string): string {
 export interface IAppWindowConfig {
 
     appWindowOptions: BrowserWindowConstructorOptions;
-    rendererHTMLServerNotFoundDev: string;
-    rendererHTMLServerNotFoundProd: string;
+    rendererHTMLServerErrorDev: string;
+    rendererHTMLServerErrorProd: string;
     rendererURLDev: string;
     rendererURLProd: string;
     fadeFPS: number;
@@ -53,8 +53,8 @@ export const mainWindowConfig: IAppWindowConfig = {
             zoomFactor: 1
         }
     },
-    rendererHTMLServerNotFoundDev: getFullPath("../../../renderer/public/static/serverNotFound.html"),
-    rendererHTMLServerNotFoundProd: getFullPath("../public/serverNotFound.html"),
+    rendererHTMLServerErrorDev: getFullPath("../../../renderer/public/static/serverError.html"),
+    rendererHTMLServerErrorProd: getFullPath("../public/serverError.html"),
     rendererURLDev:  "http://localhost:3000",
     rendererURLProd: "https://hub-graviton.herokuapp.com",
     fadeFPS: 60,
