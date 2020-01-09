@@ -23,7 +23,7 @@ export class GravitonDatabase {
 
                 .then(() => {
 
-                    this.addLookups();
+                    // this.addLookups();
 
                     resolve("Graviton database connected");
                 })
