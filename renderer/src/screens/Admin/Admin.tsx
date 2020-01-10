@@ -5,6 +5,7 @@ import { api } from "../../api/api";
 import { API } from "../../../../shared/API";
 import { Button } from "../../components/Button/Button";
 import { getComponentProps, IAdminComponentProps } from "./componentProps";
+import { DataTable } from "../../components/DataTable/DataTable";
 import { DropDown } from "../../components/DropDown/DropDown";
 
 
@@ -48,6 +49,7 @@ export class AdminScreen extends React.Component {
                 <Button   {...componentProps.submitButtonProps} />
                 <DropDown {...componentProps.aspectRatioDropDownProps} />
                 <DropDown {...componentProps.versionDropDownProps} />
+                <DataTable />
             </div>
         );
     }

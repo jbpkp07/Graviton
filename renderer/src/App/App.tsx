@@ -2,9 +2,10 @@ import React from "react";
 
 import { AdminScreen } from "../screens/Admin/Admin";
 import "./App.css";
-import { Button, IButtonProps } from "../components/Button/Button";
+import { DanielDevScreen } from "../screens/DanielDev/DanielDev";
 import { EScreen } from "../screens/EScreen";
 import { currentWindow } from "../index";
+import { JeremyDevScreen } from "../screens/JeremyDev/JeremyDev";
 import { INavBarProps, NavBar } from "../components/NavBar/NavBar";
 import { StartScreen } from "../screens/Start/Start";
 import { TitleBar } from "../components/TitleBar/TitleBar";
@@ -52,17 +53,11 @@ export class App extends React.Component {
             case EScreen.Admin:
                 return (<AdminScreen />);
 
-            case EScreen.Renamer:
+            case EScreen.JeremyDev:
+                return (<JeremyDevScreen />);
 
-                const buttonProps: IButtonProps = {
-
-                    id: "fileRenamerButton",
-                    isActive: true,
-                    label: "Renamer Button", 
-                    onClick: (): void => {}
-                };
-
-                return (<Button {...buttonProps} />);
+            case EScreen.DanielDev:
+                return (<DanielDevScreen />);
 
             default:
                 return (<StartScreen />);
@@ -71,11 +66,14 @@ export class App extends React.Component {
 
     private readonly selectScreen = (currentScreen: EScreen): void => {
 
-        console.log(`selectedScreen: ${currentScreen}`);
         this.setState({ currentScreen });
     }
 }
 
+
+
+// Below is example of creating an "Open File" popup system dialog. For use later when needed.
+// -------------------------------------------------------------------------------------------
 
 
 // setTimeout(() => {

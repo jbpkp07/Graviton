@@ -7,28 +7,28 @@ import { Controller } from "./controller/Controller";
 import { printHeader } from "./utils/printHeader";
 
 
+printHeader();
+
 const app: express.Application = express();
 
 const sessionOptions: SessionOptions = {
 
-    secret: "35036ca3-7153-4b9a-a854-c21ceba18c5c", // random UUID for secret
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    secret: "35036ca3-7153-4b9a-a854-c21ceba18c5c" // random UUID for secret
 };
 
 const controller: Controller = new Controller();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(config.staticAssetsPath));
 app.use(session(sessionOptions));
 app.use(controller.router);
-app.use(express.static(config.staticAssetsPath));
 
 controller.connectDatabase()
 
     .then((successMsg: string) => {
-
-        printHeader();
 
         terminal.white(`  ${successMsg} ► `).brightGreen("Successful\n\n");
 

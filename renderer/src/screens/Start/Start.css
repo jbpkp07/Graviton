@@ -1,10 +1,10 @@
-#startScreenWrapper {
+#startScreen {
     display: flex;
     height: 100%;
     width: 100%;
 }
 
-#startScreen {
+#startScreenBox {
     animation: startScreenUnBlur 1.25s 0s ease-out;
     backface-visibility: hidden;
     height: 480px;

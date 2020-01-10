@@ -27,21 +27,21 @@ export const mainWindowConfig: IAppWindowConfig = {
 
     appWindowOptions: {
 
-        width: 1920,
         height: 1080,
+        width: 1920,
+
+        minHeight: 900,
+        minWidth: 1440,
 
         center: true,
 
-        minWidth: 1440,
-        minHeight: 900,
-
         alwaysOnTop: !electronIsDev,
-        show: false,
-        paintWhenInitiallyHidden: true,
-        frame: false,
         backgroundColor: "#181818",
-        opacity: 0,
         darkTheme: true,
+        frame: false,
+        opacity: 0,
+        paintWhenInitiallyHidden: true,
+        show: false,
 
         webPreferences: {
 
@@ -57,9 +57,12 @@ export const mainWindowConfig: IAppWindowConfig = {
     rendererHTMLServerErrorProd: getFullPath("../public/serverError.html"),
     rendererURLDev:  "http://localhost:3000",
     rendererURLProd: "https://hub-graviton.herokuapp.com",
+
     fadeFPS: 60,
+
     blurOpacity: 0.7,
     focusOpacity: 1,
+
     closeDurationMS: 750,
     fadeToDurationMS: 250,
     showDurationMS: 750

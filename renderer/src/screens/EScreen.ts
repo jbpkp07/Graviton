@@ -2,5 +2,6 @@ export enum EScreen {
 
     Start = "Start",
     Admin = "Admin",
-    Renamer = "File Renamer"
+    JeremyDev = "Jeremy-Dev",
+    DanielDev = "Daniel-Dev"
 }

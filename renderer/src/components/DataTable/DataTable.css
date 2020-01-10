@@ -1,0 +1,10 @@
+#dataTableWrapper {
+
+    height: 600px;
+    position: relative;
+    top: 300px;
+}
+
+#dataTable {
+    color: black;
+}

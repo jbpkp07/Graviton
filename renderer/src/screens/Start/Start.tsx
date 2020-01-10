@@ -7,8 +7,8 @@ export function StartScreen(): JSX.Element {
 
     return (
 
-        <div id="startScreenWrapper">
-            <div id="startScreen">
+        <div id="startScreen">
+            <div id="startScreenBox">
                 <div id="startScreenTitle">graviton</div>
                 <img id="startScreenLogo" src={require("./images/logo.svg")} alt="Graviton Logo" draggable="false" />
             </div>

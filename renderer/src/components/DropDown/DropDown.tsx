@@ -24,7 +24,6 @@ export function DropDown(props: IDropDownProps): JSX.Element {
         container: (styles: CSSProperties): CSSProperties => ({
             
             ...styles,
-            // tslint:disable-next-line: object-literal-sort-keys
             left: props.positionLeft,
             top: props.positionTop,
             width: props.width

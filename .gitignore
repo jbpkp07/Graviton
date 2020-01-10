@@ -13,5 +13,6 @@
 /electron/dist
 
 # misc
+/.vscode
 desktop.ini
 .DS_Store

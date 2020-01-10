@@ -168,9 +168,7 @@
         "object-literal-sort-keys": [
             true,
             "ignore-case",
-            "locale-compare",
-            "match-declaration-order",
-            "shorthand-first"
+            "locale-compare"
         ],
         "prefer-const": true,
         "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
