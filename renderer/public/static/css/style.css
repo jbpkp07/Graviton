@@ -45,6 +45,7 @@
 
 * {
     box-sizing: border-box;
+    outline: none;
     text-decoration: none;
     user-select: none;
     -webkit-app-region: none;
@@ -55,7 +56,7 @@ html, body {
     color: var(--light-white);
     cursor: default;
     font-family: "Roboto-Regular" !important;
-    font-size: var(--defaultFontSize);
+    font-size: var(--defaultFontSize) !important;
     height: 100%;
     overflow-x: hidden;
     overflow-y: hidden;

@@ -17,38 +17,39 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
         id: "submitButton",
         isActive: this.state.submitButtonIsActive,
         label: "Submit",
+        onClick: this.submit,
         positionLeft: "150px",
-        positionTop: "180px",
-        onClick: this.submit
+        positionTop: "180px"
     };
 
     const aspectRatioDropDownProps: IDropDownProps = {
 
         id: "aspectRatioDropDown",
+        onChange: this.handleDropDownChange,
         options: (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null,
         placeholder: "Aspect Ratio",
         positionLeft: "150px",
         positionTop: "none",
         selectedOption: this.state.selectedOptions.aspectRatioDropDown,
-        width: "145px",
-        onChange: this.handleDropDownChange
+        width: "145px"
     };
 
     const versionDropDownProps: IDropDownProps = {
 
         id: "versionDropDown",
+        onChange: this.handleDropDownChange,
         options: (this.state.lookups !== null) ? this.state.lookups.versions : null,
         placeholder: "Version",
         positionLeft: "150px",
         positionTop: "130px",
         selectedOption: this.state.selectedOptions.versionDropDown,
-        width: "145px",
-        onChange: this.handleDropDownChange
+        width: "145px"
     };
 
     return {
 
         submitButtonProps,
+
         aspectRatioDropDownProps,
         versionDropDownProps
     };
