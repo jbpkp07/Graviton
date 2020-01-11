@@ -11,8 +11,7 @@
     border-right: 1px solid var(--lightest-gray);
     color: var(--light-blue);
     height: var(--navBarHeight);
-    line-height: 14px;
-    padding: 7px 20px 8px 20px;
+    padding: 6px 20px 7px 20px;
     position: relative;
 }
 

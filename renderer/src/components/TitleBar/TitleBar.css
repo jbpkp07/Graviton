@@ -1,3 +1,10 @@
+:root {
+    --titleBarFontSize: 18px;
+    --titleBarLineHeight: 18px;
+    --titleBarLogoWidth: 180px;
+    --titleBarBtnWidth: 48px;
+}
+
 .titleBarDrag {
     -webkit-app-region: drag;
 }
@@ -6,6 +13,7 @@
     background: var(--medium-purple);
     font-family: "Roboto-Light";
     height: var(--titleBarHeight);
+    line-height: var(--titleBarLineHeight) !important;
     text-align: center;
 }
 
@@ -31,7 +39,7 @@
 }
 
 .titleBarText {
-    font-size: var(--titleBarFontSize);
+    font-size: var(--titleBarFontSize) !important;
     letter-spacing: -.5px;
     position: relative;
     top: calc(((var(--titleBarHeight) - var(--titleBarFontSize)) / 2) - 1px);

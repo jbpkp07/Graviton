@@ -1,7 +1,6 @@
 import jQuery from "jquery";
 import React from "react";
 
-// import { Button, IButtonProps } from "../Button/Button";
 import "./DataTable.css";
 import "./datatables/datatables.css";
 
@@ -24,10 +23,10 @@ $.DataTable = require("datatables.net");
 
 
 const dataSet: string[][] = [
-    ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<button data-id="0" class="button">Delete</button>'],
-    ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", '<button data-id="1" class="button">Delete</button>'],
-    ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<button data-id="2" class="button">Delete</button>'],
-    ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<button data-id="3" class="button">Delete</button>']
+    ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="button">Delete</div>'],
+    ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="button">Delete</div>'],
+    ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
+    ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
     // ["Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28", "$162,700"],
     // ["Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000"],
     // ["Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500"],
@@ -123,9 +122,16 @@ export class DataTable extends React.Component {
 
         const table: DataTables.Api = $("#dataTable").DataTable(tableSettings);
 
+        $("#dataTable_filter > label > input").attr("id", "dataTableTextBox").addClass("textBox").attr("type", "text").attr("placeholder", "Search...");   
+        
+        // .empty().append('<input type="text" placeholder="Search..." aria-controls="dataTable">');
+        // console.log($("#dataTable_filter > label").text("blah"));
 
-       
+        // $("#dataTable_filter > label").html($("#dataTable_filter > label").html().replace($("#dataTable_filter > label").text(), ""));
 
+        $("#dataTable_filter > label").contents().filter(function(): boolean {
+            return (this.nodeType === 3);
+        }).remove();
 
         this.setState({ table });
 
@@ -137,7 +143,7 @@ export class DataTable extends React.Component {
 
         //     }
 
-        // }, 10000);
+        // }, 1000);
 
         this.deleteRowListener();
     }
@@ -157,7 +163,7 @@ export class DataTable extends React.Component {
 
     private readonly deleteRowListener = (): void => {
 
-        $("button[data-id]").one("click", (event: JQuery.ClickEvent): void => {
+        $("div[data-id]").one("click", (event: JQuery.ClickEvent): void => {
            
             console.log(event.target.dataset.id);
 
@@ -167,8 +173,8 @@ export class DataTable extends React.Component {
 
             if (this.state.table !== null) {
  
-                this.state.table.row($(`button[data-id="${id}"]`).parents("tr")).remove();
-                this.state.table.draw(false);
+                this.state.table.row($(`div[data-id="${id}"]`).parents("tr")).remove();
+                this.state.table.draw(true);
                 // this.state.table.clear().rows.add(dataSet).draw(true); // .row.add(dataSet).draw();
             }
 

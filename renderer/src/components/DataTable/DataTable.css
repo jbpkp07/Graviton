@@ -14,3 +14,7 @@
 #dataTable > tbody > tr {
     background: var(--dark-gray) !important;
 }
+
+#dataTableTextBox {
+    position: initial;
+}

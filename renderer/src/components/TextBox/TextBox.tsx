@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import "./TextBox.css";
 
@@ -12,8 +12,9 @@ export interface ITextBoxProps {
     placeholder: string;
     positionLeft?: string;
     positionTop?: string;
+    title?: string;
     width?: string;
-    onClick(id: string): void;
+    onChange(id: string, value: string): void;
 }
 
 export function TextBox(props: ITextBoxProps): JSX.Element {
@@ -22,10 +23,10 @@ export function TextBox(props: ITextBoxProps): JSX.Element {
 
     const className: string = (props.className !== undefined) ? `${props.className} ${textBoxClass}` : `${textBoxClass}`;
 
-    // function onClick(): void {
+    function onChange(event: ChangeEvent<HTMLInputElement>): void {
 
-    //     props.onClick(props.id);
-    // }
+        props.onChange(props.id, event.target.value);
+    }
 
     return (
         
@@ -33,10 +34,14 @@ export function TextBox(props: ITextBoxProps): JSX.Element {
             id={props.id}
             className={className}
             style={{ left: props.positionLeft, top: props.positionTop, width: props.width }}
-            type="text"
             placeholder={props.placeholder}
-            spellCheck={false}
-        />
-          
+            title={props.title}
+            disabled={!props.isActive}
+            onChange={onChange}
+            type="text"
+            spellCheck="false"
+            autoComplete="off"
+            autoCorrect="off"
+        />   
     );
 }

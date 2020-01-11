@@ -2,13 +2,10 @@
     background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
-    display: inline-block;
     font-family: "Roboto-Regular";
-    line-height: 14px;
     margin: 0;
-    padding: 6px 8px 8px 8px;
+    padding: 5px 8px 7px 8px;
     position: absolute;
-    width: fit-content;
 }
 
 .button {

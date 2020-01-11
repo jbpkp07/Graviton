@@ -19,13 +19,14 @@ export function DanielDevScreen(): JSX.Element {
 
     const TextBoxProps: ITextBoxProps = {
 
-        id: "submitButton",
+        id: "movieNameTextBox",
         isActive: true,
-        onClick: (): void => {},
-        placeholder: "Submit",
+        onChange: (id: string, value: string): void => console.log(`id: ${id}\nvalue: ${value}`),
+        placeholder: "Movie name",
         positionLeft: "150px",
         positionTop: "220px",
-        width: "100px"
+        title: "movie name",
+        width: "200px"
     };
 
     return (

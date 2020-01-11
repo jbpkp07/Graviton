@@ -1,34 +1,31 @@
 .textBox, .textBoxInactive {
-    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
+    background: var(--darkest-gray);
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
-    display: inline-block;
     font-family: "Roboto-Regular";
-    line-height: 14px;
     margin: 0;
     padding: 5px 8px 7px 8px;
     position: absolute;
-    width: fit-content;
 }
 
 .textBox {
     color: var(--light-blue);
-    cursor: pointer;
+    cursor: text;
 }
 
-.textBoxInactive {
-    color: var(--light-blue-transparent);
-    cursor: default;
-}
-
-.textBox:hover {
-    background: var(--light-gray);
-}
-
-.textBox:active {
+.textBox::placeholder {
     color: var(--light-blue-transparent);
 }
 
-::placeholder {
-    color: var(--light-blue-transparent);
+.textBoxInactive::placeholder {
+    color: var(--lightest-gray);
+}
+
+.textBox::selection {
+    background-color: var(--light-blue);
+    color: var(--black);
+}
+
+.textBox:focus {
+    border: 1px solid var(--light-blue-transparent);
 }

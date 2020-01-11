@@ -31,7 +31,7 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
         positionLeft: "150px",
         positionTop: "none",
         selectedOption: this.state.selectedOptions.aspectRatioDropDown,
-        width: "145px"
+        width: "200px"
     };
 
     const versionDropDownProps: IDropDownProps = {
@@ -43,7 +43,7 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
         positionLeft: "150px",
         positionTop: "130px",
         selectedOption: this.state.selectedOptions.versionDropDown,
-        width: "145px"
+        width: "200px"
     };
 
     return {

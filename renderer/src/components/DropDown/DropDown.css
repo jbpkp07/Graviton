@@ -33,27 +33,24 @@ div.dropDown__control--menu-is-open {
 div.dropDown__value-container {
     color: var(--light-blue);
     height: 30px;
-    line-height: 14px !important;
-    padding: 8px 8px 8px 8px;
+    padding: 7px 8px 7px 8px;
 }
 
 div.dropDown__value-container > div {
-    height: 14px;
-    line-height: 14px !important;
+    height: 16px;
     margin: 0;
     max-width: calc(100% - 8px);
     min-width: calc(100% - 8px);
     padding: 0;
     position: absolute;
-    top: 13px;
+    top: 12px;
     transform: matrix(1, 0, 0, 1, 0, -7);
 }
 
 div.dropDown__input {
     color: var(--light-blue);
     display: block !important;
-    height: 14px;
-    line-height: 14px !important;
+    height: 16px;
     position: absolute !important;
     width: 100%;
 }
@@ -61,15 +58,13 @@ div.dropDown__input {
 div.dropDown__input > input, div.dropDown__input > div {
     box-sizing: border-box !important;
     display: block !important;
-    height: 14px !important;
-    line-height: 14px !important;
+    height: 16px !important;
     position: absolute !important;
 }
 
 div.dropDown__placeholder {
     color: var(--light-blue-transparent);
-    height: 14px;
-    line-height: 14px !important;
+    height: 16px;
     margin: 0;
     max-width: calc(100% - 8px);
     overflow: hidden;
@@ -78,8 +73,7 @@ div.dropDown__placeholder {
 
 div.dropDown__single-value {
     color: var(--light-blue);
-    height: 14px;
-    line-height: 14px !important;
+    height: 16px;
     margin: 0;
 }
 

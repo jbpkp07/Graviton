@@ -30,6 +30,7 @@
             color: var(--light-purple);
             font-family: "Roboto-Light";
             font-size: 42pt;
+            line-height: normal !important;
         }
 
         #startScreenLogo {
@@ -52,9 +53,11 @@
             background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
             border: 1px solid var(--lightest-gray);
             border-radius: 5px;
+            font-family: "Roboto-Regular";
             color: var(--light-blue);
             cursor: pointer;
-            padding: 8px;
+            margin: 0;
+            padding: 5px 8px 7px 8px;
             position: relative;
             width: fit-content;
             z-index: 1;
@@ -76,6 +79,10 @@
 
     </style>
     
+    <script>
+        window.electronAPI.resetZoomFactor(1);
+    </script>
+
 </head>
 
 <body>
