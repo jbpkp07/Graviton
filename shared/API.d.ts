@@ -6,7 +6,8 @@ import { ILookup as ILookupModel, ILookups as ILookupsModel } from "../server/sr
 export declare namespace API {
 
     interface IApi {
-        
+
+        deleteLookupById: (...args: any) => void | Promise<ILookups>;
         getLookups: (...args: any) => void | Promise<ILookups>;
     }
 
