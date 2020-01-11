@@ -8,7 +8,7 @@
 
 #dataTable {
 
-    color: black;
+    color: var(--dark-white);
 }
 
 #dataTable > tbody > tr {

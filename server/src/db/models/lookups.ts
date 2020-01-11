@@ -11,7 +11,6 @@ interface ILookupSchema {
 
 const lookupSchema: ILookupSchema = {
 
-    _id: false,
     label: {
         minlength: 1,
         required: true,

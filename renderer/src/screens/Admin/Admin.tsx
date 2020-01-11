@@ -56,6 +56,15 @@ export class AdminScreen extends React.Component {
 
     public readonly componentDidMount = (): void => {
 
+        // Temporary test code below
+        // ---------------------------------------------------------------------------
+        // (api.deleteLookupById("5e190d0d15e47f5f505dd1a7") as Promise<API.ILookups>)
+
+        //     .then((lookups: API.ILookups) => {
+
+        //         this.setState({ lookups });
+        //     });
+
         (api.getLookups() as Promise<API.ILookups>)
 
             .then((lookups: API.ILookups) => {

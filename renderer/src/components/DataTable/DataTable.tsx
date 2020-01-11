@@ -21,21 +21,6 @@ const $: IJQuery = jQuery;
 
 $.DataTable = require("datatables.net");
 
-// const buttonProps: IButtonProps = {
-
-//     id: "submitButton",
-//     isActive: true,
-//     // key: "submitButton",
-//     label: "Submit",
-//     onClick: (): void => {},
-//     positionLeft: "150px",
-//     positionTop: "180px"
-// };
-
-function myFunction(): void {
-    console.log("clicked...");
-}
-console.log(myFunction);
 
 
 const dataSet: string[][] = [
@@ -94,6 +79,12 @@ export class DataTable extends React.Component {
 
         table: null
     };
+
+    public constructor(props: any) {
+        
+        super(props);
+
+    }
 
     public readonly render = (): JSX.Element => {
         console.log("rendering...");
@@ -166,7 +157,7 @@ export class DataTable extends React.Component {
 
     private readonly deleteRowListener = (): void => {
 
-        $("button[data-id]").one("click", (event: any): void => {
+        $("button[data-id]").one("click", (event: JQuery.ClickEvent): void => {
            
             console.log(event.target.dataset.id);
 
