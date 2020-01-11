@@ -64,7 +64,6 @@ export class AdminScreen extends React.Component {
 
         //         this.setState({ lookups });
         //     });
-        
 
         (api.getLookups() as Promise<API.ILookups>)
 
