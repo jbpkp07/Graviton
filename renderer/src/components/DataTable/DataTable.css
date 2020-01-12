@@ -3,18 +3,70 @@
     height: 600px;
     position: relative;
     top: 300px;
-    background: black;
+    /* background: black; */
+    max-width: 800px;
 }
 
-#dataTable {
-
+table#dataTable {
     color: var(--dark-white);
+    border-radius: 5px;
+    border: 1px solid var(--lightest-gray);
+    padding: 0px 10px 10px 10px;
+    background: var(--darkest-gray);
 }
 
-#dataTable > tbody > tr {
-    background: var(--dark-gray) !important;
+div#dataTable_filter > label > input {
+    margin-bottom: 10px;
+}
+
+
+table#dataTable > thead {
+    background-color: red;
 }
 
 #dataTableTextBox {
     position: initial;
+}
+
+#dataTable > tbody > tr > td > div.button {
+    position: initial;
+}
+
+
+
+#dataTable > tbody > tr.odd {
+    background-color: var(--medium-gray);
+}
+
+#dataTable > tbody > tr.even {
+    background-color: var(--light-gray);
+}
+
+#dataTable > tbody > tr:hover {
+    background-color: var(--dark-gray);
+
+}
+
+/* #dataTable > tbody > tr:not(:last-child) > td {
+    border-top: 1px solid var(--lightest-gray);
+} */
+
+/* #dataTable > tbody > tr > td {
+    border-top: 1px solid var(--lightest-gray);
+} */
+
+#dataTable > tbody > tr > td {
+    padding: 4px 10px 4px 10px;
+}
+
+#dataTable > tbody > tr > td:last-child {
+    padding: 4px 2px 4px 2px;
+}
+
+#dataTable > thead > tr > th {
+    padding: 8px 20px 8px 10px;
+    /* height: 30px; */
+    background-color: var(--darkest-gray);
+    color: var(--light-blue);
+    font-weight: 400;
 }

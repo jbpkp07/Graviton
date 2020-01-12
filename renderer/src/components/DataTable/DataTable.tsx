@@ -96,7 +96,7 @@ export class DataTable extends React.Component {
 
     public readonly componentDidMount = (): void => {
 
-        $("#dataTableWrapper").append("<table id=\"dataTable\" />");
+        $("#dataTableWrapper").append("<table id=\"dataTable\" class=\"\" />");
 
         const tableSettings: DataTables.Settings = {
 
@@ -111,7 +111,11 @@ export class DataTable extends React.Component {
                 { title: "Office" },
                 { title: "Extn." },
                 { title: "Start date" },
-                { title: "Salary" }
+                { 
+                    orderable: false, 
+                    // title: "Delete", 
+                    width: "30px"
+                }
             ],
             data: dataSet,
             info: false,
@@ -137,15 +141,22 @@ export class DataTable extends React.Component {
 
         // setTimeout(() => {
 
+        //     // if (this.state.table !== null) {
+
+        //     //     this.state.table.rows.add(dataSet2).draw();
+
+        //     // }
+
         //     if (this.state.table !== null) {
 
-        //         this.state.table.rows.add(dataSet2).draw();
-
+        //         this.state.table.destroy(true);
         //     }
 
-        // }, 1000);
+        // }, 10000);
 
         this.deleteRowListener();
+
+       
     }
 
     public readonly componentWillUnmount = (): void => {
@@ -174,7 +185,7 @@ export class DataTable extends React.Component {
             if (this.state.table !== null) {
  
                 this.state.table.row($(`div[data-id="${id}"]`).parents("tr")).remove();
-                this.state.table.draw(true);
+                this.state.table.draw();
                 // this.state.table.clear().rows.add(dataSet).draw(true); // .row.add(dataSet).draw();
             }
 

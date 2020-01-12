@@ -27,5 +27,5 @@
 }
 
 .textBox:focus {
-    border: 1px solid var(--light-blue-transparent);
+    border: 1px solid var(--light-blue);
 }
