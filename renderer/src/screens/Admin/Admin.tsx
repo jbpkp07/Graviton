@@ -5,7 +5,7 @@ import { api } from "../../api/api";
 import { API } from "../../../../shared/API";
 import { Button } from "../../components/Button/Button";
 import { getComponentProps, IAdminComponentProps } from "./componentProps";
-import { DataTable } from "../../components/DataTable/DataTable";
+import { DataTable, IDataTableProps } from "../../components/DataTable/DataTable";
 import { DropDown } from "../../components/DropDown/DropDown";
 
 
@@ -35,6 +35,30 @@ let adminScreenState: IAdminScreenState = {
 };
 
 
+const dataTableProps: IDataTableProps = {
+
+    columns: [
+        { title: "Name" },
+        { title: "Position" },
+        { title: "Office" },
+        { title: "Extn." },
+        { title: "Start date" },
+        { 
+            orderable: false,  
+            width: "30px"
+        }
+    ],
+    data: [
+        ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="button">Delete</div>'],
+        ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="button">Delete</div>'],
+        ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
+        ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
+    ],
+    pageLength: 2
+};
+
+
+
 export class AdminScreen extends React.Component {
 
     public readonly state: IAdminScreenState = adminScreenState;
@@ -43,13 +67,18 @@ export class AdminScreen extends React.Component {
 
         const componentProps: IAdminComponentProps = getComponentProps.call(this);
 
+
+
+
+
+
         return (
 
             <div id="adminScreen">
                 <Button   {...componentProps.submitButtonProps} />
                 <DropDown {...componentProps.aspectRatioDropDownProps} />
                 <DropDown {...componentProps.versionDropDownProps} />
-                <DataTable />
+                <DataTable {...dataTableProps} />
             </div>
         );
     }
@@ -79,6 +108,24 @@ export class AdminScreen extends React.Component {
     }
 
     public readonly submit = (_buttonId: string): void => {
+
+        dataTableProps.data = [
+            ["4Tiger Nixon", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="button">Delete</div>'],
+            ["3Garrett Winters", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="button">Delete</div>'],
+            ["2Ashton Cox", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
+            ["1Cedric Kelly", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
+        ];
+
+        dataTableProps.columns = [
+            { title: "Name" },
+            { title: "Office" },
+            { title: "Extn." },
+            { title: "Start date" },
+            { 
+                orderable: false,  
+                width: "30px"
+            }
+        ];
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
