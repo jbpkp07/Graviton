@@ -29,6 +29,6 @@
 
 @keyframes startScreenUnBlur {
 
-    from { filter: blur(40px); opacity: 0; }
+    from { filter: blur(48px); opacity: 0; }
     to   { filter: blur(0px); opacity: 1; }
 }

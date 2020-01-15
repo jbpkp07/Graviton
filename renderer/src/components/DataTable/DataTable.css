@@ -11,7 +11,7 @@ table#dataTable {
     color: var(--dark-white);
     border-radius: 5px;
     border: 1px solid var(--lightest-gray);
-    padding: 0px 10px 10px 10px;
+    padding: 1px 10px 10px 10px;
     background: var(--darkest-gray);
 }
 
@@ -20,9 +20,9 @@ div#dataTable_filter > label > input {
 }
 
 
-table#dataTable > thead {
+/* table#dataTable > thead {
     background-color: red;
-}
+} */
 
 #dataTableTextBox {
     position: initial;
@@ -39,11 +39,11 @@ table#dataTable > thead {
 }
 
 #dataTable > tbody > tr.even {
-    background-color: var(--light-gray);
+    background-color: var(--dark-gray);
 }
 
 #dataTable > tbody > tr:hover {
-    background-color: var(--dark-gray);
+    background-color: var(--light-gray);
 
 }
 

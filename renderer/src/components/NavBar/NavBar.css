@@ -6,6 +6,7 @@
 }
 
 .navBarLink {
+    background: var(--medium-gray);
     border: none;
     border-radius: 0px;
     border-right: 1px solid var(--lightest-gray);
@@ -21,4 +22,12 @@
 
 .navBarInActiveLink {
     border-bottom: 1px solid var(--lightest-gray);
+}
+
+.navBarInActiveLink:hover {
+    background: var(--light-gray);
+}
+
+.navBarInActiveLink:active {
+    background: var(--medium-gray);
 }

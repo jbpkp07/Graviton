@@ -54,7 +54,7 @@ const dataTableProps: IDataTableProps = {
         ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
         ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
     ],
-    pageLength: 2
+    pageLength: 4
 };
 
 

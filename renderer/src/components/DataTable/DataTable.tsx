@@ -37,11 +37,6 @@ export class DataTable extends React.Component<IDataTableProps> {
         table: null
     };
 
-    // public constructor(props: IDataTableProps) {
-
-    //     super(props);
-    // }
-
     public readonly render = (): JSX.Element => {
         console.log("rendering...");
 
@@ -118,7 +113,7 @@ export class DataTable extends React.Component<IDataTableProps> {
                     .attr("id", "dataTableTextBox")
                     .addClass("textBox")
                     .attr("type", "text")
-                    .attr("placeholder", "Search...");
+                    .attr("placeholder", "Search");
 
                 $("#dataTable_filter > label")
                     .contents()

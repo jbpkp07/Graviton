@@ -8,7 +8,7 @@ div.dropDown {
 
 /* dropDown__control ------------------------------------------------------------------------------ */
 div.dropDown__control {
-    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
+    background: linear-gradient(to bottom, var(--light-gray), var(--darkest-gray));
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
     box-shadow: none;
@@ -18,13 +18,13 @@ div.dropDown__control {
 }
 
 div.dropDown__control:hover {
-    background: var(--light-gray);
+    background: var(--medium-gray);
     border: 1px solid var(--lightest-gray);
     transition: none;
 }
 
 div.dropDown__control--menu-is-open {
-    background: linear-gradient(to bottom, var(--light-gray), var(--dark-gray));
+    background: var(--darkest-gray) !important;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
@@ -48,7 +48,7 @@ div.dropDown__value-container > div {
 }
 
 div.dropDown__input {
-    color: var(--light-blue);
+    color: var(--light-teal);
     display: block !important;
     height: 16px;
     position: absolute !important;
@@ -62,6 +62,11 @@ div.dropDown__input > input, div.dropDown__input > div {
     position: absolute !important;
 }
 
+div.dropDown__input > input::selection, div.dropDown__input > div::selection {
+    background-color: var(--light-teal);
+    color: var(--black);
+}
+
 div.dropDown__placeholder {
     color: var(--light-blue-transparent);
     height: 16px;
@@ -72,7 +77,7 @@ div.dropDown__placeholder {
 }
 
 div.dropDown__single-value {
-    color: var(--light-blue);
+    color: var(--light-teal);
     height: 16px;
     margin: 0;
 }
@@ -85,14 +90,14 @@ div.dropDown__indicators {
 span.dropDown__indicator-separator {
     background: var(--lightest-gray);
     height: 20px;
-    margin: auto 0;
+    margin: 4px 0px 6px 0px;
     width: 1px;
 }
 
 div.dropDown__indicator {
     color: var(--light-blue);
     height: 30px;
-    padding: 4px;
+    padding: 3px 4px 5px 4px;
     transition: none;
     width: 30px;
 }
@@ -111,7 +116,7 @@ div.dropDown__indicator:active {
 
 /* dropDown__menu --------------------------------------------------------------------------------- */
 div.dropDown__menu {
-    background: var(--light-gray);
+    background: var(--medium-gray);
     border-bottom: 1px solid var(--lightest-gray);
     border-left: 1px solid var(--lightest-gray);
     border-right: 1px solid var(--lightest-gray);
@@ -119,7 +124,7 @@ div.dropDown__menu {
     border-bottom-right-radius: 5px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    box-shadow: 0 2px 2px var(--black);
+    box-shadow: 0 3px 3px var(--black);
     margin: 0;
     padding-bottom: 1px;
     padding-top: 1px;
@@ -136,14 +141,14 @@ div.dropDown__option {
 }
 
 div.dropDown__option:hover {
-    background: var(--lighter-gray);
+    background: var(--light-gray);
 }
 
 div.dropDown__option:active {
-    background: var(--lighter-gray);
+    background: var(--light-gray);
     color: var(--light-blue-transparent);
 }
 
 div.dropDown__option.dropDown__option--is-selected {
-    background: var(--lighter-gray);
+    color: var(--light-teal);
 }

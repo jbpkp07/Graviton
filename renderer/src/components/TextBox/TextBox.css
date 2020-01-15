@@ -9,7 +9,7 @@
 }
 
 .textBox {
-    color: var(--light-blue);
+    color: var(--light-teal);
     cursor: text;
 }
 
@@ -17,15 +17,19 @@
     color: var(--light-blue-transparent);
 }
 
+.textBox:focus::placeholder {
+    color: var(--light-teal-transparent);
+}
+
 .textBoxInactive::placeholder {
     color: var(--lightest-gray);
 }
 
 .textBox::selection {
-    background-color: var(--light-blue);
+    background-color: var(--light-teal);
     color: var(--black);
 }
 
 .textBox:focus {
-    border: 1px solid var(--light-blue);
+    border: 1px solid var(--light-teal-transparent);
 }
