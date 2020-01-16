@@ -18,6 +18,7 @@
 
 .navBarActiveLink {
     background: var(--dark-gray);
+    border-bottom: 1px solid var(--dark-gray);
 }
 
 .navBarInActiveLink {

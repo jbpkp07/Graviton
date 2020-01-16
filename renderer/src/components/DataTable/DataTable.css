@@ -70,3 +70,7 @@ div#dataTable_filter > label > input {
     color: var(--light-blue);
     font-weight: 400;
 }
+
+#dataTable > thead > tr > th[aria-sort] {
+    color: var(--light-teal);
+}

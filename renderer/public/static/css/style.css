@@ -16,14 +16,15 @@
     --medium-purple: rgba(93,31,153,1.0);
     --dark-purple: rgba(50,27,99,1.0);
 
-    --light-blue: rgba(0,204,255,1.0);
-    --light-blue-transparent: rgba(0,204,255,0.4);
+    --light-blue: rgba(0,183,255,1.0);
+    --light-blue-transparent: rgba(0,183,255,0.5);
 
-    --light-teal: rgba(53,212,199,1.0);
-    --light-teal-transparent: rgba(53,212,199,0.4);
+    --light-teal: rgba(0,225,195,1.0);
+    --light-teal-transparent: rgba(0,225,195,0.5);
 
+    --light-yellow: rgba(209,219,125,1.0);
     --light-red: rgba(255,80,80,1.0);
-    --light-green: rgba(42,252,156,1.0);
+    --light-green: rgba(42,255,156,1.0);
 
     --defaultFontSize: 13.333px;
     --defaultLineHeight: 16px;
