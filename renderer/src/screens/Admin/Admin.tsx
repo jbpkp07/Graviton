@@ -49,12 +49,12 @@ const dataTableProps: IDataTableProps = {
         }
     ],
     data: [
-        ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="button">Delete</div>'],
-        ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="button">Delete</div>'],
-        ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
-        ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
+        ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="dataTableDeleteBtn button">Delete</div>'],
+        ["Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="dataTableDeleteBtn button">Delete</div>'],
+        ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="dataTableDeleteBtn button">Delete</div>'],
+        ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="dataTableDeleteBtn button">Delete</div>']
     ],
-    pageLength: 4
+    pageLength: 2
 };
 
 
@@ -110,10 +110,10 @@ export class AdminScreen extends React.Component {
     public readonly submit = (_buttonId: string): void => {
 
         dataTableProps.data = [
-            ["4Tiger Nixon", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="button">Delete</div>'],
-            ["3Garrett Winters", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="button">Delete</div>'],
-            ["2Ashton Cox", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="button">Delete</div>'],
-            ["1Cedric Kelly", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="button">Delete</div>']
+            ["4Tiger Nixon", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="dataTableDeleteBtn button">Delete</div>'],
+            ["3Garrett Winters", "Tokyo", "8422", "2011/07/25", '<div data-id="1" class="dataTableDeleteBtn button">Delete</div>'],
+            ["2Ashton Cox", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="dataTableDeleteBtn button">Delete</div>'],
+            ["1Cedric Kelly", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="dataTableDeleteBtn button">Delete</div>']
         ];
 
         dataTableProps.columns = [

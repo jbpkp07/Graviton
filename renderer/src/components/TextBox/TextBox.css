@@ -17,10 +17,6 @@
     color: var(--light-blue-transparent);
 }
 
-.textBox:focus::placeholder {
-    color: var(--light-teal-transparent);
-}
-
 .textBoxInactive::placeholder {
     color: var(--lightest-gray);
 }
@@ -32,4 +28,8 @@
 
 .textBox:focus {
     border: 1px solid var(--light-teal-transparent);
+}
+
+.textBox:focus::placeholder {
+    color: var(--light-teal-transparent);
 }

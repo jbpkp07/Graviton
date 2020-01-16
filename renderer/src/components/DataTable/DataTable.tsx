@@ -53,6 +53,8 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     public readonly componentWillUnmount = (): void => {
 
+        this.removeAllListeners();
+
         this.destroyTable();
     }
 
@@ -90,7 +92,7 @@ export class DataTable extends React.Component<IDataTableProps> {
 
             .then(() => {
 
-                $("#dataTableWrapper").append("<table id=\"dataTable\" />");
+                $("div#dataTableWrapper").append("<table id=\"dataTable\" />");
 
                 const tableSettings: DataTables.Settings = {
 
@@ -107,30 +109,20 @@ export class DataTable extends React.Component<IDataTableProps> {
                     pagingType: "numbers"
                 };
 
-                const table: DataTables.Api = $("#dataTable").DataTable(tableSettings);
+                const table: DataTables.Api = $("table#dataTable").DataTable(tableSettings);
 
-                $("#dataTable_filter > label > input")
+                $("div#dataTable_filter > label > input")
                     .attr("id", "dataTableTextBox")
                     .addClass("textBox")
                     .attr("type", "text")
                     .attr("placeholder", "Search");
 
-                $("#dataTable_filter > label")
+                $("div#dataTable_filter > label")
                     .contents()
                     .filter((_index: number, node: Node): boolean => node.nodeType === 3)
                     .remove();
 
-                $("div[data-id]").one("click", (event: JQuery.ClickEvent): void => {
-
-                    const id: string = event.target.dataset.id;
-
-                    if (this.state.table !== null) {
-
-                        this.state.table.row($(`div[data-id="${id}"]`).parents("tr")).remove();
-
-                        this.state.table.draw(false);
-                    }
-                });
+                this.assignAllListeners();
 
                 this.setState({ table });
             });
@@ -140,7 +132,11 @@ export class DataTable extends React.Component<IDataTableProps> {
 
         if (this.state.table !== null) {
 
+            this.removeAllListeners();
+
             this.state.table.clear().rows.add(props.data).draw(false);
+
+            this.assignAllListeners();
         }
     }
 
@@ -149,6 +145,8 @@ export class DataTable extends React.Component<IDataTableProps> {
         return new Promise((resolve: Function): void => {
 
             if (this.state.table !== null) {
+
+                this.removeAllListeners();
 
                 this.state.table.destroy(true);
 
@@ -162,5 +160,66 @@ export class DataTable extends React.Component<IDataTableProps> {
                 resolve();
             }
         });
+    }
+
+    private readonly assignAllListeners = (): void => {
+
+        this.assignDeleteButtonListeners();
+
+        this.assignPaginateButtonListeners();
+    }
+
+    private readonly removeAllListeners = (): void => {
+
+        this.removeDeleteButtonListeners();
+
+        this.removePaginateButtonListeners();
+    }
+
+    private readonly assignDeleteButtonListeners = (): void => {
+
+        $("div.dataTableDeleteBtn[data-id]").one("click", (event: JQuery.ClickEvent): void => {
+
+            const id: string = event.target.dataset.id;
+            console.log(id);
+            if (this.state.table !== null) {
+
+                this.state.table.row($(`div.dataTableDeleteBtn[data-id="${id}"]`).parents("tr")).remove();
+
+                this.state.table.draw(false);
+
+                this.reAssignDeleteButtonListeners();
+
+                this.assignPaginateButtonListeners();
+            }
+        });
+    }
+
+    private readonly removeDeleteButtonListeners = (): void => {
+
+        $("div.dataTableDeleteBtn[data-id]").off("click");
+    }
+
+    private readonly reAssignDeleteButtonListeners = (): void => {
+
+        this.removeDeleteButtonListeners();
+
+        this.assignDeleteButtonListeners();
+    }
+
+    private readonly assignPaginateButtonListeners = (): void => {
+
+        $("div.dataTables_paginate > span > a.paginate_button:not(a.paginate_button.current)").on("click", () => {
+
+            console.log("clicked paginate button");
+            this.reAssignDeleteButtonListeners();
+            
+            this.assignPaginateButtonListeners();
+        });
+    }
+
+    private readonly removePaginateButtonListeners = (): void => {
+
+        $("div.dataTables_paginate > span > a.paginate_button").off("click");
     }
 }
