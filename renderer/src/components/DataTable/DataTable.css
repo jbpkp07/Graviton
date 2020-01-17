@@ -1,10 +1,6 @@
-#dataTableWrapper {
-
-    height: 600px;
-    position: relative;
-    top: 300px;
-    /* background: black; */
-    max-width: 800px;
+.dataTableWrapper {
+    position: sticky;
+    width: 100%;
 }
 
 table#dataTable {
@@ -19,6 +15,13 @@ div#dataTable_filter > label > input {
     margin-bottom: 20px;
 }
 
+.dataTableDeleteBtn {
+    color: var(--light-red);
+}
+
+.dataTableDeleteBtn:active {
+    color: var(--light-red-transparent);
+}
 
 /* table#dataTable > thead {
     background-color: red;

@@ -1,6 +1,6 @@
 :root {
     --light-white: rgba(248,248,248,1.0);
-    --medium-white: rgba(232,232,232,1.0);
+    --medium-white: rgba(220,220,220,1.0);
     --dark-white: rgba(192,192,192,1.0);
   
     --lightest-gray: rgba(96,96,96,1.0);
@@ -23,8 +23,10 @@
     --light-teal-transparent: rgba(0,225,195,0.5);
 
     --light-yellow: rgba(209,219,125,1.0);
-    --light-red: rgba(255,80,80,1.0);
-    --light-green: rgba(42,255,156,1.0);
+    --light-yellow-transparent: rgba(209,219,125,0.5);
+
+    --light-red: rgba(230,80,89,1.0);
+    --light-red-transparent: rgba(230,80,89,0.5);
 
     --defaultFontSize: 13.333px;
     --defaultLineHeight: 16px;
