@@ -30,5 +30,5 @@
 }
 
 .navBarInActiveLink:active {
-    background: var(--medium-gray);
+    background: var(--light-gray);
 }

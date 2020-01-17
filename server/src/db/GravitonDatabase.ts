@@ -54,7 +54,7 @@ export class GravitonDatabase {
             ],
             versions: [
                 { label: "Theatrical",  ordinal: 2, value: "T" },
-                { label: "Edited3",     ordinal: 1, value: "E" }
+                { label: "Edited3",     value: "E", ordinal: 1 }
             ]
         };
 

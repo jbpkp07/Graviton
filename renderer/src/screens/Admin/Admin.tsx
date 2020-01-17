@@ -43,10 +43,7 @@ const dataTableProps: IDataTableProps = {
         { title: "Office" },
         { title: "Extn." },
         { title: "Start date" },
-        { 
-            orderable: false,  
-            width: "30px"
-        }
+        { orderable: false, width: "30px" }
     ],
     data: [
         ["Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", '<div data-id="0" class="dataTableDeleteBtn button">Delete</div>'],
@@ -54,11 +51,11 @@ const dataTableProps: IDataTableProps = {
         ["Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", '<div data-id="2" class="dataTableDeleteBtn button">Delete</div>'],
         ["Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", '<div data-id="3" class="dataTableDeleteBtn button">Delete</div>']
     ],
-    id: "jeremyTable",
     maxWidth: "1000px",
     pageLength: 2,
     positionLeft: "0px",
-    positionTop: "200px"
+    positionTop: "200px",
+    wrapperId: "jeremyTable"
 };
 
 

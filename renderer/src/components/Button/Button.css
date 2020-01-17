@@ -24,6 +24,6 @@
 }
 
 .button:active {
-    background: var(--dark-gray);
+    background: var(--medium-gray);
     color: var(--light-blue-transparent);
 }

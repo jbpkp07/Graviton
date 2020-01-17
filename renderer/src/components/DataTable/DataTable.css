@@ -3,7 +3,7 @@
     width: 100%;
 }
 
-table#dataTable {
+#dataTable {
     color: var(--dark-white);
     border-radius: 5px;
     border: 1px solid var(--lightest-gray);
@@ -11,7 +11,7 @@ table#dataTable {
     background: var(--darkest-gray);
 }
 
-div#dataTable_filter > label > input {
+#dataTable_filter > label > input {
     margin-bottom: 20px;
 }
 

@@ -14,45 +14,35 @@ const $: IJQuery = jQuery;
 
 $.DataTable = require("datatables.net");
 
-interface IDataTableState {
-
-    table: DataTables.Api | null;
-}
-
 export interface IDataTableProps {
 
     columns: DataTables.ColumnSettings[];
     data: string[][];
-    id: string;
     maxWidth: string;
     pageLength: number;
     positionLeft: string;
     positionTop: string;
+    wrapperId: string;
 }
 
 export class DataTable extends React.Component<IDataTableProps> {
 
-    public readonly wrapperClassName: string = "dataTableWrapper";
+    private readonly wrapperClassName: string = "dataTableWrapper";
+    private readonly tableId: string = "dataTable";
+    private readonly deleteBtnClassName: string = "dataTableDeleteBtn";
 
-    public readonly selectorBase: string = `div#${this.props.id}.${this.wrapperClassName}`;
+    private readonly baseSelector: string = `#${this.props.wrapperId}.${this.wrapperClassName}`;
+    private readonly baseSelectorInner: string = `${this.baseSelector} > #${this.tableId}_wrapper`;
 
-    public readonly selectorBaseInner: string = `${this.selectorBase} > #dataTable_wrapper`;
+    private readonly initialTableElement: string = `<table id="${this.tableId}" />`;
+    private readonly initialTableSelector: string = `${this.baseSelector} > #${this.tableId}`;
 
-    public readonly deleteBtnsSelector: string = `   ${this.selectorBaseInner} > #dataTable > tbody > tr > td > .dataTableDeleteBtn`;
-    public readonly paginateBtnsSelector: string = ` ${this.selectorBaseInner} > .dataTables_paginate > span > .paginate_button:not(.paginate_button.current)`;
-    public readonly searchTextBoxSelector: string = `${this.selectorBaseInner} > #dataTable_filter > label > input`;
-    public readonly sortBtnsSelector: string = `     ${this.selectorBaseInner} > #dataTable > thead > tr > th`;
+    private readonly searchTextBoxSelector: string = `${this.baseSelectorInner} > #${this.tableId}_filter > label > input`;
+    private readonly sortBtnsSelector: string = `     ${this.baseSelectorInner} > #${this.tableId} > thead > tr > th`;
+    private readonly deleteBtnsSelector: string = `   ${this.baseSelectorInner} > #${this.tableId} > tbody > tr > td > .${this.deleteBtnClassName}`;
+    private readonly paginateBtnsSelector: string = ` ${this.baseSelectorInner} > #${this.tableId}_paginate > span > .paginate_button:not(.paginate_button.current)`;
 
-    public readonly initialTableId: string = "dataTable";
-    public readonly initialTableElement: string = `<table id="${this.initialTableId}" />`;
-    public readonly initialTableSelector: string = `${this.selectorBase} > #${this.initialTableId}`;
-
-
-
-    public readonly state: IDataTableState = {
-
-        table: null
-    };
+    private dataTable: DataTables.Api | null = null;
 
     public readonly render = (): JSX.Element => {
         console.log("rendering...");
@@ -67,7 +57,7 @@ export class DataTable extends React.Component<IDataTableProps> {
         return (
 
             <div
-                id={this.props.id}
+                id={this.props.wrapperId}
                 className={this.wrapperClassName}
                 style={cssProperties}
             />
@@ -81,34 +71,18 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     public readonly componentWillUnmount = (): void => {
 
-        // this.removeAllListeners();
-
         this.destroyTable();
     }
 
     public readonly shouldComponentUpdate = (nextProps: IDataTableProps): boolean => {
 
-        if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {   // Do deep comparison of props object
+        if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.props.columns)) {  // Do deep comparison of props.columns object
 
-            // console.log("Different Props");
-
-            if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.props.columns)) {
-
-                // console.log("Different Columns... Brand new table");
-
-                this.createTable(nextProps);
-            }
-            else {
-
-                // console.log("Same Columns... Redraw existing table");
-
-                this.reDrawTable(nextProps);
-            }
-
+            this.createTable(nextProps);
         }
-        else {
+        else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {   // Do deep comparison of props.data object
 
-            // console.log("Same props");
+            this.reDrawTable(nextProps);
         }
 
         return false;  // Never return true, we don't want React controlling DOM manipulation because Datatables uses JQuery to do it
@@ -116,114 +90,99 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly createTable = (props: IDataTableProps): void => {
         console.log("creating table");
-        this.destroyTable()
+        this.destroyTable();
 
-            .then(() => {
+        $(this.baseSelector).append(this.initialTableElement);
 
-                $(this.selectorBase).append(this.initialTableElement);
+        const tableSettings: DataTables.Settings = {
 
-                const tableSettings: DataTables.Settings = {
+            autoWidth: false,
+            columnDefs: [{
+                className: "dt-left",
+                targets: "_all"
+            }],
+            columns: props.columns,
+            data: props.data,
+            info: false,
+            lengthChange: false,
+            pageLength: props.pageLength,
+            pagingType: "numbers"
+        };
 
-                    autoWidth: false,
-                    columnDefs: [{
-                        className: "dt-left",
-                        targets: "_all"
-                    }],
-                    columns: props.columns,
-                    data: props.data,
-                    info: false,
-                    lengthChange: false,
-                    pageLength: props.pageLength,
-                    pagingType: "numbers"
-                };
+        this.dataTable = $(this.initialTableSelector).DataTable(tableSettings);
 
-                const table: DataTables.Api = $(this.initialTableSelector).DataTable(tableSettings);
+        $(this.searchTextBoxSelector) // Modify search text box for custom styling
+            .addClass("textBox")
+            .attr("id", "dataTableTextBox")
+            .attr("type", "text")
+            .attr("placeholder", "Search");
 
-                $(this.searchTextBoxSelector) // Modify search text box for custom styling
-                    .addClass("textBox")
-                    .attr("id", "dataTableTextBox")
-                    .attr("type", "text")
-                    .attr("placeholder", "Search");
+        $(this.searchTextBoxSelector) // Remove search text box default label "Search:"
+            .parent()
+            .contents()
+            .filter((_index: number, node: Node): boolean => node.nodeType === 3)
+            .remove();
 
-                $(this.searchTextBoxSelector) // Remove search text box default label "Search:"
-                    .parent()
-                    .contents()
-                    .filter((_index: number, node: Node): boolean => node.nodeType === 3)
-                    .remove();
-
-                this.assignAllListeners();
-
-                this.setState({ table });
-            });
+        this.assignAllListeners();
     }
 
     private readonly reDrawTable = (props: IDataTableProps): void => {
 
-        if (this.state.table !== null) {
+        if (this.dataTable !== null) {
 
-            this.state.table.clear().rows.add(props.data).draw(false);
+            this.dataTable.clear().rows.add(props.data).draw(false);
 
             this.assignAllListeners();
         }
     }
 
-    private readonly destroyTable = async (): Promise<void> => {
+    private readonly destroyTable = (): void => {
 
-        return new Promise((resolve: Function): void => {
+        if (this.dataTable !== null) {
 
-            if (this.state.table !== null) {
+            this.removeAllListeners();
 
-                // this.removeAllListeners();
+            this.dataTable.destroy(true);
 
-                this.state.table.destroy(true);
-
-                this.setState({ table: null }, () => {
-
-                    resolve();
-                });
-            }
-            else {
-
-                resolve();
-            }
-        });
+            this.dataTable = null;
+        }
     }
 
     private readonly assignAllListeners = (): void => {
 
         this.removeAllListeners();
 
-        $(this.deleteBtnsSelector).one("click", this.handleDeleteBtnClick);
-
-        $(this.paginateBtnsSelector).one("click", this.handlePaginateBtnClick);
-
         $(this.searchTextBoxSelector).one("change", this.handleSearchChange);
 
         $(this.sortBtnsSelector).one("click", this.handleSortBtnClick);
+
+        $(this.deleteBtnsSelector).one("click", this.handleDeleteBtnClick);
+
+        $(this.paginateBtnsSelector).one("click", this.handlePaginateBtnClick);
     }
 
     private readonly removeAllListeners = (): void => {
 
-        $(this.deleteBtnsSelector).off("click", this.handleDeleteBtnClick);
-
-        $(this.paginateBtnsSelector).off("click", this.handlePaginateBtnClick);
-
         $(this.searchTextBoxSelector).off("change", this.handleSearchChange);
 
         $(this.sortBtnsSelector).off("click", this.handleSortBtnClick);
+
+        $(this.deleteBtnsSelector).off("click", this.handleDeleteBtnClick);
+
+        $(this.paginateBtnsSelector).off("click", this.handlePaginateBtnClick);
     }
 
     private readonly handleDeleteBtnClick = (event: JQuery.ClickEvent): void => {
 
         const id: string = event.target.dataset.id;
         console.log(`Deleting id: ${id}`);
-        if (this.state.table !== null) {
+        if (this.dataTable !== null) {
 
             const rowToRemove: JQuery = $(`${this.deleteBtnsSelector}[data-id="${id}"]`).parent("td").parent("tr");
 
-            this.state.table.row(rowToRemove).remove();
+            this.dataTable.row(rowToRemove).remove();
 
-            this.state.table.draw(false);
+            this.dataTable.draw(false);
 
             this.assignAllListeners();
         }
