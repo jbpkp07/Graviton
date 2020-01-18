@@ -23,7 +23,7 @@ export class GravitonDatabase {
 
                 .then(() => {
 
-                    // this.addLookups();
+                    this.addLookups();
 
                     resolve("Graviton database connected");
                 })
@@ -48,20 +48,30 @@ export class GravitonDatabase {
         const lookups: ILookups = {
 
             aspectRatios: [
-                { label: "4 x 3",   ordinal: 1, value: "4x3" },
-                { label: "16 x 9",  ordinal: 3, value: "16x9" },
+                { label: "4 x 3", ordinal: 1, value: "4x3" },
+                { label: "16 x 9", ordinal: 3, value: "16x9" },
                 { label: "16 x 10", ordinal: 2, value: "16x10" }
             ],
+            languages: [
+                {
+                    iso639: "eng",
+                    label: "ENG",
+                    languageName: "English",
+                    languageRegional: "en-US",
+                    ordinal: 1,
+                    value: "ENG"
+                }
+            ],
             versions: [
-                { label: "Theatrical",  ordinal: 2, value: "T" },
-                { label: "Edited3",     value: "E", ordinal: 1 }
+                { label: "Theatrical", ordinal: 2, value: "T" },
+                { label: "Edited3", value: "E", ordinal: 1 }
             ]
         };
 
         this.lookupsModel.create(lookups)
 
             .catch((err: string) => {
-                
+
                 console.log(err);
             });
     }

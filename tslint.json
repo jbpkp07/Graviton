@@ -43,7 +43,7 @@
         },
         "no-any": false,
         "no-empty-interface": true,
-        "no-for-in": false,
+        "no-for-in": true,
         "no-import-side-effect": [true, { "ignore-module": "(\\.html|\\.css|\\.svg)$" }],
         "no-inferrable-types": [false, "ignore-params"],
         "no-internal-module": true,
@@ -153,7 +153,7 @@
         "invalid-void": true,
         "linebreak-style": [false, "LF"],
         "max-classes-per-file": [true, 1, "exclude-class-expressions"],
-        "max-file-line-count": { "options": 1000 },
+        "max-file-line-count": { "options": 250 },
         "max-line-length": {
             "options": { "limit": 180 }
         },

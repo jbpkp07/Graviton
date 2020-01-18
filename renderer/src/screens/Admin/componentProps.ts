@@ -1,12 +1,15 @@
 import { AdminScreen } from "./Admin";
 import { IButtonProps } from "../../components/Button/Button";
+import { ETableLayout, IDataTableAdaptorProps } from "../../components/DataTableAdaptor/DataTableAdaptor";
 import { IDropDownProps } from "../../components/DropDown/DropDown";
 
 
 export interface IAdminComponentProps {
 
-    submitButtonProps: IButtonProps;
     aspectRatioDropDownProps: IDropDownProps;
+    dataTableAdaptorProps: IDataTableAdaptorProps;
+    dataTableAdaptorProps2: IDataTableAdaptorProps;
+    submitButtonProps: IButtonProps;
     versionDropDownProps: IDropDownProps;
 }
 
@@ -46,11 +49,36 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
         width: "200px"
     };
 
+    const dataTableAdaptorProps: IDataTableAdaptorProps = {
+
+        allowRowDelete: false,
+        dataArray: (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null,
+        maxWidth: "600px",
+        pageLength: 2,
+        positionLeft: "0px",
+        positionTop: "200px",
+        tableLayout: ETableLayout.ILookup,
+        wrapperId: "jeremyTable"
+    };
+
+    const dataTableAdaptorProps2: IDataTableAdaptorProps = {
+
+        allowRowDelete: true,
+        dataArray: (this.state.lookups !== null) ? this.state.lookups.languages : null,
+        maxWidth: "1000px",
+        pageLength: 2,
+        positionLeft: "0px",
+        positionTop: "500px",
+        tableLayout: ETableLayout.ILookupLanguage,
+        wrapperId: "jeremyTable2"
+    };
+
     return {
 
-        submitButtonProps,
-
         aspectRatioDropDownProps,
+        dataTableAdaptorProps,
+        dataTableAdaptorProps2,
+        submitButtonProps,
         versionDropDownProps
     };
 }

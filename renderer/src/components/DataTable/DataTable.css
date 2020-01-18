@@ -7,7 +7,7 @@
     color: var(--dark-white);
     border-radius: 5px;
     border: 1px solid var(--lightest-gray);
-    padding: 1px 10px 10px 10px;
+    padding: 0px 10px 10px 10px;
     background: var(--darkest-gray);
 }
 
@@ -63,11 +63,11 @@
 }
 
 #dataTable > tbody > tr > td:last-child {
-    padding: 4px 2px 4px 2px;
+    padding: 4px 4px 4px 10px;
 }
 
 #dataTable > thead > tr > th {
-    padding: 8px 20px 8px 10px;
+    padding: 7px 20px 6px 10px;
     /* height: 30px; */
     background-color: var(--darkest-gray);
     color: var(--light-blue);

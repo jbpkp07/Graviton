@@ -16,6 +16,8 @@ $.DataTable = require("datatables.net");
 
 export interface IDataTableProps {
 
+    allowRowDelete: boolean;
+    columnDefClassName: string;
     columns: DataTables.ColumnSettings[];
     data: string[][];
     maxWidth: string;
@@ -44,6 +46,8 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private dataTable: DataTables.Api | null = null;
 
+    private oldProps: any | null = null;
+
     public readonly render = (): JSX.Element => {
         console.log("rendering...");
 
@@ -65,7 +69,7 @@ export class DataTable extends React.Component<IDataTableProps> {
     }
 
     public readonly componentDidMount = (): void => {
-
+        console.log("first attempt");
         this.createTable(this.props);
     }
 
@@ -75,39 +79,82 @@ export class DataTable extends React.Component<IDataTableProps> {
     }
 
     public readonly shouldComponentUpdate = (nextProps: IDataTableProps): boolean => {
+        console.log("second attempt");
 
-        if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.props.columns)) {  // Do deep comparison of props.columns object
+        if (this.oldProps !== null) {
+            console.log(JSON.stringify(nextProps.columns));
+            console.log(JSON.stringify(this.oldProps.columns));
+
+        }
+
+        const isSame: boolean = nextProps.columns.some((setting: DataTables.ColumnSettings) => {
+           
+            setting.title !== 
+        });
+
+
+
+        if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.props.columns)) {
+
+
+
+
+            this.oldProps = { columns: nextProps.columns };
+            
+            
+            console.log(JSON.stringify(this.oldProps.columns));
+   
+
 
             this.createTable(nextProps);
         }
-        else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {   // Do deep comparison of props.data object
+        else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
 
             this.reDrawTable(nextProps);
         }
 
-        return false;  // Never return true, we don't want React controlling DOM manipulation because Datatables uses JQuery to do it
+
+
+        return false;
     }
 
     private readonly createTable = (props: IDataTableProps): void => {
         console.log("creating table");
         this.destroyTable();
 
-        $(this.baseSelector).append(this.initialTableElement);
+        let columnDefClassName: string = props.columnDefClassName;
+        let columns: DataTables.ColumnSettings[] = props.columns;
+        let data: string[][] = props.data;
+
+        if (columns.length === 0) {
+
+            columnDefClassName = "dt-center";
+            columns = [{ title: "ERROR: No columns provided..." }];
+            data = [[""]];
+        }
+        else if (data.length !== 0 && data.some((row: string[]) => row.length !== columns.length)) {
+
+            columnDefClassName = "dt-center";
+            columns = [{ title: "ERROR: Column and data count mismatch..." }];
+            data = [[""]];
+        }
 
         const tableSettings: DataTables.Settings = {
 
             autoWidth: false,
             columnDefs: [{
-                className: "dt-left",
+                className: columnDefClassName,
                 targets: "_all"
             }],
-            columns: props.columns,
-            data: props.data,
+            columns,
+            data,
             info: false,
             lengthChange: false,
             pageLength: props.pageLength,
             pagingType: "numbers"
         };
+
+        $(this.baseSelector).append(this.initialTableElement);
 
         this.dataTable = $(this.initialTableSelector).DataTable(tableSettings);
 
@@ -128,7 +175,20 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly reDrawTable = (props: IDataTableProps): void => {
 
-        if (this.dataTable !== null) {
+        if (this.dataTable === null) {
+
+            return;
+        }
+
+        if (props.columns.length === 0 || props.data.length === 0) {
+
+            this.createTable(props);
+        }
+        else if (props.data.some((row: string[]) => row.length !== props.columns.length)) {
+
+            this.createTable(props);
+        }
+        else {
 
             this.dataTable.clear().rows.add(props.data).draw(false);
 
@@ -150,6 +210,11 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly assignAllListeners = (): void => {
 
+        if (!this.props.allowRowDelete) {
+
+            return;
+        }
+
         this.removeAllListeners();
 
         $(this.searchTextBoxSelector).one("change", this.handleSearchChange);
@@ -162,6 +227,11 @@ export class DataTable extends React.Component<IDataTableProps> {
     }
 
     private readonly removeAllListeners = (): void => {
+
+        if (!this.props.allowRowDelete) {
+
+            return;
+        }
 
         $(this.searchTextBoxSelector).off("change", this.handleSearchChange);
 

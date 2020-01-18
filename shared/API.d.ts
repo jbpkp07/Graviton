@@ -1,6 +1,10 @@
 import { AxiosResponse } from "axios";
 
-import { ILookup as ILookupModel, ILookups as ILookupsModel } from "../server/src/db/models/lookups";
+import {
+    ILookup as ILookupModel,
+    ILookupLanguage as ILookupLanguageModel,
+    ILookups as ILookupsModel
+} from "../server/src/db/models/lookups";
 
 
 export declare namespace API {
@@ -12,5 +16,6 @@ export declare namespace API {
     }
 
     type ILookup = ILookupModel;
+    type ILookupLanguage = ILookupLanguageModel;
     type ILookups = ILookupsModel;
 }

@@ -9,37 +9,66 @@ interface ILookupSchema {
     value: SchemaTypeOpts<any> | string;
 }
 
+interface ILookupSchemaLanguage extends ILookupSchema {
+
+    iso639: SchemaTypeOpts<any> | string;
+    languageName: SchemaTypeOpts<any> | string;
+    languageRegional: SchemaTypeOpts<any> | string;
+}
+
 const lookupSchema: ILookupSchema = {
 
     label: {
         minlength: 1,
         required: true,
-        type: String,
-        unique: true
+        type: String
     },
     ordinal: {
+        default: 1,
         max: 99,
-        min: 0,
+        min: 1,
         required: true,
         type: Number
     },
     value: {
         minlength: 1,
         required: true,
-        type: String,
-        unique: true
+        type: String
+    }
+};
+
+const lookupSchemaLanguage: ILookupSchemaLanguage = {
+
+    ...lookupSchema,
+
+    iso639: {
+        minlength: 1,
+        required: true,
+        type: String
+    },
+    languageName: {
+        minlength: 1,
+        required: true,
+        type: String
+    },
+    languageRegional: {
+        minlength: 1,
+        required: true,
+        type: String
     }
 };
 
 interface ILookupsSchema {
 
     aspectRatios: ILookupSchema[] | ILookup[];
+    languages: ILookupSchemaLanguage[] | ILookupLanguage[];
     versions: ILookupSchema[] | ILookup[];
 }
 
 const lookupsSchema: ILookupsSchema & SchemaDefinition = {
 
     aspectRatios: [lookupSchema],
+    languages: [lookupSchemaLanguage],
     versions: [lookupSchema]
 };
 
@@ -53,9 +82,21 @@ export interface ILookup extends ILookupSchema {
     value: string;
 }
 
+export interface ILookupLanguage extends ILookupSchemaLanguage {
+
+    _id?: any;
+    iso639: string;
+    label: string;
+    languageName: string;
+    languageRegional: string;
+    ordinal: number;
+    value: string;
+}
+
 export interface ILookups extends ILookupsSchema {
 
     aspectRatios: ILookup[];
+    languages: ILookupLanguage[];
     versions: ILookup[];
 }
 
@@ -67,5 +108,5 @@ export function convertToILookups(lookupsDoc: ILookupsDoc): ILookups {
 
     delete lookups._id;
 
-    return lookups;
+    return (lookups as ILookups);
 }
