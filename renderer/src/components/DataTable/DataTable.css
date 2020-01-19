@@ -3,39 +3,44 @@
     width: 100%;
 }
 
+#dataTable_filter {
+    float: left;
+    margin: 0px 0px 10px 0px;
+}
+
+#dataTable_filter > label > #dataTableTextBox {
+    margin: 0;
+    position: initial;
+    width: 150px;
+}
+
 #dataTable {
+    background-color: var(--darkest-gray);
     color: var(--dark-white);
-    border-radius: 5px;
     border: 1px solid var(--lightest-gray);
-    padding: 0px 10px 10px 10px;
-    background: var(--darkest-gray);
+    border-radius: 5px;
+    padding: 1px 10px 10px 10px;
 }
 
-#dataTable_filter > label > input {
-    margin-bottom: 20px;
+#dataTable > thead {
+    background-color: var(--darkest-gray);
 }
 
-.dataTableDeleteBtn {
-    color: var(--light-red);
+#dataTable > thead > tr {
+    background-color: var(--darkest-gray);
 }
 
-.dataTableDeleteBtn:active {
-    color: var(--light-red-transparent);
+#dataTable > thead > tr > th {
+    background-color: var(--darkest-gray);
+    border: 0;
+    color: var(--light-blue);
+    font-weight: initial;
+    padding: 7px 20px 6px 10px;
 }
 
-/* table#dataTable > thead {
-    background-color: red;
-} */
-
-#dataTableTextBox {
-    position: initial;
+#dataTable > thead > tr > th[aria-sort] {
+    color: var(--light-teal);
 }
-
-#dataTable > tbody > tr > td > div.button {
-    position: initial;
-}
-
-
 
 #dataTable > tbody > tr.odd {
     background-color: var(--medium-gray);
@@ -47,16 +52,7 @@
 
 #dataTable > tbody > tr:hover {
     background-color: var(--light-gray);
-
 }
-
-/* #dataTable > tbody > tr:not(:last-child) > td {
-    border-top: 1px solid var(--lightest-gray);
-} */
-
-/* #dataTable > tbody > tr > td {
-    border-top: 1px solid var(--lightest-gray);
-} */
 
 #dataTable > tbody > tr > td {
     padding: 4px 10px 4px 10px;
@@ -66,14 +62,69 @@
     padding: 4px 4px 4px 10px;
 }
 
-#dataTable > thead > tr > th {
-    padding: 7px 20px 6px 10px;
-    /* height: 30px; */
-    background-color: var(--darkest-gray);
-    color: var(--light-blue);
-    font-weight: 400;
+#dataTable > tbody > tr > td > .dataTableDeleteBtn {
+    color: var(--light-red);
+    position: initial;
 }
 
-#dataTable > thead > tr > th[aria-sort] {
-    color: var(--light-teal);
+#dataTable > tbody > tr > td > .dataTableDeleteBtn:active {
+    color: var(--light-red-transparent);
+}
+
+#dataTable_paginate {
+    height: 30px;
+    left: 160px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0px;
+}
+
+#dataTable_paginate > span > .paginate_button {
+    background: linear-gradient(to bottom, var(--light-gray), var(--darkest-gray));
+    border: 1px solid var(--lightest-gray);
+    border-radius: 5px;
+    font-family: "Roboto-Regular";
+    /* margin: 0; */
+    padding: 5px 8px 7px 8px;
+    /* position: absolute; */
+    width: fit-content;
+
+
+
+    margin: 0px 10px 0px 0px;
+    position: initial;
+
+
+    min-width: 30px;
+    box-shadow: none !important;
+}
+
+#dataTable_paginate > span > .paginate_button.current {
+    color: var(--light-teal) !important;
+    cursor: default;
+}
+
+#dataTable_paginate > span > .paginate_button:not(.current) {
+    color: var(--light-blue) !important;
+    cursor: pointer;
+}
+
+#dataTable_paginate > span > .paginate_button:not(.current):hover {
+    background: var(--medium-gray);
+}
+
+#dataTable_paginate > span > .paginate_button:not(.current):active {
+    background: var(--medium-gray);
+    color: var(--light-blue-transparent) !important;
+}
+
+#dataTable_paginate > span > .ellipsis {
+    color: var(--dark-white);
+    font-size: 18px;
+    height: 30px;
+    line-height: 18px;
+    padding: 6px 4px 6px 4px;
+    position: relative;
+    left: -5px;
 }

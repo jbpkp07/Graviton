@@ -31,11 +31,6 @@ export interface IDataTableAdaptorProps {
 export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
 
     public readonly render = (): JSX.Element => {
-
-        let columnKeys: string[];
-
-        const columns: DataTables.ColumnSettings[] = [];
-        const data: string[][] = [];
     
         const dataTableProps: IDataTableProps = {
     
@@ -49,35 +44,71 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
             positionTop: this.props.positionTop,
             wrapperId: this.props.wrapperId
         };
+
+        return this.renderTable(dataTableProps);
+    }
+
+    private readonly renderTable = (dataTableProps: IDataTableProps): JSX.Element => {
     
         if (this.props.dataArray === null) {
-    
-            dataTableProps.columnDefClassName = "dt-center";
-            dataTableProps.columns = [{ title: "Loading..." }];
-            dataTableProps.data = [[""]];
-    
-            return (
-    
-                <DataTable {...dataTableProps} />
-            );
+
+            return this.renderLoadingTable(dataTableProps);
         }
+
+        const columnKeys: string[] = this.getColumnKeys();
+
+        const columns: DataTables.ColumnSettings[] = this.getColumns(columnKeys);
+
+        const dataRows: string[][] = this.getDataRows(columnKeys, this.props.dataArray);
+    
+        const doAllRowsHaveIds: boolean = !this.props.dataArray.some((object: IGenericObject) => object["_id"] === undefined);
+
+        if (columns.length > 0 && dataRows.length > 0 && doAllRowsHaveIds) {
+    
+            this.addDeleteButtons(columns, dataRows, this.props.dataArray);
+        }
+        
+        dataTableProps.columns = columns;
+        dataTableProps.data = dataRows;
+    
+        return (
+    
+            <DataTable {...dataTableProps} />
+        );
+    }
+
+    private readonly renderLoadingTable = (dataTableProps: IDataTableProps): JSX.Element => {
+    
+        dataTableProps.columnDefClassName = "dt-center";
+        dataTableProps.columns = [{ title: "Loading..." }];
+        dataTableProps.data = [[""]];
+
+        return (
+
+            <DataTable {...dataTableProps} />
+        );
+    }
+
+    private readonly getColumnKeys = (): string[] => {
     
         switch (this.props.tableLayout) {
     
             case ETableLayout.ILookup: {
     
                 const orderedKeys: API.ILookup = {
-                    label: "",
+
                     value: "",
+                    label: "",
                     ordinal: 0
                 };
-                columnKeys = Object.keys(orderedKeys);
-                break;
+                
+                return Object.keys(orderedKeys);
             }
     
             case ETableLayout.ILookupLanguage: {
     
                 const orderedKeys: API.ILookupLanguage = {
+                    
                     value: "",
                     label: "",
                     languageName: "",
@@ -85,53 +116,67 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
                     iso639: "",
                     ordinal: 0
                 };
-                columnKeys = Object.keys(orderedKeys);
-                break;
+
+                return Object.keys(orderedKeys);
             }
     
-            default:
-    
-                columnKeys = [];
+            default: {
+
+                return [];
+            }
         }
-    
+    }
+
+    private readonly getColumns = (columnKeys: string[]): DataTables.ColumnSettings[] => {
+
+        const columns: DataTables.ColumnSettings[] = [];
+
         columnKeys.forEach((key: string) => {
     
             const prettyTitle: string = key.replace(/((?<!^)[A-Z](?![A-Z]))(?=\S)/g, " $1").replace(/^./, (str: string) => str.toUpperCase());
     
             columns.push({ title: prettyTitle });
         });
+
+        return columns;
+    }
+
+    private readonly getDataRows = (columnKeys: string[], dataArray: IGenericObject[]): string[][] => {
+
+        const dataRows: string[][] = [];
     
-        this.props.dataArray.forEach((object: IGenericObject) => {
+        dataArray.forEach((object: IGenericObject) => {
     
             const row: string[] = [];
     
             columnKeys.forEach((key: string) => {
-    
-                (object[key] !== undefined) ? row.push(object[key]) : row.push("...");
+
+                if (object[key] !== undefined && object[key] !== "") {
+
+                    row.push(object[key]);
+                }
+                else {
+
+                    row.push("...");
+                }
             });
     
-            data.push(row);
+            dataRows.push(row);
         });
+
+        return dataRows;
+    }
+
+    private readonly addDeleteButtons = (columns: DataTables.ColumnSettings[], dataRows: string[][], dataArray: IGenericObject[]): void => {
+
+        if (this.props.allowRowDelete) {
     
-        if (columns.length > 0 && data.length > 0) {
-    
-            if (this.props.allowRowDelete && !this.props.dataArray.some((object: IGenericObject) => object["_id"] === undefined)) {
-    
-                columns.push({ orderable: false, width: "30px" });
-    
-                for (let i: number = 0; i < this.props.dataArray.length; i++) {
-    
-                    data[i].push(`<div class="dataTableDeleteBtn button" data-id="${this.props.dataArray[i]["_id"]}">Delete</div>`);
-                }
+            columns.push({ orderable: false, width: "30px" });
+
+            for (let i: number = 0; i < dataArray.length; i++) {
+
+                dataRows[i].push(DataTable.getDeleteBtnElement(dataArray[i]["_id"]));
             }
         }
-    
-        dataTableProps.columns = columns;
-        dataTableProps.data = data;
-    
-        return (
-    
-            <DataTable {...dataTableProps} />
-        );
     }
 }

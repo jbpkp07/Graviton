@@ -49,7 +49,7 @@ export class AdminScreen extends React.Component {
                 <DropDown {...componentProps.aspectRatioDropDownProps} />
                 <DropDown {...componentProps.versionDropDownProps} />
                 <DataTableAdaptor {...componentProps.dataTableAdaptorProps} />
-                {/* <DataTableAdaptor {...componentProps.dataTableAdaptorProps2} /> */}
+                <DataTableAdaptor {...componentProps.dataTableAdaptorProps2} />
             </div>
         );
     }

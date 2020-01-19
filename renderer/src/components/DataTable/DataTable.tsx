@@ -29,27 +29,32 @@ export interface IDataTableProps {
 
 export class DataTable extends React.Component<IDataTableProps> {
 
-    private readonly wrapperClassName: string = "dataTableWrapper";
-    private readonly tableId: string = "dataTable";
-    private readonly deleteBtnClassName: string = "dataTableDeleteBtn";
+    public static readonly wrapperClassName: string = "dataTableWrapper";
+    public static readonly tableId: string = "dataTable";
+    public static readonly dataIdAttribute: string = "data-id";
+    public static readonly deleteBtnClass: string = "dataTableDeleteBtn";
 
-    private readonly baseSelector: string = `#${this.props.wrapperId}.${this.wrapperClassName}`;
-    private readonly baseSelectorInner: string = `${this.baseSelector} > #${this.tableId}_wrapper`;
+    public static getDeleteBtnElement = (id: string): string => { 
 
-    private readonly initialTableElement: string = `<table id="${this.tableId}" />`;
-    private readonly initialTableSelector: string = `${this.baseSelector} > #${this.tableId}`;
+        return `<div class="${DataTable.deleteBtnClass} button" ${DataTable.dataIdAttribute}="${id}">Delete</div>`;
+    }
+    
+    private readonly baseSelector: string = `#${this.props.wrapperId}.${DataTable.wrapperClassName}`;
+    private readonly baseSelectorInner: string = `${this.baseSelector} > #${DataTable.tableId}_wrapper`;
 
-    private readonly searchTextBoxSelector: string = `${this.baseSelectorInner} > #${this.tableId}_filter > label > input`;
-    private readonly sortBtnsSelector: string = `     ${this.baseSelectorInner} > #${this.tableId} > thead > tr > th`;
-    private readonly deleteBtnsSelector: string = `   ${this.baseSelectorInner} > #${this.tableId} > tbody > tr > td > .${this.deleteBtnClassName}`;
-    private readonly paginateBtnsSelector: string = ` ${this.baseSelectorInner} > #${this.tableId}_paginate > span > .paginate_button:not(.paginate_button.current)`;
+    private readonly initialTableElement: string = `<table id="${DataTable.tableId}" />`;
+    private readonly initialTableSelector: string = `${this.baseSelector} > #${DataTable.tableId}`;
+
+    private readonly searchTextBoxSelector: string = `${this.baseSelectorInner} > #${DataTable.tableId}_filter > label > input`;
+    private readonly sortBtnsSelector: string = `     ${this.baseSelectorInner} > #${DataTable.tableId} > thead > tr > th`;
+    private readonly deleteBtnsSelector: string = `   ${this.baseSelectorInner} > #${DataTable.tableId} > tbody > tr > td > .${DataTable.deleteBtnClass}`;
+    private readonly paginateBtnsSelector: string = ` ${this.baseSelectorInner} > #${DataTable.tableId}_paginate > span > .paginate_button:not(.paginate_button.current)`;
 
     private dataTable: DataTables.Api | null = null;
 
-    private oldProps: any | null = null;
+    private prevColumns: DataTables.ColumnSettings[] | null = null;
 
     public readonly render = (): JSX.Element => {
-        console.log("rendering...");
 
         const cssProperties: React.CSSProperties = {
 
@@ -62,14 +67,17 @@ export class DataTable extends React.Component<IDataTableProps> {
 
             <div
                 id={this.props.wrapperId}
-                className={this.wrapperClassName}
+                className={DataTable.wrapperClassName}
                 style={cssProperties}
             />
         );
     }
 
     public readonly componentDidMount = (): void => {
-        console.log("first attempt");
+
+        // Deep copy because datatables.net modifies the columns array after createTable()
+        this.prevColumns = JSON.parse(JSON.stringify(this.props.columns));
+
         this.createTable(this.props);
     }
 
@@ -79,47 +87,23 @@ export class DataTable extends React.Component<IDataTableProps> {
     }
 
     public readonly shouldComponentUpdate = (nextProps: IDataTableProps): boolean => {
-        console.log("second attempt");
 
-        if (this.oldProps !== null) {
-            console.log(JSON.stringify(nextProps.columns));
-            console.log(JSON.stringify(this.oldProps.columns));
+        if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.prevColumns)) {  // Deep comparison
 
-        }
-
-        const isSame: boolean = nextProps.columns.some((setting: DataTables.ColumnSettings) => {
-           
-            setting.title !== 
-        });
-
-
-
-        if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.props.columns)) {
-
-
-
-
-            this.oldProps = { columns: nextProps.columns };
-            
-            
-            console.log(JSON.stringify(this.oldProps.columns));
+            this.prevColumns = JSON.parse(JSON.stringify(nextProps.columns)); // Deep copy
    
-
-
             this.createTable(nextProps);
         }
-        else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
-
+        else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {  // Deep comparison
+            
             this.reDrawTable(nextProps);
         }
 
-
-
-        return false;
+        return false;  // Turn off React rendering, this table uses JQuery for DOM manipulation
     }
 
     private readonly createTable = (props: IDataTableProps): void => {
-        console.log("creating table");
+
         this.destroyTable();
 
         let columnDefClassName: string = props.columnDefClassName;
@@ -175,16 +159,9 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly reDrawTable = (props: IDataTableProps): void => {
 
-        if (this.dataTable === null) {
-
-            return;
-        }
-
-        if (props.columns.length === 0 || props.data.length === 0) {
-
-            this.createTable(props);
-        }
-        else if (props.data.some((row: string[]) => row.length !== props.columns.length)) {
+        if (this.dataTable === null ||
+            props.columns.length === 0 || 
+            props.data.some((row: string[]) => row.length !== props.columns.length)) {
 
             this.createTable(props);
         }
@@ -210,45 +187,45 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly assignAllListeners = (): void => {
 
-        if (!this.props.allowRowDelete) {
+        if (!this.props.allowRowDelete || this.dataTable === null) {
 
             return;
         }
 
         this.removeAllListeners();
 
-        $(this.searchTextBoxSelector).one("change", this.handleSearchChange);
-
-        $(this.sortBtnsSelector).one("click", this.handleSortBtnClick);
-
         $(this.deleteBtnsSelector).one("click", this.handleDeleteBtnClick);
 
-        $(this.paginateBtnsSelector).one("click", this.handlePaginateBtnClick);
+        $(this.searchTextBoxSelector).one("change", this.assignAllListeners);
+
+        $(this.sortBtnsSelector).one("click", this.assignAllListeners);
+
+        $(this.paginateBtnsSelector).one("click", this.assignAllListeners);
     }
 
     private readonly removeAllListeners = (): void => {
 
-        if (!this.props.allowRowDelete) {
+        if (!this.props.allowRowDelete || this.dataTable === null) {
 
             return;
         }
 
-        $(this.searchTextBoxSelector).off("change", this.handleSearchChange);
-
-        $(this.sortBtnsSelector).off("click", this.handleSortBtnClick);
-
         $(this.deleteBtnsSelector).off("click", this.handleDeleteBtnClick);
 
-        $(this.paginateBtnsSelector).off("click", this.handlePaginateBtnClick);
+        $(this.searchTextBoxSelector).off("change", this.assignAllListeners);
+
+        $(this.sortBtnsSelector).off("click", this.assignAllListeners);
+
+        $(this.paginateBtnsSelector).off("click", this.assignAllListeners);
     }
 
     private readonly handleDeleteBtnClick = (event: JQuery.ClickEvent): void => {
 
         const id: string = event.target.dataset.id;
-        console.log(`Deleting id: ${id}`);
-        if (this.dataTable !== null) {
 
-            const rowToRemove: JQuery = $(`${this.deleteBtnsSelector}[data-id="${id}"]`).parent("td").parent("tr");
+        if (this.dataTable !== null) {
+            console.log(`Deleting id: ${id}`);
+            const rowToRemove: JQuery = $(`${this.deleteBtnsSelector}[${DataTable.dataIdAttribute}="${id}"]`).parent("td").parent("tr");
 
             this.dataTable.row(rowToRemove).remove();
 
@@ -256,23 +233,5 @@ export class DataTable extends React.Component<IDataTableProps> {
 
             this.assignAllListeners();
         }
-    }
-
-    private readonly handlePaginateBtnClick = (): void => {
-
-        console.log("clicked paginate button");
-        this.assignAllListeners();
-    }
-
-    private readonly handleSearchChange = (): void => {
-
-        console.log("changed search");
-        this.assignAllListeners();
-    }
-
-    private readonly handleSortBtnClick = (): void => {
-
-        console.log("clicked sort button");
-        this.assignAllListeners();
     }
 }

@@ -51,12 +51,12 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
 
     const dataTableAdaptorProps: IDataTableAdaptorProps = {
 
-        allowRowDelete: false,
+        allowRowDelete: true,
         dataArray: (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null,
         maxWidth: "600px",
-        pageLength: 2,
+        pageLength: 1,
         positionLeft: "0px",
-        positionTop: "200px",
+        positionTop: "250px",
         tableLayout: ETableLayout.ILookup,
         wrapperId: "jeremyTable"
     };
