@@ -11,6 +11,7 @@
 
 #titleBar {
     background: var(--medium-purple);
+    color: var(--light-white);
     font-family: "Roboto-Light";
     height: var(--titleBarHeight);
     line-height: var(--titleBarLineHeight) !important;

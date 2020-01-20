@@ -52,7 +52,7 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
     const dataTableAdaptorProps: IDataTableAdaptorProps = {
 
         allowRowDelete: true,
-        dataArray: (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null,
+        dataObjectArray: (this.state.lookups !== null) ? this.state.lookups.aspectRatios : null,
         maxWidth: "600px",
         pageLength: 1,
         positionLeft: "0px",
@@ -64,7 +64,7 @@ export function getComponentProps(this: AdminScreen): IAdminComponentProps {
     const dataTableAdaptorProps2: IDataTableAdaptorProps = {
 
         allowRowDelete: true,
-        dataArray: (this.state.lookups !== null) ? this.state.lookups.languages : null,
+        dataObjectArray: (this.state.lookups !== null) ? this.state.lookups.languages : null,
         maxWidth: "1000px",
         pageLength: 2,
         positionLeft: "0px",

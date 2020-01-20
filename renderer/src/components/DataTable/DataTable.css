@@ -16,7 +16,6 @@
 
 #dataTable {
     background-color: var(--darkest-gray);
-    color: var(--dark-white);
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
     padding: 1px 10px 10px 10px;
@@ -82,25 +81,17 @@
 
 #dataTable_paginate > span > .paginate_button {
     background: linear-gradient(to bottom, var(--light-gray), var(--darkest-gray));
+    box-shadow: none !important;
     border: 1px solid var(--lightest-gray);
     border-radius: 5px;
     font-family: "Roboto-Regular";
-    /* margin: 0; */
-    padding: 5px 8px 7px 8px;
-    /* position: absolute; */
-    width: fit-content;
-
-
-
     margin: 0px 10px 0px 0px;
-    position: initial;
-
-
     min-width: 30px;
-    box-shadow: none !important;
+    padding: 5px 8px 7px 8px;
 }
 
 #dataTable_paginate > span > .paginate_button.current {
+    background: var(--darkest-gray);
     color: var(--light-teal) !important;
     cursor: default;
 }
@@ -124,7 +115,8 @@
     font-size: 18px;
     height: 30px;
     line-height: 18px;
-    padding: 6px 4px 6px 4px;
+    padding: 4px 4px 4px 4px;
     position: relative;
     left: -5px;
+    top: -3px;
 }

@@ -19,7 +19,7 @@ export enum ETableLayout {
 export interface IDataTableAdaptorProps {
 
     allowRowDelete: boolean;
-    dataArray: IGenericObject[] | null;
+    dataObjectArray: IGenericObject[] | null;
     maxWidth: string;
     pageLength: number;
     positionLeft: string;
@@ -29,6 +29,16 @@ export interface IDataTableAdaptorProps {
 }
 
 export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
+
+    public readonly shouldComponentUpdate = (nextProps: IDataTableAdaptorProps): boolean => {
+
+        if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {  // Deep compare
+
+            return true;
+        }
+
+        return false;
+    }
 
     public readonly render = (): JSX.Element => {
     
@@ -45,36 +55,12 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
             wrapperId: this.props.wrapperId
         };
 
-        return this.renderTable(dataTableProps);
-    }
-
-    private readonly renderTable = (dataTableProps: IDataTableProps): JSX.Element => {
-    
-        if (this.props.dataArray === null) {
+        if (this.props.dataObjectArray === null) {
 
             return this.renderLoadingTable(dataTableProps);
         }
 
-        const columnKeys: string[] = this.getColumnKeys();
-
-        const columns: DataTables.ColumnSettings[] = this.getColumns(columnKeys);
-
-        const dataRows: string[][] = this.getDataRows(columnKeys, this.props.dataArray);
-    
-        const doAllRowsHaveIds: boolean = !this.props.dataArray.some((object: IGenericObject) => object["_id"] === undefined);
-
-        if (columns.length > 0 && dataRows.length > 0 && doAllRowsHaveIds) {
-    
-            this.addDeleteButtons(columns, dataRows, this.props.dataArray);
-        }
-        
-        dataTableProps.columns = columns;
-        dataTableProps.data = dataRows;
-    
-        return (
-    
-            <DataTable {...dataTableProps} />
-        );
+        return this.renderTable(dataTableProps, this.props.dataObjectArray);
     }
 
     private readonly renderLoadingTable = (dataTableProps: IDataTableProps): JSX.Element => {
@@ -85,6 +71,30 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
 
         return (
 
+            <DataTable {...dataTableProps} />
+        );
+    }
+
+    private readonly renderTable = (dataTableProps: IDataTableProps, dataObjectArray: IGenericObject[]): JSX.Element => {
+
+        const columnKeys: string[] = this.getColumnKeys();
+
+        const columns: DataTables.ColumnSettings[] = this.getColumns(columnKeys);
+
+        const dataRows: string[][] = this.getDataRows(columnKeys, dataObjectArray);
+    
+        const doAllRowsHaveIds: boolean = !dataObjectArray.some((object: IGenericObject) => object["_id"] === undefined);
+
+        if (columns.length > 0 && dataRows.length > 0 && doAllRowsHaveIds) {
+    
+            this.addDeleteButtons(columns, dataRows, dataObjectArray);
+        }
+        
+        dataTableProps.columns = columns;
+        dataTableProps.data = dataRows;
+
+        return (
+    
             <DataTable {...dataTableProps} />
         );
     }
@@ -141,11 +151,11 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
         return columns;
     }
 
-    private readonly getDataRows = (columnKeys: string[], dataArray: IGenericObject[]): string[][] => {
+    private readonly getDataRows = (columnKeys: string[], dataObjectArray: IGenericObject[]): string[][] => {
 
         const dataRows: string[][] = [];
     
-        dataArray.forEach((object: IGenericObject) => {
+        dataObjectArray.forEach((object: IGenericObject) => {
     
             const row: string[] = [];
     
@@ -167,15 +177,15 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
         return dataRows;
     }
 
-    private readonly addDeleteButtons = (columns: DataTables.ColumnSettings[], dataRows: string[][], dataArray: IGenericObject[]): void => {
+    private readonly addDeleteButtons = (columns: DataTables.ColumnSettings[], dataRows: string[][], dataObjectArray: IGenericObject[]): void => {
 
         if (this.props.allowRowDelete) {
     
             columns.push({ orderable: false, width: "30px" });
 
-            for (let i: number = 0; i < dataArray.length; i++) {
+            for (let i: number = 0; i < dataObjectArray.length; i++) {
 
-                dataRows[i].push(DataTable.getDeleteBtnElement(dataArray[i]["_id"]));
+                dataRows[i].push(DataTable.getDeleteBtnElement(dataObjectArray[i]["_id"]));
             }
         }
     }

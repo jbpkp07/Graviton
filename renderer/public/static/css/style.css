@@ -53,9 +53,26 @@
     -webkit-app-region: none;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+    border-radius: 5px;
+    background-color: var(--darkest-gray);
+    margin-bottom: 3px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: var(--lighter-gray);
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
 html, body {
     background: var(--dark-gray);
-    color: var(--light-white);
+    color: var(--dark-white);
     cursor: default;
     font-family: "Roboto-Regular" !important;
     font-size: var(--defaultFontSize) !important;

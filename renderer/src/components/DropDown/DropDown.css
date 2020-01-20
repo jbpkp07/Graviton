@@ -126,8 +126,16 @@ div.dropDown__menu {
     border-top-right-radius: 0px;
     box-shadow: 0 3px 3px var(--black);
     margin: 0;
-    padding-bottom: 1px;
-    padding-top: 1px;
+    max-height: 330px;
+    padding: 1px;
+}
+
+div.dropDown__menu-list {
+    max-height: 330px;
+}
+
+div.dropDown__menu-list > div:not(.dropDown__option) {
+    color: var(--dark-white);
 }
 
 div.dropDown__option {
