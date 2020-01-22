@@ -134,6 +134,15 @@ div.dropDown__menu-list {
     max-height: 330px;
 }
 
+div.dropDown__menu-list::-webkit-scrollbar-track {
+    border-bottom-right-radius: 2px;
+    margin-bottom: 4px;
+}
+
+div.dropDown__menu-list::-webkit-scrollbar-thumb {
+    border-bottom-right-radius: 2px;
+}
+
 div.dropDown__menu-list > div:not(.dropDown__option) {
     color: var(--dark-white);
 }
