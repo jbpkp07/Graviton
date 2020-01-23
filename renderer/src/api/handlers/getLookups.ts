@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from "axios";
+import Axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
 
 import { API } from "../../../../shared/API";
 import { currentWindow } from "../../index";
@@ -6,23 +6,35 @@ import { currentWindow } from "../../index";
 
 const clientErr: string = "ERROR [api.getLookups()]:  \"Server could not retreive lookups object from graviton database\"";
 
-export async function getLookups(): Promise<API.ILookups> {
+export async function getLookups(cancelToken: CancelTokenSource): Promise<API.ILookups> {
+
+    const config: AxiosRequestConfig = {
+
+        cancelToken: cancelToken.token
+    };
 
     return new Promise((resolve: Function): void => {
 
-        Axios.get("/api/lookups")
+        Axios.get("/api/lookups", config)
 
             .then((response: AxiosResponse<API.ILookups>) => {
                 console.log(response.data);
                 resolve(response.data);
             })
-            .catch((response: string) => {
+            .catch((thrown: any) => {
 
-                console.log(response);
+                if (Axios.isCancel(thrown)) {
 
-                alert(clientErr);
+                    console.log(`api.getLookups() request cancelled: ${thrown.message}`);
+                }
+                else {
 
-                currentWindow.loadServerError();
+                    console.log(thrown);
+
+                    alert(clientErr);
+    
+                    currentWindow.loadServerError();
+                }
             });
     });
 }

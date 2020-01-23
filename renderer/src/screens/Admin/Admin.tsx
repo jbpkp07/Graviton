@@ -1,3 +1,4 @@
+import { CancelTokenSource } from "axios";
 import React from "react";
 
 import "./Admin.css";
@@ -38,6 +39,8 @@ export class AdminScreen extends React.Component {
 
     public readonly state: IAdminScreenState = adminScreenState;
 
+    private readonly apiCancelToken: CancelTokenSource = api.getNewCancelToken(); 
+
     public readonly render = (): JSX.Element => {
 
         const componentProps: IAdminComponentProps = getComponentProps.call(this);
@@ -58,22 +61,24 @@ export class AdminScreen extends React.Component {
 
         // Temporary test code below
         // ---------------------------------------------------------------------------
-        // (api.deleteLookupById("5e190d0d15e47f5f505dd1a7") as Promise<API.ILookups>)
-
-        //     .then((lookups: API.ILookups) => {
-
-        //         this.setState({ lookups });
-        //     });
-
-        (api.getLookups() as Promise<API.ILookups>)
+        api.deleteLookupById("5e292fff03174307bc3aa211", this.apiCancelToken)
 
             .then((lookups: API.ILookups) => {
 
                 this.setState({ lookups });
             });
+
+        // api.getLookups(this.apiCancelToken)
+
+        //     .then((lookups: API.ILookups) => {
+
+        //         this.setState({ lookups });
+        //     });
     }
 
     public readonly componentWillUnmount = (): void => {
+
+        this.apiCancelToken.cancel("Admin Screen");
 
         adminScreenState = this.state;
     }

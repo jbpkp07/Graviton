@@ -10,7 +10,15 @@ export function deleteLookupById(this: Controller, request: Request, response: R
 
     const _id: string = request.params._id;
 
-    this.gravitonDatabase.lookupsModel.findByIdAndDelete(_id).exec()
+    const options: object[] = [
+
+        { },
+        { $pull: { aspectRatios: { _id } } },
+        { new: true, useFindAndModify: false }
+    ];
+
+    // @ts-ignore  (Typescript doesn't like the spread operator "..." for function params)
+    this.gravitonDatabase.lookupsModel.findOneAndUpdate(...options).exec()
 
         .then((lookupsDoc: ILookupsDoc | null) => {
 
@@ -18,7 +26,11 @@ export function deleteLookupById(this: Controller, request: Request, response: R
 
                 const lookups: ILookups = convertToILookups(lookupsDoc);
 
-                response.json(lookups);
+                setTimeout(() => {
+                    response.json(lookups);
+                }, 5000);
+
+                // DONT LEAVE THIS TIMEOUT HERE FOREVER, JUST FOR TESTING ------------------------------------------------
             }
             else {
 

@@ -1,10 +1,20 @@
+import Axios, { CancelTokenSource } from "axios";
+
 import { API } from "../../../shared/API";
 import { deleteLookupById } from "./handlers/deleteLookupById";
 import { getLookups } from "./handlers/getLookups";
 
 
-export const api: API.IApi = {
+interface IApiClient extends API.IApi {
+
+    deleteLookupById(_id: string, cancelToken: CancelTokenSource): Promise<API.ILookups>;
+    getLookups(cancelToken: CancelTokenSource): Promise<API.ILookups>;
+    getNewCancelToken(): CancelTokenSource;
+}
+
+export const api: IApiClient = {
 
     deleteLookupById,
-    getLookups
+    getLookups,
+    getNewCancelToken: (): CancelTokenSource => Axios.CancelToken.source()
 };

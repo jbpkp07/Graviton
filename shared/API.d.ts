@@ -1,5 +1,4 @@
-import { AxiosResponse } from "axios";
-
+// tslint:disable: invalid-void
 import {
     ILookup as ILookupModel,
     ILookupLanguage as ILookupLanguageModel,
@@ -11,8 +10,8 @@ export declare namespace API {
 
     interface IApi {
 
-        deleteLookupById: (...args: any) => void | Promise<ILookups>;
-        getLookups: (...args: any) => void | Promise<ILookups>;
+        deleteLookupById(...args: any): void | Promise<ILookups>;
+        getLookups(...args: any): void | Promise<ILookups>;
     }
 
     type ILookup = ILookupModel;
