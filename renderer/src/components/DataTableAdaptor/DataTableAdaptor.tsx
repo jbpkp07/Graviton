@@ -10,6 +10,13 @@ interface IGenericObject {
     [key: string]: any;
 }
 
+export const lookupTypes: API.ILookupsType = {
+
+    aspectRatios: "aspectRatios",
+    languages: "languages",
+    versions: "versions"
+};
+
 export enum ETableLayout {
 
     ILookup = "ILookup",

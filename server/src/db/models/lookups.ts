@@ -9,7 +9,7 @@ interface ILookupSchema {
     value: SchemaTypeOpts<any> | string;
 }
 
-interface ILookupSchemaLanguage extends ILookupSchema {
+interface ILookupLanguageSchema extends ILookupSchema {
 
     iso639: SchemaTypeOpts<any> | string;
     languageName: SchemaTypeOpts<any> | string;
@@ -33,11 +33,12 @@ const lookupSchema: ILookupSchema = {
     value: {
         minlength: 1,
         required: true,
-        type: String
+        type: String,
+        unique: true  // value is the unique property
     }
 };
 
-const lookupSchemaLanguage: ILookupSchemaLanguage = {
+const lookupSchemaLanguage: ILookupLanguageSchema = {
 
     ...lookupSchema,
 
@@ -60,9 +61,9 @@ const lookupSchemaLanguage: ILookupSchemaLanguage = {
 
 interface ILookupsSchema {
 
-    aspectRatios: ILookupSchema[] | ILookup[];
-    languages: ILookupSchemaLanguage[] | ILookupLanguage[];
-    versions: ILookupSchema[] | ILookup[];
+    aspectRatios: ILookupSchema[] | ILookup[] | string;
+    languages: ILookupLanguageSchema[] | ILookupLanguage[] | string;
+    versions: ILookupSchema[] | ILookup[] | string;
 }
 
 const lookupsSchema: ILookupsSchema & SchemaDefinition = {
@@ -82,7 +83,7 @@ export interface ILookup extends ILookupSchema {
     value: string;
 }
 
-export interface ILookupLanguage extends ILookupSchemaLanguage {
+export interface ILookupLanguage extends ILookupLanguageSchema {
 
     _id?: any;
     iso639: string;
@@ -98,6 +99,13 @@ export interface ILookups extends ILookupsSchema {
     aspectRatios: ILookup[];
     languages: ILookupLanguage[];
     versions: ILookup[];
+}
+
+export interface ILookupsType extends ILookupsSchema {
+
+    aspectRatios: "aspectRatios";
+    languages: "languages";
+    versions: "versions";
 }
 
 export interface ILookupsDoc extends ILookups, Document { }

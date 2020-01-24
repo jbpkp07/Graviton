@@ -61,7 +61,7 @@ export class AdminScreen extends React.Component {
 
         // Temporary test code below
         // ---------------------------------------------------------------------------
-        api.deleteLookupById("5e292fff03174307bc3aa211", this.apiCancelToken)
+        api.deleteLookupById("versions", "5e2a53ac1e7ba41d14f7a1a3", this.apiCancelToken)
 
             .then((lookups: API.ILookups) => {
 

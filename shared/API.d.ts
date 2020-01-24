@@ -2,7 +2,8 @@
 import {
     ILookup as ILookupModel,
     ILookupLanguage as ILookupLanguageModel,
-    ILookups as ILookupsModel
+    ILookups as ILookupsModel,
+    ILookupsType as ILookupsTypeModel
 } from "../server/src/db/models/lookups";
 
 
@@ -17,4 +18,5 @@ export declare namespace API {
     type ILookup = ILookupModel;
     type ILookupLanguage = ILookupLanguageModel;
     type ILookups = ILookupsModel;
+    type ILookupsType = ILookupsTypeModel;
 }

@@ -20,7 +20,7 @@ export class Controller {
         this.router.route("/api/lookups")
             .get(api.getLookups.bind(this));
 
-        this.router.route("/api/lookups/:_id")
+        this.router.route("/api/lookups/:lookupType/:_id")
             .delete(api.deleteLookupById.bind(this));
     }
 

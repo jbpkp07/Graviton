@@ -8,12 +8,14 @@ const clientErr: string = "ERROR [api.deleteLookupById()]:  \"Server could not d
 
 export function deleteLookupById(this: Controller, request: Request, response: Response): void {
 
+    const lookupType: string = request.params.lookupType;
+
     const _id: string = request.params._id;
 
     const options: object[] = [
 
         { },
-        { $pull: { aspectRatios: { _id } } },
+        { $pull: { [lookupType]: { _id } } },
         { new: true, useFindAndModify: false }
     ];
 

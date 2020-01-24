@@ -7,7 +7,7 @@ import { getLookups } from "./handlers/getLookups";
 
 interface IApiClient extends API.IApi {
 
-    deleteLookupById(_id: string, cancelToken: CancelTokenSource): Promise<API.ILookups>;
+    deleteLookupById(lookupType: string, _id: string, cancelToken: CancelTokenSource): Promise<API.ILookups>;
     getLookups(cancelToken: CancelTokenSource): Promise<API.ILookups>;
     getNewCancelToken(): CancelTokenSource;
 }
