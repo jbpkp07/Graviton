@@ -1,6 +1,7 @@
 import jQuery from "jquery";
 import React from "react";
 
+import { API } from "../../../../shared/API";
 import "./DataTable.css";
 import "./datatables/datatables.css";
 
@@ -24,31 +25,34 @@ export interface IDataTableProps {
     pageLength: number;
     positionLeft: string;
     positionTop: string;
+    tableKind: keyof API.ILookupsKind;
     wrapperId: string;
+    handleDeleteBtnClick?(...args: any): void;
 }
 
 export class DataTable extends React.Component<IDataTableProps> {
 
-    public static readonly wrapperClassName: string = "dataTableWrapper";
-    public static readonly tableId: string = "dataTable";
     public static readonly dataIdAttribute: string = "data-id";
     public static readonly deleteBtnClass: string = "dataTableDeleteBtn";
 
-    public static getDeleteBtnElement = (id: string): string => { 
+    public static getDeleteBtnElement = (_id: string): string => { 
 
-        return `<div class="${DataTable.deleteBtnClass} button" ${DataTable.dataIdAttribute}="${id}">Delete</div>`;
+        return `<div class="${DataTable.deleteBtnClass} button" ${DataTable.dataIdAttribute}="${_id}">Delete</div>`;
     }
+
+    private readonly wrapperClassName: string = "dataTableWrapper";
+    private readonly tableId: string = "dataTable";
     
-    private readonly baseSelector: string = `#${this.props.wrapperId}.${DataTable.wrapperClassName}`;
-    private readonly baseSelectorInner: string = `${this.baseSelector} > #${DataTable.tableId}_wrapper`;
+    private readonly baseSelector: string = `#${this.props.wrapperId}.${this.wrapperClassName}`;
+    private readonly baseSelectorInner: string = `${this.baseSelector} > #${this.tableId}_wrapper`;
 
-    private readonly initialTableElement: string = `<table id="${DataTable.tableId}" />`;
-    private readonly initialTableSelector: string = `${this.baseSelector} > #${DataTable.tableId}`;
+    private readonly initialTableElement: string = `<table id="${this.tableId}" />`;
+    private readonly initialTableSelector: string = `${this.baseSelector} > #${this.tableId}`;
 
-    private readonly searchTextBoxSelector: string = `${this.baseSelectorInner} > #${DataTable.tableId}_filter > label > input`;
-    private readonly sortBtnsSelector: string = `     ${this.baseSelectorInner} > #${DataTable.tableId} > thead > tr > th`;
-    private readonly deleteBtnsSelector: string = `   ${this.baseSelectorInner} > #${DataTable.tableId} > tbody > tr > td > .${DataTable.deleteBtnClass}`;
-    private readonly paginateBtnsSelector: string = ` ${this.baseSelectorInner} > #${DataTable.tableId}_paginate > span > .paginate_button:not(.paginate_button.current)`;
+    private readonly searchTextBoxSelector: string = `${this.baseSelectorInner} > #${this.tableId}_filter > label > input`;
+    private readonly sortBtnsSelector: string = `     ${this.baseSelectorInner} > #${this.tableId} > thead > tr > th`;
+    private readonly deleteBtnsSelector: string = `   ${this.baseSelectorInner} > #${this.tableId} > tbody > tr > td > .${DataTable.deleteBtnClass}`;
+    private readonly paginateBtnsSelector: string = ` ${this.baseSelectorInner} > #${this.tableId}_paginate > span > .paginate_button:not(.paginate_button.current)`;
 
     private dataTable: DataTables.Api | null = null;
 
@@ -67,7 +71,7 @@ export class DataTable extends React.Component<IDataTableProps> {
 
             <div
                 id={this.props.wrapperId}
-                className={DataTable.wrapperClassName}
+                className={this.wrapperClassName}
                 style={cssProperties}
             />
         );
@@ -91,7 +95,7 @@ export class DataTable extends React.Component<IDataTableProps> {
         if (JSON.stringify(nextProps.columns) !== JSON.stringify(this.prevColumns)) {  // Deep comparison
 
             this.prevColumns = JSON.parse(JSON.stringify(nextProps.columns)); // Deep copy
-   
+            
             this.createTable(nextProps);
         }
         else if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {  // Deep comparison
@@ -221,11 +225,17 @@ export class DataTable extends React.Component<IDataTableProps> {
 
     private readonly handleDeleteBtnClick = (event: JQuery.ClickEvent): void => {
 
-        const id: string = event.target.dataset.id;
+        const _id: string = event.target.dataset.id;
 
-        if (this.dataTable !== null) {
-            console.log(`Deleting id: ${id}`);
-            const rowToRemove: JQuery = $(`${this.deleteBtnsSelector}[${DataTable.dataIdAttribute}="${id}"]`).parent("td").parent("tr");
+        if (this.props.handleDeleteBtnClick !== undefined) {
+
+            this.removeAllListeners();
+
+            this.props.handleDeleteBtnClick(this.props.tableKind, _id);  // Table will be redrawn after server returns updated data
+        }
+        else if (this.dataTable !== null) {
+
+            const rowToRemove: JQuery = $(`${this.deleteBtnsSelector}[${DataTable.dataIdAttribute}="${_id}"]`).parent("td").parent("tr");
 
             this.dataTable.row(rowToRemove).remove();
 

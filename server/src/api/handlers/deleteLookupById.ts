@@ -1,21 +1,35 @@
 import { Request, Response } from "express";
 
 import { Controller } from "../../controller/Controller";
-import { convertToILookups, ILookups, ILookupsDoc } from "../../db/models/lookups";
+import { convertToILookups, ILookups, ILookupsDoc, ILookupsKind } from "../../db/models/lookups";
 
 
 const clientErr: string = "ERROR [api.deleteLookupById()]:  \"Server could not delete lookup entry from graviton database\"";
 
 export function deleteLookupById(this: Controller, request: Request, response: Response): void {
 
-    const lookupType: string = request.params.lookupType;
-
     const _id: string = request.params._id;
+
+    const kind: string = request.params.kind;
+
+    const kinds: ILookupsKind = {
+
+        aspectRatios: "aspectRatios",
+        languages: "languages",
+        versions: "versions"
+    };
+
+    if (!Object.values(kinds).some((value: string) => value === kind)) {
+
+        this.sendError(response, 500, clientErr);
+
+        return;
+    }
 
     const options: object[] = [
 
-        { },
-        { $pull: { [lookupType]: { _id } } },
+        {},
+        { $pull: { [kind]: { _id } } },
         { new: true, useFindAndModify: false }
     ];
 
@@ -28,11 +42,7 @@ export function deleteLookupById(this: Controller, request: Request, response: R
 
                 const lookups: ILookups = convertToILookups(lookupsDoc);
 
-                setTimeout(() => {
-                    response.json(lookups);
-                }, 5000);
-
-                // DONT LEAVE THIS TIMEOUT HERE FOREVER, JUST FOR TESTING ------------------------------------------------
+                response.json(lookups);
             }
             else {
 

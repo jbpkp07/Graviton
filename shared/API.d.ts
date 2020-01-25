@@ -3,7 +3,8 @@ import {
     ILookup as ILookupModel,
     ILookupLanguage as ILookupLanguageModel,
     ILookups as ILookupsModel,
-    ILookupsType as ILookupsTypeModel
+    ILookupsKind as ILookupsKindModel,
+    ILookupType as ILookupTypeModel
 } from "../server/src/db/models/lookups";
 
 
@@ -15,8 +16,10 @@ export declare namespace API {
         getLookups(...args: any): void | Promise<ILookups>;
     }
 
+    type ILookupType = ILookupTypeModel;
     type ILookup = ILookupModel;
     type ILookupLanguage = ILookupLanguageModel;
+    
+    type ILookupsKind = ILookupsKindModel;
     type ILookups = ILookupsModel;
-    type ILookupsType = ILookupsTypeModel;
 }

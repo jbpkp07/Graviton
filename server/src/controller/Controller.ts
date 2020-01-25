@@ -20,7 +20,7 @@ export class Controller {
         this.router.route("/api/lookups")
             .get(api.getLookups.bind(this));
 
-        this.router.route("/api/lookups/:lookupType/:_id")
+        this.router.route("/api/lookups/:kind/:_id")
             .delete(api.deleteLookupById.bind(this));
     }
 
@@ -29,7 +29,7 @@ export class Controller {
         return this.gravitonDatabase.connectDatabase();
     }
     
-    public sendError(response: Response, statusCode: number, clientErr: string, caughtErr?: string): void {
+    protected sendError(response: Response, statusCode: number, clientErr: string, caughtErr?: string): void {
 
         terminal.red(`  ${clientErr}\n\n`);
 

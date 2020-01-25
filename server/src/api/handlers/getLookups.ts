@@ -16,11 +16,7 @@ export function getLookups(this: Controller, _request: Request, response: Respon
 
                 const lookups: ILookups = convertToILookups(lookupsDoc);
 
-                setTimeout(() => {
-                    response.json(lookups);
-                }, 5000);
-
-                // DONT LEAVE THIS TIMEOUT HERE FOREVER, JUST FOR TESTING ------------------------------------------------
+                response.json(lookups);
             }
             else {
 

@@ -11,7 +11,7 @@ import { DropDown } from "../../components/DropDown/DropDown";
 
 
 interface IDropDownStates {
-    
+
     [key: string]: API.ILookup | null;
     aspectRatioDropDown: API.ILookup | null;
     versionDropDown: API.ILookup | null;
@@ -39,7 +39,7 @@ export class AdminScreen extends React.Component {
 
     public readonly state: IAdminScreenState = adminScreenState;
 
-    private readonly apiCancelToken: CancelTokenSource = api.getNewCancelToken(); 
+    private readonly apiCancelToken: CancelTokenSource = api.getNewCancelToken();
 
     public readonly render = (): JSX.Element => {
 
@@ -59,21 +59,12 @@ export class AdminScreen extends React.Component {
 
     public readonly componentDidMount = (): void => {
 
-        // Temporary test code below
-        // ---------------------------------------------------------------------------
-        api.deleteLookupById("versions", "5e2a53ac1e7ba41d14f7a1a3", this.apiCancelToken)
+        api.getLookups(this.apiCancelToken)
 
             .then((lookups: API.ILookups) => {
 
                 this.setState({ lookups });
             });
-
-        // api.getLookups(this.apiCancelToken)
-
-        //     .then((lookups: API.ILookups) => {
-
-        //         this.setState({ lookups });
-        //     });
     }
 
     public readonly componentWillUnmount = (): void => {
@@ -83,7 +74,7 @@ export class AdminScreen extends React.Component {
         adminScreenState = this.state;
     }
 
-    public readonly submit = (_buttonId: string): void => {
+    protected readonly submit = (_buttonId: string): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
@@ -97,7 +88,7 @@ export class AdminScreen extends React.Component {
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
     }
 
-    public readonly handleDropDownChange = (dropDownId: string, selectedOption: API.ILookup | null): void => {
+    protected readonly handleDropDownChange = (dropDownId: string, selectedOption: API.ILookup | null): void => {
 
         const selectedOptions: IDropDownStates = this.state.selectedOptions;
 
@@ -106,5 +97,15 @@ export class AdminScreen extends React.Component {
         const submitButtonIsActive: boolean = !Object.values(selectedOptions).some((option: API.ILookup | null) => option === null);
 
         this.setState({ selectedOptions, submitButtonIsActive }, () => console.log(this.state.selectedOptions));
+    }
+
+    protected readonly handleDataTableDeleteBtnClick = (kind: keyof API.ILookupsKind, _id: string): void => {
+
+        api.deleteLookupById(kind, _id, this.apiCancelToken)
+
+            .then((lookups: API.ILookups) => {
+
+                this.setState({ lookups });
+            });
     }
 }

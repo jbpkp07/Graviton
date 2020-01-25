@@ -9,7 +9,7 @@ interface ILookupSchema {
     value: SchemaTypeOpts<any> | string;
 }
 
-interface ILookupLanguageSchema extends ILookupSchema {
+interface ILookupSchemaLanguage extends ILookupSchema {
 
     iso639: SchemaTypeOpts<any> | string;
     languageName: SchemaTypeOpts<any> | string;
@@ -38,7 +38,7 @@ const lookupSchema: ILookupSchema = {
     }
 };
 
-const lookupSchemaLanguage: ILookupLanguageSchema = {
+const lookupSchemaLanguage: ILookupSchemaLanguage = {
 
     ...lookupSchema,
 
@@ -61,9 +61,9 @@ const lookupSchemaLanguage: ILookupLanguageSchema = {
 
 interface ILookupsSchema {
 
-    aspectRatios: ILookupSchema[] | ILookup[] | string;
-    languages: ILookupLanguageSchema[] | ILookupLanguage[] | string;
-    versions: ILookupSchema[] | ILookup[] | string;
+    aspectRatios: ILookupSchema[] | ILookup[];
+    languages: ILookupSchemaLanguage[] | ILookupLanguage[];
+    versions: ILookupSchema[] | ILookup[];
 }
 
 const lookupsSchema: ILookupsSchema & SchemaDefinition = {
@@ -75,6 +75,12 @@ const lookupsSchema: ILookupsSchema & SchemaDefinition = {
 
 export const lookupsModel: Model<ILookupsDoc> = mongoose.model("lookups", new Schema(lookupsSchema));
 
+export interface ILookupType {
+
+    ILookup: "ILookup";
+    ILookupLanguage: "ILookupLanguage";
+}
+
 export interface ILookup extends ILookupSchema {
 
     _id?: any;
@@ -83,7 +89,7 @@ export interface ILookup extends ILookupSchema {
     value: string;
 }
 
-export interface ILookupLanguage extends ILookupLanguageSchema {
+export interface ILookupLanguage extends ILookupSchemaLanguage {
 
     _id?: any;
     iso639: string;
@@ -94,18 +100,18 @@ export interface ILookupLanguage extends ILookupLanguageSchema {
     value: string;
 }
 
+export interface ILookupsKind {
+
+    aspectRatios: "aspectRatios";
+    languages: "languages";
+    versions: "versions";
+}
+
 export interface ILookups extends ILookupsSchema {
 
     aspectRatios: ILookup[];
     languages: ILookupLanguage[];
     versions: ILookup[];
-}
-
-export interface ILookupsType extends ILookupsSchema {
-
-    aspectRatios: "aspectRatios";
-    languages: "languages";
-    versions: "versions";
 }
 
 export interface ILookupsDoc extends ILookups, Document { }

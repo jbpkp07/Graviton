@@ -10,19 +10,6 @@ interface IGenericObject {
     [key: string]: any;
 }
 
-export const lookupTypes: API.ILookupsType = {
-
-    aspectRatios: "aspectRatios",
-    languages: "languages",
-    versions: "versions"
-};
-
-export enum ETableLayout {
-
-    ILookup = "ILookup",
-    ILookupLanguage = "ILookupLanguage"
-}
-
 export interface IDataTableAdaptorProps {
 
     allowRowDelete: boolean;
@@ -31,8 +18,10 @@ export interface IDataTableAdaptorProps {
     pageLength: number;
     positionLeft: string;
     positionTop: string;
-    tableLayout: ETableLayout;
+    tableKind: keyof API.ILookupsKind;
+    tableLayout: keyof API.ILookupType;
     wrapperId: string;
+    handleDeleteBtnClick?(...args: any): void;
 }
 
 export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
@@ -55,10 +44,12 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
             columnDefClassName: "dt-left",
             columns: [],
             data: [],
+            handleDeleteBtnClick: this.props.handleDeleteBtnClick,
             maxWidth: this.props.maxWidth,
             pageLength: this.props.pageLength,
             positionLeft: this.props.positionLeft,
             positionTop: this.props.positionTop,
+            tableKind: this.props.tableKind,
             wrapperId: this.props.wrapperId
         };
 
@@ -110,7 +101,7 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
     
         switch (this.props.tableLayout) {
     
-            case ETableLayout.ILookup: {
+            case "ILookup": {
     
                 const orderedKeys: API.ILookup = {
 
@@ -122,7 +113,7 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
                 return Object.keys(orderedKeys);
             }
     
-            case ETableLayout.ILookupLanguage: {
+            case "ILookupLanguage": {
     
                 const orderedKeys: API.ILookupLanguage = {
                     
