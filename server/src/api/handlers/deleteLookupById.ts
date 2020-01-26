@@ -6,19 +6,19 @@ import { convertToILookups, ILookups, ILookupsDoc, ILookupsKind } from "../../db
 
 const clientErr: string = "ERROR [api.deleteLookupById()]:  \"Server could not delete lookup entry from graviton database\"";
 
+const kinds: ILookupsKind = {
+
+    aspectRatios: "aspectRatios",
+    languages: "languages",
+    versions: "versions"
+};
+
 export function deleteLookupById(this: Controller, request: Request, response: Response): void {
 
     const _id: string = request.params._id;
 
     const kind: string = request.params.kind;
-
-    const kinds: ILookupsKind = {
-
-        aspectRatios: "aspectRatios",
-        languages: "languages",
-        versions: "versions"
-    };
-
+    
     if (!Object.values(kinds).some((value: string) => value === kind)) {
 
         this.sendError(response, 500, clientErr);

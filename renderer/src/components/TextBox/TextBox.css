@@ -5,7 +5,8 @@
     font-family: "Roboto-Regular";
     margin: 0;
     padding: 5px 8px 7px 8px;
-    position: absolute;
+    position: sticky;
+    width: 100%;
 }
 
 .textBox {

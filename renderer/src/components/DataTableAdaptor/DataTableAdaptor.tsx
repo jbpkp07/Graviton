@@ -161,7 +161,8 @@ export class DataTableAdaptor extends React.Component<IDataTableAdaptorProps> {
 
                 if (object[key] !== undefined && object[key] !== "") {
 
-                    row.push(object[key]);
+                    // row.push(object[key]);
+                    row.push(`<input data-dprop="${key}" data-id="${object["_id"]}" class="textBox" value="${object[key]}">`);
                 }
                 else {
 

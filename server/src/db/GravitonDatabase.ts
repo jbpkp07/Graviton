@@ -39,12 +39,18 @@ export class GravitonDatabase {
         const lookups: ILookups = {
 
             aspectRatios: [
-                { label: "4 x 3", ordinal: 1, value: "4x3" },
-                { label: "16 x 9", ordinal: 3, value: "16x9" },
-                { label: "16 x 10", ordinal: 2, value: "16x10" },
                 { label: "14 x 3", ordinal: 1, value: "4x3" },
-                { label: "18 x 9", ordinal: 3, value: "16x9" },
-                { label: "20 x 10", ordinal: 2, value: "16x10" }
+                { label: "26 x 9", ordinal: 3, value: "16x9" },
+                { label: "36 x 10", ordinal: 2, value: "16x10" },
+                { label: "44 x 3", ordinal: 1, value: "4x3" },
+                { label: "58 x 9", ordinal: 3, value: "16x9" },
+                { label: "60 x 10", ordinal: 2, value: "16x10" },
+                { label: "7 x 3", ordinal: 1, value: "4x3" },
+                { label: "86 x 9", ordinal: 3, value: "16x9" },
+                { label: "96 x 10", ordinal: 2, value: "16x10" },
+                { label: "a4 x 3", ordinal: 1, value: "4x3" },
+                { label: "b8 x 9", ordinal: 3, value: "16x9" },
+                { label: "c0 x 10", ordinal: 2, value: "16x10" }
             ],
             languages: [
                 {
